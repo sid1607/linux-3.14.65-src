@@ -101,5 +101,6 @@ all.config
 !.gitignore
 !net
 !net/*
+!net/**
 !include
-!include/*
+!include/**
