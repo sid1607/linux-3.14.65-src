@@ -7,19 +7,6 @@
 # command after changing this file, to see if there are
 # any tracked files which get ignored after the change.
 #
-
-# my gitignore
-*
-!.gitignore
-!net
-!net/*
-!net/**
-!include
-!include/**
-!link.sh
-!arch
-!arch/**
-
 # Normal rules
 #
 .*
