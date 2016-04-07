@@ -7,6 +7,18 @@
 # command after changing this file, to see if there are
 # any tracked files which get ignored after the change.
 #
+
+# my gitignore
+*
+!.gitignore
+!net
+!net/*
+!net/**
+!include
+!include/**
+!link.sh
+*.o
+
 # Normal rules
 #
 .*
@@ -95,12 +107,3 @@ x509.genkey
 
 # Kconfig presets
 all.config
-
-# my gitignore
-*
-!.gitignore
-!net
-!net/*
-!net/**
-!include
-!include/**
