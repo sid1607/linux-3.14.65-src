@@ -17,7 +17,8 @@
 !include
 !include/**
 !link.sh
-*.o
+!arch
+!arch/**
 
 # Normal rules
 #
