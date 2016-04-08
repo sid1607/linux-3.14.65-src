@@ -988,8 +988,10 @@ set_rcvbuf:
 
 #ifdef CROSS_LAYER_DELAY
 	case SO_CROSS_LAYER_DELAY:
-		printk("Reached this case: %d", (int *)optval)
-
+		printk("Reached this case: %d", (int *)optval);
+		break;
+#endif
+		
 	default:
 		ret = -ENOPROTOOPT;
 		break;
