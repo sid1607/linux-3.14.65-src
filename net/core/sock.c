@@ -146,11 +146,11 @@ static DEFINE_MUTEX(proto_list_mutex);
 static LIST_HEAD(proto_list);
 
 // enable delay config as a socket opt
-// #define CROSS_LAYER_DELAY
+#define CROSS_LAYER_DELAY
 
-// #ifdef CROSS_LAYER_DELAY
-// #define SO_CROSS_LAYER_DELAY 100
-// #endif
+#ifdef CROSS_LAYER_DELAY
+#define DEFAULT_DELAY_MS 100
+#endif
 
 /**
  * sk_ns_capable - General socket capability test
@@ -692,7 +692,7 @@ int sock_setsockopt(struct socket *sock, int level, int optname,
 		    char __user *optval, unsigned int optlen)
 {
 	struct sock *sk = sock->sk;
-	int val, delay;
+	int val;
 	int valbool;
 	struct linger ling;
 	int ret = 0;
@@ -988,11 +988,15 @@ set_rcvbuf:
 					 sk->sk_max_pacing_rate);
 		break;
 
+#ifdef CROSS_LAYER_DELAY
 	case SO_CROSS_LAYER_DELAY:
-		if(copy_from_user(&delay, optval, sizeof(delay)))
-			delay = 100;
-		printk("Reached this case, delay:%d\n", delay);
+		sk->sk_delay_enabled = 1;
+		if(copy_from_user(&sk->sk_delay_ms, optval, sizeof(sk->sk_delay_ms)))
+			sk->sk_delay_ms = DEFAULT_DELAY_MS;
+		printk("CLDelay: Reached this case, status:%d delay_ms:%d\n", 
+			sk->sk_delay_enabled, sk->sk_delay_ms);
 		break;
+#endif
 
 	default:
 		ret = -ENOPROTOOPT;
@@ -2401,6 +2405,12 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 
 	sk->sk_max_pacing_rate = ~0U;
 	sk->sk_pacing_rate = ~0U;
+
+#ifdef CROSS_LAYER_DELAY
+	sk->sk_delay_enabled = 0;
+	sk->sk_delay_ms = 0;
+#endif
+
 	/*
 	 * Before updating sk_refcnt, we must commit prior changes to memory
 	 * (Documentation/RCU/rculist_nulls.txt for details)

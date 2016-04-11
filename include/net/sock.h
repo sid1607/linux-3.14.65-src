@@ -420,7 +420,8 @@ struct sock {
 	struct cg_proto		*sk_cgrp;
 
 #ifdef CROSS_LAYER_DELAY
-	int 	delay_ms;
+	char 	sk_delay_enabled;
+	int 	sk_delay_ms;
 #endif
 	
 	void			(*sk_state_change)(struct sock *sk);
