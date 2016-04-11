@@ -988,11 +988,9 @@ set_rcvbuf:
 					 sk->sk_max_pacing_rate);
 		break;
 
-#ifdef CROSS_LAYER_DELAY
 	case SO_CROSS_LAYER_DELAY:
-		// printk("Reached this case: %d", *((int *)optval));
+		printk("Reached this case\n");
 		break;
-#endif
 
 	default:
 		ret = -ENOPROTOOPT;
