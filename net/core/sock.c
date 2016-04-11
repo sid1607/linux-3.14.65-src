@@ -148,9 +148,9 @@ static LIST_HEAD(proto_list);
 // enable delay config as a socket opt
 #define CROSS_LAYER_DELAY
 
-#ifdef CROSS_LAYER_DELAY
-#define SO_CROSS_LAYER_DELAY 100
-#endif
+// #ifdef CROSS_LAYER_DELAY
+// #define SO_CROSS_LAYER_DELAY 100
+// #endif
 
 /**
  * sk_ns_capable - General socket capability test
@@ -990,7 +990,7 @@ set_rcvbuf:
 
 #ifdef CROSS_LAYER_DELAY
 	case SO_CROSS_LAYER_DELAY:
-		printk("Reached this case: %d", *((int *)optval));
+		// printk("Reached this case: %d", *((int *)optval));
 		break;
 #endif
 

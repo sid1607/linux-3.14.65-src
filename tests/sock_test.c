@@ -31,5 +31,6 @@ int main() {
 
 	if (sockfd < 0) 
 		error("ERROR opening socket");
-    
+ 
+ 	return 0;   
 }
