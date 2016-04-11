@@ -145,9 +145,6 @@
 static DEFINE_MUTEX(proto_list_mutex);
 static LIST_HEAD(proto_list);
 
-// enable delay config as a socket opt
-#define CROSS_LAYER_DELAY
-
 #ifdef CROSS_LAYER_DELAY
 #define DEFAULT_DELAY_MS 100
 #endif

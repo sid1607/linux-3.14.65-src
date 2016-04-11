@@ -103,6 +103,9 @@ void SOCK_DEBUG(const struct sock *sk, const char *msg, ...)
 }
 #endif
 
+// enable delay config as a socket opt
+#define CROSS_LAYER_DELAY
+
 /* This is the per-socket lock.  The spinlock provides a synchronization
  * between user contexts and software interrupt processing, whereas the
  * mini-semaphore synchronizes multiple users amongst themselves.
