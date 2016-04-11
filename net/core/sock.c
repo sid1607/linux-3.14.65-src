@@ -146,7 +146,7 @@ static DEFINE_MUTEX(proto_list_mutex);
 static LIST_HEAD(proto_list);
 
 // enable delay config as a socket opt
-#define CROSS_LAYER_DELAY
+// #define CROSS_LAYER_DELAY
 
 // #ifdef CROSS_LAYER_DELAY
 // #define SO_CROSS_LAYER_DELAY 100
@@ -988,11 +988,9 @@ set_rcvbuf:
 					 sk->sk_max_pacing_rate);
 		break;
 
-#ifdef CROSS_LAYER_DELAY
 	case SO_CROSS_LAYER_DELAY:
 		// printk("Reached this case: %d", *((int *)optval));
 		break;
-#endif
 
 	default:
 		ret = -ENOPROTOOPT;
