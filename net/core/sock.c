@@ -692,7 +692,7 @@ int sock_setsockopt(struct socket *sock, int level, int optname,
 		    char __user *optval, unsigned int optlen)
 {
 	struct sock *sk = sock->sk;
-	int val;
+	int val, delay;
 	int valbool;
 	struct linger ling;
 	int ret = 0;
@@ -989,7 +989,6 @@ set_rcvbuf:
 		break;
 
 	case SO_CROSS_LAYER_DELAY:
-		int delay;
 		if(copy_from_user(&delay, optval, sizeof(delay)))
 			delay = 100;
 		printk("Reached this case, delay:%d\n", delay);
