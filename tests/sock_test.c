@@ -18,7 +18,7 @@ int main() {
 	socklen_t clilen;
 	char buffer[256];
 	int delay_ms = 10;
-	int oirt = 15744;
+	int port = 15744;
 	struct sockaddr_in serv_addr, cli_addr;
 	int n;
 	
