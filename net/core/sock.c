@@ -989,7 +989,10 @@ set_rcvbuf:
 		break;
 
 	case SO_CROSS_LAYER_DELAY:
-		printk("Reached this case\n");
+		int delay;
+		if(copy_from_user(&delay, optval, sizeof(delay)))
+			delay = 100;
+		printk("Reached this case, delay:%d\n", delay);
 		break;
 
 	default:
