@@ -146,8 +146,6 @@
 
 #define MS_TO_NS(x)	(x * 1E6L)
 
-static struct hrtimer hr_timer;
-
 static DEFINE_MUTEX(proto_list_mutex);
 static LIST_HEAD(proto_list);
 
@@ -156,11 +154,13 @@ static LIST_HEAD(proto_list);
 #endif
 
 #ifdef CROSS_LAYER_DELAY
+	static struct hrtimer hr_timer;
+
 	enum hrtimer_restart my_hrtimer_callback( struct hrtimer *timer )
 	{
 	  printk( "my_hrtimer_callback called (%ld).\n", jiffies );
 
-	  return HRTIMER_NORESTART;
+	  return HRTIMER_RESTART;
 	}
 
 	int init_module( void )
