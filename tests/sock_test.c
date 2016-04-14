@@ -31,6 +31,8 @@ int main() {
 
 	if (sockfd < 0) 
 		error("ERROR opening socket");
- 
+	// printf("\nSleeping\n");
+	// sleep(1000);
+ 	close(sockfd);
  	return 0;   
 }

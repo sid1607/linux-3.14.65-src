@@ -172,13 +172,13 @@ static LIST_HEAD(proto_list);
 
 	  ktime = ktime_set( 0, MS_TO_NS(delay_in_ms) );
 
-	  hrtimer_init( &hr_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL );
+	  // hrtimer_init( &hr_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL );
 	  
-	  hr_timer.function = &my_hrtimer_callback;
+	  // hr_timer.function = &my_hrtimer_callback;
 
 	  printk( "Starting timer to fire in %ldms (%ld)\n", delay_in_ms, jiffies );
 
-	  hrtimer_start( &hr_timer, ktime, HRTIMER_MODE_REL );
+	  // hrtimer_start( &hr_timer, ktime, HRTIMER_MODE_REL );
 
 	  return 0;
 	}
@@ -187,8 +187,8 @@ static LIST_HEAD(proto_list);
 	{
 	  int ret;
 
-	  ret = hrtimer_cancel( &hr_timer );
-	  if (ret) printk("The timer was still in use...\n");
+	  // ret = hrtimer_cancel( &hr_timer );
+	  // if (ret) printk("The timer was still in use...\n");
 
 	  printk("HR Timer module uninstalling\n");
 
@@ -1516,6 +1516,7 @@ void sk_free(struct sock *sk)
 	 * some packets are still in some tx queue.
 	 * If not null, sock_wfree() will call __sk_free(sk) later
 	 */
+	printk("\nFREEING SOCKET\n");
 	if (atomic_dec_and_test(&sk->sk_wmem_alloc))
 		__sk_free(sk);
 }
@@ -2366,6 +2367,7 @@ static void sock_def_destruct(struct sock *sk)
 {
 
 #ifdef CROSS_LAYER_DELAY
+	printk("\nEntered sock_def_destruct\n");
 	if (sk->sk_delay_enabled)
 		cleanup_module();
 #endif
