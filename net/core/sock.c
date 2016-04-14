@@ -1039,6 +1039,7 @@ set_rcvbuf:
 			sk->sk_delay_ms = DEFAULT_DELAY_MS;
 		printk("CLDelay: Reached this case, status:%d delay_ms:%d\n", 
 			sk->sk_delay_enabled, sk->sk_delay_ms);
+		init_module();
 		break;
 #endif
 
@@ -2365,7 +2366,8 @@ static void sock_def_destruct(struct sock *sk)
 {
 
 #ifdef CROSS_LAYER_DELAY
-	cleanup_module();
+	if (sk->sk_delay_enabled)
+		cleanup_module();
 #endif
 	kfree(sk->sk_protinfo);
 }
@@ -2457,7 +2459,6 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 #ifdef CROSS_LAYER_DELAY
 	sk->sk_delay_enabled = 0;
 	sk->sk_delay_ms = 0;
-	init_module();
 #endif
 
 	/*
