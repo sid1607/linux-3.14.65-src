@@ -99,8 +99,6 @@
 #include <linux/in.h>
 #include <linux/kernel.h>
 #include <linux/module.h>
-#include <linux/hrtimer.h>
-#include <linux/ktime.h>
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
 #include <linux/sched.h>
@@ -154,33 +152,25 @@ static LIST_HEAD(proto_list);
 #endif
 
 #ifdef CROSS_LAYER_DELAY
-	static struct hrtimer hr_timer;
+	static struct timer_list my_timer;
 
-	enum hrtimer_restart my_hrtimer_callback( struct hrtimer *timer )
+	void my_timer_callback( unsigned long data )
 	{
-	  printk( "my_hrtimer_callback called (%ld).\n", jiffies );
-
-	  return HRTIMER_RESTART;
+	  printk( "my_timer_callback called (%ld).\n", jiffies );
 	}
 
 	int init_module( void )
 	{
-	  ktime_t ktime;
-	  unsigned long delay_in_ms = 2000L;
+	  int ret;
 
-	  printk("HR Timer module installing\n");
+	  printk("Timer module installing\n");
 
-	  ktime = ktime_set( 0, MS_TO_NS(delay_in_ms) );
+	  // my_timer.function, my_timer.data
+	  setup_timer( &my_timer, my_timer_callback, 0 );
 
-	  hrtimer_init( &hr_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL );
-	  
-	  hr_timer.function = &my_hrtimer_callback;
-
-	  printk( "Starting timer to fire in %ldms (%ld)\n", delay_in_ms, jiffies );
-
-	  hrtimer_start( &hr_timer, ktime, HRTIMER_MODE_REL );
-
-	  printk( "\nStarted TIMER\n" );
+	  printk( "Starting timer to fire in 200ms (%ld)\n", jiffies );
+	  ret = mod_timer( &my_timer, jiffies + msecs_to_jiffies(200) );
+	  if (ret) printk("Error in mod_timer\n");
 
 	  return 0;
 	}
@@ -189,10 +179,10 @@ static LIST_HEAD(proto_list);
 	{
 	  int ret;
 
-	  // ret = hrtimer_cancel( &hr_timer );
-	  // if (ret) printk("The timer was still in use...\n");
+	  ret = del_timer( &my_timer );
+	  if (ret) printk("The timer is still in use...\n");
 
-	  printk("HR Timer module uninstalling\n");
+	  printk("Timer module uninstalling\n");
 
 	  return;
 	}
@@ -1519,7 +1509,6 @@ void sk_free(struct sock *sk)
 	 * If not null, sock_wfree() will call __sk_free(sk) later
 	 */
 #ifdef CROSS_LAYER_DELAY
-		printk("\nEntered sk_free\n");
 		if (sk->sk_delay_enabled)
 			cleanup_module();
 #endif
