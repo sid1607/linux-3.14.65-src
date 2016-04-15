@@ -166,7 +166,7 @@ static LIST_HEAD(proto_list);
 	int init_module( void )
 	{
 	  ktime_t ktime;
-	  unsigned long delay_in_ms = 200L;
+	  unsigned long delay_in_ms = 2000L;
 
 	  printk("HR Timer module installing\n");
 
