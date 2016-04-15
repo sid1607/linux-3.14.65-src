@@ -172,9 +172,9 @@ static LIST_HEAD(proto_list);
 
 	  ktime = ktime_set( 0, MS_TO_NS(delay_in_ms) );
 
-	  // hrtimer_init( &hr_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL );
+	  hrtimer_init( &hr_timer, CLOCK_MONOTONIC, HRTIMER_MODE_REL );
 	  
-	  // hr_timer.function = &my_hrtimer_callback;
+	  hr_timer.function = &my_hrtimer_callback;
 
 	  printk( "Starting timer to fire in %ldms (%ld)\n", delay_in_ms, jiffies );
 
@@ -1516,7 +1516,12 @@ void sk_free(struct sock *sk)
 	 * some packets are still in some tx queue.
 	 * If not null, sock_wfree() will call __sk_free(sk) later
 	 */
-	printk("\nFREEING SOCKET\n");
+#ifdef CROSS_LAYER_DELAY
+		printk("\nEntered sk_free\n");
+		if (sk->sk_delay_enabled)
+			cleanup_module();
+#endif
+
 	if (atomic_dec_and_test(&sk->sk_wmem_alloc))
 		__sk_free(sk);
 }
@@ -2365,12 +2370,6 @@ static void sock_def_write_space(struct sock *sk)
 
 static void sock_def_destruct(struct sock *sk)
 {
-
-#ifdef CROSS_LAYER_DELAY
-	printk("\nEntered sock_def_destruct\n");
-	if (sk->sk_delay_enabled)
-		cleanup_module();
-#endif
 	kfree(sk->sk_protinfo);
 }
 
