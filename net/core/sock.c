@@ -178,7 +178,9 @@ static LIST_HEAD(proto_list);
 
 	  printk( "Starting timer to fire in %ldms (%ld)\n", delay_in_ms, jiffies );
 
-	  // hrtimer_start( &hr_timer, ktime, HRTIMER_MODE_REL );
+	  hrtimer_start( &hr_timer, ktime, HRTIMER_MODE_REL );
+
+	  printk( "\nStarted TIMER\n" );
 
 	  return 0;
 	}
