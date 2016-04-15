@@ -68,6 +68,7 @@
 #include <net/dst.h>
 #include <net/checksum.h>
 
+
 struct cgroup;
 struct cgroup_subsys;
 #ifdef CONFIG_NET
@@ -105,6 +106,10 @@ void SOCK_DEBUG(const struct sock *sk, const char *msg, ...)
 
 // enable delay config as a socket opt
 #define CROSS_LAYER_DELAY
+
+#ifdef CROSS_LAYER_DELAY
+#include <asm/atomic.h>
+#endif
 
 /* This is the per-socket lock.  The spinlock provides a synchronization
  * between user contexts and software interrupt processing, whereas the
@@ -2321,5 +2326,26 @@ extern int sysctl_optmem_max;
 
 extern __u32 sysctl_wmem_default;
 extern __u32 sysctl_rmem_default;
+
+#ifdef CROSS_LAYER_DELAY
+	#define DEFAULT_CL_DELAY_MS 200
+
+	static int cl_delay_ms;
+
+	static struct timer_list my_timer;
+
+	static atomic_t cl_block_flag;
+
+	extern void cl_timeout_callback( unsigned long data );
+
+	
+	extern int cl_timer_init( void );
+
+
+	extern int cl_timer_start( void );
+
+	extern void cl_cleanup_timer( void );
+#endif
+
 
 #endif	/* _SOCK_H */

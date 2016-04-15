@@ -862,6 +862,12 @@ static int tcp_transmit_skb(struct sock *sk, struct sk_buff *skb, int clone_it,
 	struct tcphdr *th;
 	int err;
 
+	#ifdef CROSS_LAYER_DELAY
+	if (sk->sk_delay_enabled) {
+		printk("CL Socket Delay block flag val:(%d)\n", atomic_read(cl_block_flag));
+	}
+	#endif
+
 	BUG_ON(!skb || !tcp_skb_pcount(skb));
 
 	if (clone_it) {

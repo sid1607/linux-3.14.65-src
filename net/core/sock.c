@@ -142,51 +142,9 @@
 
 #include <net/busy_poll.h>
 
-#define MS_TO_NS(x)	(x * 1E6L)
 
 static DEFINE_MUTEX(proto_list_mutex);
 static LIST_HEAD(proto_list);
-
-#ifdef CROSS_LAYER_DELAY
-#define DEFAULT_DELAY_MS 100
-#endif
-
-#ifdef CROSS_LAYER_DELAY
-	static struct timer_list my_timer;
-
-	void my_timer_callback( unsigned long data )
-	{
-	  printk( "my_timer_callback called (%ld).\n", jiffies );
-	}
-
-	int init_module( void )
-	{
-	  int ret;
-
-	  printk("Timer module installing\n");
-
-	  // my_timer.function, my_timer.data
-	  setup_timer( &my_timer, my_timer_callback, 0 );
-
-	  printk( "Starting timer to fire in 200ms (%ld)\n", jiffies );
-	  ret = mod_timer( &my_timer, jiffies + msecs_to_jiffies(200) );
-	  if (ret) printk("Error in mod_timer\n");
-
-	  return 0;
-	}
-
-	void cleanup_module( void )
-	{
-	  int ret;
-
-	  ret = del_timer( &my_timer );
-	  if (ret) printk("The timer is still in use...\n");
-
-	  printk("Timer module uninstalling\n");
-
-	  return;
-	}
-#endif
 
 /**
  * sk_ns_capable - General socket capability test
@@ -1028,10 +986,16 @@ set_rcvbuf:
 	case SO_CROSS_LAYER_DELAY:
 		sk->sk_delay_enabled = 1;
 		if(copy_from_user(&sk->sk_delay_ms, optval, sizeof(sk->sk_delay_ms)))
-			sk->sk_delay_ms = DEFAULT_DELAY_MS;
-		printk("CLDelay: Reached this case, status:%d delay_ms:%d\n", 
-			sk->sk_delay_enabled, sk->sk_delay_ms);
-		init_module();
+			sk->sk_delay_ms = DEFAULT_CL_DELAY_MS;
+		
+		// TODO: implement EDF here
+		cl_delay_ms = sk->sk_delay_ms;
+
+		atomic_set(&cl_block_flag, 1);
+
+		printk("CLdelay: Reached this case, status:%d delay_ms:%d\n", 
+			sk->sk_delay_enabled, cl_delay_ms);
+		
 		break;
 #endif
 
@@ -1510,7 +1474,7 @@ void sk_free(struct sock *sk)
 	 */
 #ifdef CROSS_LAYER_DELAY
 		if (sk->sk_delay_enabled)
-			cleanup_module();
+			cl_cleanup_timer();
 #endif
 
 	if (atomic_dec_and_test(&sk->sk_wmem_alloc))
@@ -2451,6 +2415,10 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 #ifdef CROSS_LAYER_DELAY
 	sk->sk_delay_enabled = 0;
 	sk->sk_delay_ms = 0;
+	atomic_set(&cl_block_flag, 1);
+
+	// init as default
+	cl_delay_ms = DEFAULT_CL_DELAY_MS;
 #endif
 
 	/*
@@ -3074,4 +3042,39 @@ static int __init proto_init(void)
 
 subsys_initcall(proto_init);
 
+#ifdef CROSS_LAYER_DELAY
+void cl_timeout_callback( unsigned long data )
+{
+  atomic_set(&cl_block_flag, 0);
+  printk( "cl_timeout_callback called (%ld).\n, flag value:(%d)", jiffies, atomic_read(&cl_block_flag));
+}
+
+int cl_timer_init( void ) {
+	int ret;
+
+	printk("Timer module installing\n");
+
+	setup_timer( &my_timer, my_timer_callback, 0 );
+
+	return 0;
+}
+
+int cl_timer_start( void ) {
+	printk( "Starting timer to fire in 200ms (%ld)\n", jiffies );
+	ret = mod_timer( &my_timer, jiffies + msecs_to_jiffies(200) );
+	if (ret) printk("Error in mod_timer\n");
+
+	return 0;
+}
+
+void cl_cleanup_timer( void ) {
+	int ret;
+
+	ret = del_timer( &my_timer );
+	if (ret) printk("The timer is still in use...\n");
+
+	printk("Timer module uninstalling\n");
+
+	return;
+}
 #endif /* PROC_FS */
