@@ -2338,9 +2338,7 @@ extern __u32 sysctl_rmem_default;
 
 	extern void cl_timer_callback( unsigned long data );
 
-	
 	extern int cl_timer_init( void );
-
 
 	extern int cl_timer_start( void );
 

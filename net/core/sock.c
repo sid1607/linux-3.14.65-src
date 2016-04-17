@@ -997,6 +997,7 @@ set_rcvbuf:
 			sk->sk_delay_enabled, cl_delay_ms);
 
 		cl_timer_init();
+		cl_timer_start();
 		
 		break;
 #endif
