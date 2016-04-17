@@ -3060,8 +3060,6 @@ void cl_timer_callback( unsigned long data )
 }
 
 int cl_timer_init( void ) {
-	int ret;
-
 	printk("Timer module installing\n");
 
 	setup_timer( &cl_timer, cl_timer_callback, 0 );
@@ -3075,7 +3073,7 @@ int cl_timer_start( void ) {
 	ret = mod_timer( &cl_timer, jiffies + msecs_to_jiffies(200) );
 	if (ret) printk("Error in mod_timer\n");
 
-	return ret;
+	return 0;
 }
 
 void cl_cleanup_timer( void ) {
