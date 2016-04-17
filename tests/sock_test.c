@@ -20,17 +20,24 @@ int main() {
 	int delay_ms = 10;
 	int port = 15744;
 	struct sockaddr_in serv_addr, cli_addr;
-	int n;
+	int n, yes=1;
 	
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+	if (sockfd < 0) 
+		error("ERROR opening socket");
 
 	if (setsockopt(sockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &delay_ms,
 	 							 sizeof(delay_ms)) == -1) {
 	 	error("Setsockopt error: can't config sock delay");
 	}
 
-	if (sockfd < 0) 
-		error("ERROR opening socket");
+	if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes,
+	               sizeof(yes)) == -1) {
+	  error("Setsockopt error: can't config reuse addr");
+	  exit(EXIT_FAILURE);
+	}
+
 
 	bzero((char *) &serv_addr, sizeof(serv_addr));
 	serv_addr.sin_family = AF_INET;
@@ -50,14 +57,16 @@ int main() {
 	for (;;) {
 		bzero(buffer,256);
 		n = read(newsockfd,buffer,255);
+		if (!strcmp(buffer, "quit\r\n")) {
+			close(newsockfd);
+			close(sockfd);	
+			return 0;   
+		}
 		if (n < 0) error("ERROR reading from socket");
 		printf("Here is the message: %s\n",buffer);
-		n = write(newsockfd,"I got your message",18);
+		n = write(newsockfd,"I got your message\r\n",20);
 		if (n < 0) error("ERROR writing to socket");
 	}
 
-	close(newsockfd);
-	close(sockfd);	
-
-	return 0;   
+	return 0;
 }

@@ -3079,7 +3079,7 @@ int cl_timer_start( void ) {
 void cl_cleanup_timer( void ) {
 	int ret;
 
-	ret = del_timer( &cl_timer );
+	ret = del_timer_sync( &cl_timer );
 	if (ret) printk("The timer is still in use...\n");
 
 	printk("Timer module uninstalling\n");
