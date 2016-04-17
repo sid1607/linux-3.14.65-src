@@ -3056,7 +3056,7 @@ atomic_t cl_block_flag;
 void cl_timer_callback( unsigned long data )
 {
   atomic_set(&cl_block_flag, 0);
-  printk( "cl_timeout_callback called (%ld).\n, flag value:(%d)", jiffies, atomic_read(&cl_block_flag));
+  printk( "cl_timeout_callback called (%ld).\n, flag value:(%d)\n", jiffies, atomic_read(&cl_block_flag));
 }
 
 int cl_timer_init( void ) {
