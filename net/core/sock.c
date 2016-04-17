@@ -995,6 +995,8 @@ set_rcvbuf:
 
 		printk("CLdelay: Reached this case, status:%d delay_ms:%d\n", 
 			sk->sk_delay_enabled, cl_delay_ms);
+
+		cl_timer_init();
 		
 		break;
 #endif
