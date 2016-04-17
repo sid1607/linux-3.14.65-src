@@ -3042,6 +3042,8 @@ static int __init proto_init(void)
 
 subsys_initcall(proto_init);
 
+#endif /* PROC_FS */
+
 #ifdef CROSS_LAYER_DELAY
 void cl_timeout_callback( unsigned long data )
 {
@@ -3077,4 +3079,4 @@ void cl_cleanup_timer( void ) {
 
 	return;
 }
-#endif /* PROC_FS */
+#endif
