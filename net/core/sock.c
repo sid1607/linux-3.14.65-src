@@ -3045,7 +3045,7 @@ subsys_initcall(proto_init);
 #endif /* PROC_FS */
 
 #ifdef CROSS_LAYER_DELAY
-void cl_timeout_callback( unsigned long data )
+void cl_timer_callback( unsigned long data )
 {
   atomic_set(&cl_block_flag, 0);
   printk( "cl_timeout_callback called (%ld).\n, flag value:(%d)", jiffies, atomic_read(&cl_block_flag));
@@ -3056,14 +3056,14 @@ int cl_timer_init( void ) {
 
 	printk("Timer module installing\n");
 
-	setup_timer( &my_timer, my_timer_callback, 0 );
+	setup_timer( &cl_timer, cl_timer_callback, 0 );
 
 	return 0;
 }
 
 int cl_timer_start( void ) {
 	printk( "Starting timer to fire in 200ms (%ld)\n", jiffies );
-	ret = mod_timer( &my_timer, jiffies + msecs_to_jiffies(200) );
+	ret = mod_timer( &cl_timer, jiffies + msecs_to_jiffies(200) );
 	if (ret) printk("Error in mod_timer\n");
 
 	return 0;
@@ -3072,7 +3072,7 @@ int cl_timer_start( void ) {
 void cl_cleanup_timer( void ) {
 	int ret;
 
-	ret = del_timer( &my_timer );
+	ret = del_timer( &cl_timer );
 	if (ret) printk("The timer is still in use...\n");
 
 	printk("Timer module uninstalling\n");

@@ -2332,11 +2332,11 @@ extern __u32 sysctl_rmem_default;
 
 	static int cl_delay_ms;
 
-	static struct timer_list my_timer;
+	static struct timer_list cl_timer;
 
 	static atomic_t cl_block_flag;
 
-	extern void cl_timeout_callback( unsigned long data );
+	extern void cl_timer_callback( unsigned long data );
 
 	
 	extern int cl_timer_init( void );
