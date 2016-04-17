@@ -24,10 +24,10 @@ int main() {
 	
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-	// if (setsockopt(sockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &delay_ms,
-	// 							 sizeof(delay_ms)) == -1) {
-	// 	error("Setsockopt error: can't config sock delay");
-	// }
+	if (setsockopt(sockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &delay_ms,
+	 							 sizeof(delay_ms)) == -1) {
+	 	error("Setsockopt error: can't config sock delay");
+	}
 
 	if (sockfd < 0) 
 		error("ERROR opening socket");
