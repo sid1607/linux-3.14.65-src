@@ -2330,11 +2330,11 @@ extern __u32 sysctl_rmem_default;
 #ifdef CROSS_LAYER_DELAY
 	#define DEFAULT_CL_DELAY_MS 200
 
-	static int cl_delay_ms;
+	extern int cl_delay_ms;
 
-	static struct timer_list cl_timer;
+	extern struct timer_list cl_timer;
 
-	static atomic_t cl_block_flag;
+	extern atomic_t cl_block_flag;
 
 	extern void cl_timer_callback( unsigned long data );
 
