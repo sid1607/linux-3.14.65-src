@@ -3048,6 +3048,11 @@ subsys_initcall(proto_init);
 #endif /* PROC_FS */
 
 #ifdef CROSS_LAYER_DELAY
+
+int cl_delay_ms;
+struct timer_list cl_timer;
+atomic_t cl_block_flag;
+
 void cl_timer_callback( unsigned long data )
 {
   atomic_set(&cl_block_flag, 0);
