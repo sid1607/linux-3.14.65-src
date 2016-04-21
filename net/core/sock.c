@@ -2419,7 +2419,7 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 	sk->sk_delay_enabled = 0;
 	sk->sk_delay_ms = 0;
 	atomic_set(&cl_block_flag, 1);
-
+	sk_ref = sk;
 	// init as default
 	cl_delay_ms = DEFAULT_CL_DELAY_MS;
 #endif
@@ -3052,6 +3052,11 @@ subsys_initcall(proto_init);
 int cl_delay_ms;
 struct timer_list cl_timer;
 atomic_t cl_block_flag;
+struct sock *sk_ref;
+
+void iterate_sock_structs() {
+	struct sock *head = sk_head(sk_ref);
+}
 
 void cl_timer_callback( unsigned long data )
 {
@@ -3061,17 +3066,24 @@ void cl_timer_callback( unsigned long data )
 
 int cl_timer_init( void ) {
 	printk("Timer module installing\n");
-
 	setup_timer( &cl_timer, cl_timer_callback, 0 );
-
 	return 0;
 }
 
 int cl_timer_start( void ) {
 	int ret;
+	printk( "Locking socket (%ld)\n", jiffies);
+	lock_sock(sk_ref);
+	printk( "Socket locked (%ld)\n", jiffies);
+
 	printk( "Starting timer to fire in 200ms (%ld)\n", jiffies );
+	// TODO: make this to set value
 	ret = mod_timer( &cl_timer, jiffies + msecs_to_jiffies(200) );
 	if (ret) printk("Error in mod_timer\n");
+
+	printk( "Unlocking socket (%ld)\n", jiffies);
+	release_sock(sk_ref);
+	printk( "Socket unlocked (%ld)\n", jiffies);
 
 	return 0;
 }
