@@ -3054,10 +3054,6 @@ struct timer_list cl_timer;
 atomic_t cl_block_flag;
 struct sock *sk_ref;
 
-void iterate_sock_structs() {
-	struct sock *head = sk_head(sk_ref);
-}
-
 void cl_timer_callback( unsigned long data )
 {
   atomic_set(&cl_block_flag, 0);
