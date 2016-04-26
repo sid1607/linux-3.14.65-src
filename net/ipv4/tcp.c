@@ -649,16 +649,6 @@ static void tcp_push(struct sock *sk, int flags, int mss_now,
 	if (!tcp_send_head(sk))
 		return;
 
-#ifdef CROSS_LAYER_DELAY
-	if (sk_ref->sk_delay_enabled) {
-		if (atomic_read(&cl_block_flag)) {
-			printk("tcp_push_send_head: cl_block_flag set\n");
-		} else {
-			printk("tcp_push_send_head: cl_block flag not set\n");
-		}
-	}
-#endif
-
 	skb = tcp_write_queue_tail(sk);
 	if (!(flags & MSG_MORE) || forced_push(tp))
 		tcp_mark_push(tp, skb);
@@ -683,6 +673,16 @@ static void tcp_push(struct sock *sk, int flags, int mss_now,
 		nonagle = TCP_NAGLE_CORK;
 
 	__tcp_push_pending_frames(sk, mss_now, nonagle);
+#ifdef CROSS_LAYER_DELAY
+	if (sk_ref->sk_delay_enabled) {
+		if (atomic_read(&cl_block_flag)) {
+			printk("tcp_push_send_head: cl_block_flag set\n");
+		} else {
+			printk("tcp_push_send_head: cl_block flag not set\n");
+		}
+	}
+#endif
+
 }
 
 static int tcp_splice_data_recv(read_descriptor_t *rd_desc, struct sk_buff *skb,
