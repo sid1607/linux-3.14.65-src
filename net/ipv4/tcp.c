@@ -643,17 +643,18 @@ static bool tcp_should_autocork(struct sock *sk, struct sk_buff *skb,
 static void tcp_push(struct sock *sk, int flags, int mss_now,
 		     int nonagle, int size_goal)
 {
+	struct tcp_sock *tp = tcp_sk(sk);
+	struct sk_buff *skb;
+
 #ifdef CROSS_LAYER_DELAY
 	if (sk_ref->sk_delay_enabled) {
 		if (atomic_read(&cl_block_flag)) {
-			printk("tcp_push: cl_block_flag set");
+			printk("tcp_push: cl_block_flag set\n");
 		} else {
-			printk("tcp_push: cl_block flag not set");
+			printk("tcp_push: cl_block flag not set\n");
 		}
 	}
 #endif
-	struct tcp_sock *tp = tcp_sk(sk);
-	struct sk_buff *skb;
 
 	if (!tcp_send_head(sk))
 		return;

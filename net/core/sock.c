@@ -991,8 +991,6 @@ set_rcvbuf:
 		// TODO: implement EDF here
 		cl_delay_ms = sk->sk_delay_ms;
 
-		atomic_set(&cl_block_flag, 1);
-
 		printk("CLdelay: Reached this case, status:%d delay_ms:%d\n", 
 			sk->sk_delay_enabled, cl_delay_ms);
 
@@ -2417,7 +2415,7 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 #ifdef CROSS_LAYER_DELAY
 	sk->sk_delay_enabled = 0;
 	sk->sk_delay_ms = 0;
-	atomic_set(&cl_block_flag, 1);
+	atomic_set(&cl_block_flag, 0);
 	sk_ref = sk;
 	// init as default
 	cl_delay_ms = DEFAULT_CL_DELAY_MS;
@@ -3068,7 +3066,8 @@ int cl_timer_init( void ) {
 int cl_timer_start( void ) {
 	int ret;
 
-	printk( "Starting timer to fire in 200ms (%ld)\n", jiffies );
+	atomic_set(&cl_block_flag, 1);
+	printk( "Starting timer to fire in 200ms (%ld), cl_block flag val (%d)\n", jiffies, atomic_read(&cl_block_flag) );
 	// TODO: make this to set value
 	ret = mod_timer( &cl_timer, jiffies + msecs_to_jiffies(200) );
 	if (ret) printk("Error in mod_timer\n");
