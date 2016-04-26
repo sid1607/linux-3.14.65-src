@@ -3054,11 +3054,11 @@ struct sock *sk_ref;
 void cl_timer_callback( unsigned long data )
 {
   atomic_set(&cl_block_flag, 0);
-  printk( "cl_timeout_callback called (%ld).\n, flag value:(%d)\n", jiffies, atomic_read(&cl_block_flag));
+  printk( "timer:callback: (%ld).\n, flag value:(%d)\n", jiffies, atomic_read(&cl_block_flag));
 }
 
 int cl_timer_init( void ) {
-	printk("Timer module installing\n");
+	printk("timer_init: Timer module installing\n");
 	setup_timer( &cl_timer, cl_timer_callback, 0 );
 	return 0;
 }
@@ -3067,7 +3067,7 @@ int cl_timer_start( void ) {
 	int ret;
 
 	atomic_set(&cl_block_flag, 1);
-	printk( "Starting timer to fire in 200ms (%ld), cl_block flag val (%d)\n", jiffies, atomic_read(&cl_block_flag) );
+	printk( "timer_start: Starting timer to fire in 200ms (%ld), cl_block flag val (%d)\n", jiffies, atomic_read(&cl_block_flag) );
 	// TODO: make this to set value
 	ret = mod_timer( &cl_timer, jiffies + msecs_to_jiffies(200) );
 	if (ret) printk("Error in mod_timer\n");
