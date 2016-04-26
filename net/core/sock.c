@@ -997,8 +997,7 @@ set_rcvbuf:
 			sk->sk_delay_enabled, cl_delay_ms);
 
 		cl_timer_init();
-		cl_timer_start();
-		
+
 		break;
 #endif
 
@@ -3068,18 +3067,11 @@ int cl_timer_init( void ) {
 
 int cl_timer_start( void ) {
 	int ret;
-	printk( "Locking socket (%ld)\n", jiffies);
-	lock_sock(sk_ref);
-	printk( "Socket locked (%ld)\n", jiffies);
 
 	printk( "Starting timer to fire in 200ms (%ld)\n", jiffies );
 	// TODO: make this to set value
 	ret = mod_timer( &cl_timer, jiffies + msecs_to_jiffies(200) );
 	if (ret) printk("Error in mod_timer\n");
-
-	printk( "Unlocking socket (%ld)\n", jiffies);
-	release_sock(sk_ref);
-	printk( "Socket unlocked (%ld)\n", jiffies);
 
 	return 0;
 }
