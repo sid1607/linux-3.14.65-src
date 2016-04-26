@@ -646,18 +646,18 @@ static void tcp_push(struct sock *sk, int flags, int mss_now,
 	struct tcp_sock *tp = tcp_sk(sk);
 	struct sk_buff *skb;
 
+	if (!tcp_send_head(sk))
+		return;
+
 #ifdef CROSS_LAYER_DELAY
 	if (sk_ref->sk_delay_enabled) {
 		if (atomic_read(&cl_block_flag)) {
-			printk("tcp_push: cl_block_flag set\n");
+			printk("tcp_push_send_head: cl_block_flag set\n");
 		} else {
-			printk("tcp_push: cl_block flag not set\n");
+			printk("tcp_push_send_head: cl_block flag not set\n");
 		}
 	}
 #endif
-
-	if (!tcp_send_head(sk))
-		return;
 
 	skb = tcp_write_queue_tail(sk);
 	if (!(flags & MSG_MORE) || forced_push(tp))

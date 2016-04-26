@@ -3067,7 +3067,7 @@ int cl_timer_start( void ) {
 	int ret;
 
 	atomic_set(&cl_block_flag, 1);
-	printk( "timer_start: Starting timer to fire in 200ms (%ld), cl_block flag val (%d)\n", jiffies, atomic_read(&cl_block_flag) );
+	printk( "timer_start: Starting timer to fire in %dms (%ld), cl_block flag val (%d)\n", cl_delay_ms, jiffies, atomic_read(&cl_block_flag) );
 	// TODO: make this to set value
 	ret = mod_timer( &cl_timer, jiffies + msecs_to_jiffies(200) );
 	if (ret) printk("Error in mod_timer\n");

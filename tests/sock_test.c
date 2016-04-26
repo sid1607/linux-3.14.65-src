@@ -17,12 +17,14 @@ int main() {
 	int sockfd, newsockfd;
 	socklen_t clilen;
 	char buffer[256];
-	int delay_ms = 10;
+	int delay_ms = 10000;
 	int port = 15744;
 	struct sockaddr_in serv_addr, cli_addr;
 	int n, yes=1;
 	
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+	printf("INFO: Running with %dms delay\n", delay_ms);
 
 	if (sockfd < 0) 
 		error("ERROR opening socket");
