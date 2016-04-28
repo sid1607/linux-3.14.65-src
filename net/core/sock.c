@@ -2417,9 +2417,6 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 	sk->sk_delay_ms = 0;
 	atomic_set(&cl_block_flag, 0);
 	sk_ref = sk;
-	// init as default
-	cl_delay_ms = DEFAULT_CL_DELAY_MS;
-	printk("sock_init_data: cl_delay_ms = %d", cl_delay_ms);
 #endif
 
 	/*
