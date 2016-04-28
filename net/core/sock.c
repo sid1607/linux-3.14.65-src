@@ -3051,7 +3051,7 @@ struct sock *sk_ref;
 
 void cl_timer_callback( unsigned long data )
 {
-  atomic_set(&cl_block_flag, 0);
+   atomic_set(&cl_block_flag, 0);
   printk( "timer_callback: (%ld).\n, flag value:(%d)\n", jiffies, atomic_read(&cl_block_flag));
 }
 
