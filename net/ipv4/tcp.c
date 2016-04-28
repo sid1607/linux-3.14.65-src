@@ -649,11 +649,11 @@ static void tcp_push(struct sock *sk, int flags, int mss_now,
 #ifdef CROSS_LAYER_DELAY
 	if (sk_ref->sk_delay_enabled) {
 		return;
-		int is_blocked = atomic_read(&cl_block_flag)
-		if (is_blocked) {
-			printk("tcp_push: socket is blocked, not pushing");
-			return;
-		}
+//		int is_blocked = atomic_read(&cl_block_flag)
+//		if (is_blocked) {
+//			printk("tcp_push: socket is blocked, not pushing");
+//			return;
+//		}
 	}
 #endif
 
