@@ -2419,6 +2419,7 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 	sk_ref = sk;
 	// init as default
 	cl_delay_ms = DEFAULT_CL_DELAY_MS;
+	printk("sock_init_data: cl_delay_ms = %d", cl_delay_ms);
 #endif
 
 	/*
@@ -3054,7 +3055,7 @@ struct sock *sk_ref;
 void cl_timer_callback( unsigned long data )
 {
   atomic_set(&cl_block_flag, 0);
-  printk( "timer:callback: (%ld).\n, flag value:(%d)\n", jiffies, atomic_read(&cl_block_flag));
+  printk( "timer_callback: (%ld).\n, flag value:(%d)\n", jiffies, atomic_read(&cl_block_flag));
 }
 
 int cl_timer_init( void ) {
@@ -3069,7 +3070,7 @@ int cl_timer_start( void ) {
 	atomic_set(&cl_block_flag, 1);
 	printk( "timer_start: Starting timer to fire in %dms (%ld), cl_block flag val (%d)\n", cl_delay_ms, jiffies, atomic_read(&cl_block_flag) );
 	// TODO: make this to set value
-	ret = mod_timer( &cl_timer, jiffies + msecs_to_jiffies(200) );
+	ret = mod_timer( &cl_timer, jiffies + msecs_to_jiffies(cl_delay_ms) );
 	if (ret) printk("Error in mod_timer\n");
 
 	return 0;
