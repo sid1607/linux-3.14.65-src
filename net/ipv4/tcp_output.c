@@ -2098,6 +2098,7 @@ void __tcp_push_pending_frames(struct sock *sk, unsigned int cur_mss,
 	 * all will be happy.
 	 */
 	printk("push_pending: called\n");
+	return;
 	if (unlikely(sk->sk_state == TCP_CLOSE))
 		return;
 
