@@ -29,11 +29,6 @@ int main() {
 	if (sockfd < 0) 
 		error("ERROR opening socket");
 
-	if (setsockopt(sockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &delay_ms,
-	 							 sizeof(delay_ms)) == -1) {
-	 	error("Setsockopt error: can't config sock delay");
-	}
-
 	if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &yes,
 	               sizeof(yes)) == -1) {
 	  error("Setsockopt error: can't config reuse addr");
@@ -55,6 +50,12 @@ int main() {
 	            &clilen);
 	if (newsockfd < 0) 
 		error("ERROR on accept");
+
+	if (setsockopt(newsockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &delay_ms,
+		 							 sizeof(delay_ms)) == -1) {
+		 	error("Setsockopt error: can't config sock delay");
+		}
+
 
 	for (;;) {
 		bzero(buffer,256);
