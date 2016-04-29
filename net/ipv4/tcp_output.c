@@ -2119,6 +2119,13 @@ void tcp_push_one(struct sock *sk, unsigned int mss_now)
 {
 	struct sk_buff *skb = tcp_send_head(sk);
 
+#ifdef CROSS_LAYER_DELAY
+	if (sk_ref->sk_delay_enabled ) {
+		printk("push_one: called\n");
+		return;
+	}
+#endif
+
 	BUG_ON(!skb || skb->len < mss_now);
 
 	tcp_write_xmit(sk, mss_now, TCP_NAGLE_PUSH, 1, sk->sk_allocation);
