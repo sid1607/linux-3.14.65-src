@@ -2097,8 +2097,13 @@ void __tcp_push_pending_frames(struct sock *sk, unsigned int cur_mss,
 	 * In time closedown will finish, we empty the write queue and
 	 * all will be happy.
 	 */
-	// printk("push_pending: called\n");
-	return;
+	//
+#ifdef CROSS_LAYER_DELAY
+	if (sk_ref->sk_delay_enabled ) {
+		printk("push_pending: called\n");
+		return;
+	}
+#endif
 	if (unlikely(sk->sk_state == TCP_CLOSE))
 		return;
 
