@@ -3057,6 +3057,7 @@ void cl_timer_callback( unsigned long data )
 
 int cl_timer_init( void ) {
 	printk("timer_init: Timer module installing\n");
+	printk("timer_init: sk_ref_delay_enabled: %d", sk_ref->sk_delay_enabled);
 	setup_timer( &cl_timer, cl_timer_callback, 0 );
 	return 0;
 }
