@@ -862,13 +862,6 @@ static int tcp_transmit_skb(struct sock *sk, struct sk_buff *skb, int clone_it,
 	struct tcphdr *th;
 	int err;
 
-#ifdef CROSS_LAYER_DELAY
-	if (sk_ref->sk_delay_enabled ) {
-		printk("push_pending: called\n");
-		return 0;
-	}
-#endif
-
 	BUG_ON(!skb || !tcp_skb_pcount(skb));
 
 	if (clone_it) {
@@ -2105,12 +2098,6 @@ void __tcp_push_pending_frames(struct sock *sk, unsigned int cur_mss,
 	 * all will be happy.
 	 */
 	//
-#ifdef CROSS_LAYER_DELAY
-	if (sk_ref->sk_delay_enabled ) {
-		printk("push_pending: called\n");
-		return;
-	}
-#endif
 	if (unlikely(sk->sk_state == TCP_CLOSE))
 		return;
 
@@ -2125,13 +2112,6 @@ void __tcp_push_pending_frames(struct sock *sk, unsigned int cur_mss,
 void tcp_push_one(struct sock *sk, unsigned int mss_now)
 {
 	struct sk_buff *skb = tcp_send_head(sk);
-
-#ifdef CROSS_LAYER_DELAY
-	if (sk_ref->sk_delay_enabled ) {
-		printk("push_one: called\n");
-		return;
-	}
-#endif
 
 	BUG_ON(!skb || skb->len < mss_now);
 
