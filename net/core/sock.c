@@ -996,6 +996,9 @@ set_rcvbuf:
 
 		cl_timer_init();
 
+		printk("CLdelay: Reached this case, status:%d delay_ms:%d\n",
+					sk->sk_delay_enabled, cl_delay_ms);
+
 		break;
 #endif
 
@@ -3057,7 +3060,7 @@ void cl_timer_callback( unsigned long data )
 
 int cl_timer_init( void ) {
 	printk("timer_init: Timer module installing\n");
-	printk("timer_init: sk_ref_delay_enabled: %d", sk_ref->sk_delay_enabled);
+	printk("timer_init: sk_ref_delay_enabled: %d\n", sk_ref->sk_delay_enabled);
 	setup_timer( &cl_timer, cl_timer_callback, 0 );
 	return 0;
 }
