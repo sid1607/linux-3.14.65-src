@@ -2333,7 +2333,7 @@ extern __u32 sysctl_rmem_default;
 	extern int cl_delay_ms;
 
 	extern struct sock *sk_ref;
-	
+
 	extern struct timer_list cl_timer;
 
 	extern atomic_t cl_block_flag;
