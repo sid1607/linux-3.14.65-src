@@ -864,19 +864,6 @@ static int tcp_transmit_skb(struct sock *sk, struct sk_buff *skb, int clone_it,
 
 	BUG_ON(!skb || !tcp_skb_pcount(skb));
 
-#ifdef CROSS_LAYER_DELAY
-	if (sk_ref->sk_delay_enabled) {
-		printk("skb_transmit: blocked\n");
-		return 0;
-//		int is_blocked = atomic_read(&cl_block_flag)
-//		if (is_blocked) {
-//			printk("tcp_push: socket is blocked, not pushing");
-//			return;
-//		}
-	}
-#endif
-
-
 	if (clone_it) {
 		const struct sk_buff *fclone = skb + 1;
 
