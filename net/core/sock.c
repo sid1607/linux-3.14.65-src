@@ -986,7 +986,7 @@ set_rcvbuf:
 	case SO_CROSS_LAYER_DELAY:{
 		struct inet_sock *inet_ref = inet_sk(sk_ref);
 		struct inet_sock *inet = inet_sk(sk);
-
+		sk_ref = sk;
 		printk("sockopt: Ref port pair: src(%d), dest(%d)", inet_ref->inet_sport, inet_ref->inet_dport);
 		printk("sockopt: sk port pair: src(%d), dest(%d)", inet->inet_sport, inet->inet_dport);
 		sk_ref->sk_delay_enabled = 1;
