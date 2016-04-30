@@ -2330,7 +2330,7 @@ extern __u32 sysctl_rmem_default;
 #ifdef CROSS_LAYER_DELAY
 	#define DEFAULT_CL_DELAY_MS 200
 
-	extern int cl_delay_ms;
+	extern int cl_delay_ms, cl_ctr;
 
 	extern struct sock *sk_ref;
 

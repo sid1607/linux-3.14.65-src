@@ -986,7 +986,9 @@ set_rcvbuf:
 	case SO_CROSS_LAYER_DELAY:{
 		struct inet_sock *inet_ref = inet_sk(sk_ref);
 		struct inet_sock *inet = inet_sk(sk);
+		printk("sockopt: sk_ref(%u), sk(%u)\n", sk_ref, sk);
 		sk_ref = sk;
+		cl_ctr++;
 		printk("sockopt: Ref port pair: src(%d), dest(%d)", inet_ref->inet_sport, inet_ref->inet_dport);
 		printk("sockopt: sk port pair: src(%d), dest(%d)", inet->inet_sport, inet->inet_dport);
 		sk_ref->sk_delay_enabled = 1;
@@ -996,13 +998,13 @@ set_rcvbuf:
 		// TODO: implement EDF here
 		cl_delay_ms = sk_ref->sk_delay_ms;
 
-		printk("CLdelay: Reached this case, status:%d delay_ms:%d, sk_ref(%u), sk(%u)\n",
-			sk_ref->sk_delay_enabled, cl_delay_ms, sk_ref, sk);
+		printk("CLdelay: Reached this case, status:%d delay_ms:%d, cl_ctr(%d)\n",
+			sk_ref->sk_delay_enabled, cl_delay_ms, cl_ctr);
 
 		cl_timer_init();
 
-		printk("CLdelay: Reached this case, status:%d delay_ms:%d, sk_ref(%u), sk(%u)\n",
-					sk_ref->sk_delay_enabled, cl_delay_ms, sk_ref, sk);
+		printk("CLdelay: Reached this case, status:%d delay_ms:%d, cl_ctr(%d)\n",
+					sk_ref->sk_delay_enabled, cl_delay_ms, cl_ctr);
 
 		break;
 	}
@@ -3054,7 +3056,7 @@ subsys_initcall(proto_init);
 
 #ifdef CROSS_LAYER_DELAY
 
-int cl_delay_ms;
+int cl_delay_ms, cl_ctr = 0;
 struct timer_list cl_timer;
 atomic_t cl_block_flag;
 struct sock *sk_ref;
