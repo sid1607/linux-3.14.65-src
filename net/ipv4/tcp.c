@@ -656,8 +656,9 @@ static void tcp_push(struct sock *sk, int flags, int mss_now,
 //			return;
 //		}
 	}
-	if (cl_ctr > 0){
+	if (cl_ctr > 0 && cl_ctr < 10){
 		struct inet_sock *inet_ref = inet_sk(sk_ref);
+		cl_ctr++;
 		printk("sockopt: Ref port pair: src(%d), dest(%d)", inet_ref->inet_sport, inet_ref->inet_dport);
 		printk("tcp_push: sk_ref(%u), cl_ctr(%d), delay_enable(%d)\n", sk_ref, cl_ctr, sk_ref->sk_delay_enabled);
 	}
