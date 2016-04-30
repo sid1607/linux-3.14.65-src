@@ -3092,7 +3092,7 @@ void cl_cleanup_timer( void ) {
 	ret = del_timer_sync( &cl_timer );
 	if (ret) printk("The timer is still in use...\n");
 
-	printk("Timer module uninstalling\n");
+	printk("Timer module uninstalling, sk_ref(%u)\n", sk_ref);
 
 	return;
 }
