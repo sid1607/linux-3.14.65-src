@@ -991,13 +991,13 @@ set_rcvbuf:
 		// TODO: implement EDF here
 		cl_delay_ms = sk_ref->sk_delay_ms;
 
-		printk("CLdelay: Reached this case, status:%d delay_ms:%d, sk_ref(%u)\n",
-			sk_ref->sk_delay_enabled, cl_delay_ms, sk_ref);
+		printk("CLdelay: Reached this case, status:%d delay_ms:%d, sk_ref(%u), sk(%u)\n",
+			sk_ref->sk_delay_enabled, cl_delay_ms, sk_ref, sk);
 
 		cl_timer_init();
 
-		printk("CLdelay: Reached this case, status:%d delay_ms:%d\n",
-					sk_ref->sk_delay_enabled, cl_delay_ms);
+		printk("CLdelay: Reached this case, status:%d delay_ms:%d, sk_ref(%u), sk(%u)\n",
+					sk_ref->sk_delay_enabled, cl_delay_ms, sk_ref, sk);
 
 		break;
 #endif
