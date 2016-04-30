@@ -984,20 +984,20 @@ set_rcvbuf:
 
 #ifdef CROSS_LAYER_DELAY
 	case SO_CROSS_LAYER_DELAY:
-		sk->sk_delay_enabled = 1;
-		if(copy_from_user(&sk->sk_delay_ms, optval, sizeof(sk->sk_delay_ms)))
+		sk_ref->sk_delay_enabled = 1;
+		if(copy_from_user(&sk_ref->sk_delay_ms, optval, sizeof(sk->sk_delay_ms)))
 			sk->sk_delay_ms = DEFAULT_CL_DELAY_MS;
 		
 		// TODO: implement EDF here
-		cl_delay_ms = sk->sk_delay_ms;
+		cl_delay_ms = sk_ref->sk_delay_ms;
 
-		printk("CLdelay: Reached this case, status:%d delay_ms:%d\n", 
-			sk->sk_delay_enabled, cl_delay_ms);
+		printk("CLdelay: Reached this case, status:%d delay_ms:%d, sk_ref(%u)\n",
+			sk_ref->sk_delay_enabled, cl_delay_ms, sk_ref);
 
 		cl_timer_init();
 
 		printk("CLdelay: Reached this case, status:%d delay_ms:%d\n",
-					sk->sk_delay_enabled, cl_delay_ms);
+					sk_ref->sk_delay_enabled, cl_delay_ms);
 
 		break;
 #endif
@@ -2420,6 +2420,7 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 	sk->sk_delay_ms = 0;
 	atomic_set(&cl_block_flag, 0);
 	sk_ref = sk;
+	printk("sock_init_data: called, sk_ref(%u)", sk_ref);
 #endif
 
 	/*
