@@ -647,7 +647,8 @@ static void tcp_push(struct sock *sk, int flags, int mss_now,
 	struct sk_buff *skb;
 
 #ifdef CROSS_LAYER_DELAY
-	if (sk_ref->sk_delay_enabled) {
+	if (cl_ctr > 0 && sk_ref->sk_delay_enabled) {
+		printk("tcp_push: push called in cl delay\n");
 		// printk("tcp_push: blocked\n");
 		// return;
 //		int is_blocked = atomic_read(&cl_block_flag)
