@@ -571,6 +571,12 @@ static inline void tcp_clear_xmit_timers(struct sock *sk)
 	inet_csk_clear_xmit_timers(sk);
 }
 
+/* sock.c */
+#ifdef CROSS_LAYER_DELAY
+void tcp_push_callback( struct sock *sk, int flags, int mss_now,
+	     int nonagle, int size_goal);
+#endif
+
 unsigned int tcp_sync_mss(struct sock *sk, u32 pmtu);
 unsigned int tcp_current_mss(struct sock *sk);
 

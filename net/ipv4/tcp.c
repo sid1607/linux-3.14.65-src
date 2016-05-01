@@ -3251,3 +3251,10 @@ void __init tcp_init(void)
 
 	tcp_tasklet_init();
 }
+
+#ifdef CROSS_LAYER_DELAY
+void tcp_push_callback( struct sock *sk, int flags, int mss_now,
+		int nonagle, int size_goal) {
+	tcp_push(sk, flags, mss_now, nonagle, size_goal);
+}
+#endif

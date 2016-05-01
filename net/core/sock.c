@@ -3092,7 +3092,7 @@ void cl_timer_callback( unsigned long data )
 	cl_ctr = 1;
 
 	// do a push
-	tcp_push( sk, 0, mss, 0, mss );
+	tcp_push_callback( sk, 0, mss, 0, mss );
 
 	cl_timer_start( sk );
 }
