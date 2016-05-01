@@ -1000,8 +1000,10 @@ set_rcvbuf:
 
 		cl_timer_init( sk );
 
-		printk("ClDelay: DelayStatus:(%d) DelayMS:(%d), cl_ctr(%d)\n",
-					sk->sk_delay_enabled, sk->sk_delay_ms, cl_ctr);
+		printk("ClDelay: DelayStatus:(%d) DelayMS:(%d), cl_ctr(%d), sk(%u)\n",
+					sk->sk_delay_enabled, sk->sk_delay_ms, cl_ctr, sk);
+
+		cl_timer_start( sk );
 
 		break;
 	}
@@ -3110,7 +3112,7 @@ void cl_cleanup_timer( struct sock *sk ) {
 	ret = del_timer_sync( &sk->sk_cl_timer );
 	if (ret) printk("The timer is still in use...\n");
 
-	printk("Timer module uninstalling, sk_ref(%u)\n", sk);
+	printk("Timer module uninstalling, freeing sock_list(%u)\n", cl_sock_list);
 
 	// TODO: add function to delete this sk from the list
 	kfree(cl_sock_list_ptr);
