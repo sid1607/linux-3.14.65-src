@@ -3149,13 +3149,43 @@ void cl_sock_list_insert_tail( struct cl_sock_list *node ) {
 }
 
 // basic callback
-void cl_timer_callback( unsigned long data )
-{
-	int mss = 21888, needs_retransmit;
+void cl_timer_callback( unsigned long data ) {
+	// 1) Lock list
+	spin_lock(&sock_list_lock);
 
-	// TODO struct sock *sk = cl_sock_list_ptr->node;
-	return;
-	// TODO printk( "cl_timer_callback: callback for sock(%u)\n", sk );
+	// 2) Check head
+	// If head was destroyed before insert call
+	if (cl_sock_list_head == NULL) {
+		// List does not exist, just return
+		spin_unlock(&sock_list_lock);
+		return;
+	}
+	// 3) Lock head, unlock list
+	spin_lock(&cl_sock_list_head->sock_lock);
+	spin_unlock(&sock_list_lock);
+
+	// 4) Traverse, hand-over-hand
+	cl_sock_list *curr = cl_sock_list_head;
+	while(curr != NULL) {
+		// Inititate send
+		cl_timer_callback_send(curr->node);
+		if (curr->next == NULL) {
+			spin_unlock(&curr->sock_lock);
+			break;
+		} else {
+			// Jump to next node
+			spin_lock(&curr->next->sock_lock);
+			cl_sock_list *next = curr->next;
+			spin_unlock(&curr->sock_lock);
+			curr = next;
+		}
+	}
+}
+
+void cl_timer_callback_send( struct sock *sk ) {
+	printk( "cl_timer_callback: callback for sock(%u)\n", sk );
+
+	int mss = 21888, needs_retransmit;
 
 	// unblock socket
 	atomic_set(&sk->sk_cl_block_flag, 0);

@@ -2357,6 +2357,9 @@ extern __u32 sysctl_rmem_default;
 
 	extern void cl_timer_callback( unsigned long data );
 
+	// Inititate sending on a socket
+	extern void cl_timer_callback_send( struct sock *sk );
+
 	// Method to insert node, makes appropriate checks
 	extern void cl_sock_list_insert( struct cl_sock_list *node );
 
