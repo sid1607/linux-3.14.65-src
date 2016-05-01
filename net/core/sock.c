@@ -3082,6 +3082,7 @@ cl_sock_list *init_cl_sock_list( void ) {
 // basic callback
 void cl_timer_callback( unsigned long data )
 {
+	int mss = 21888;
 	struct sock *sk = cl_sock_list_ptr->node;
 	printk( "cl_timer_callback: callback for sock(%u)\n", sk );
 
@@ -3089,6 +3090,9 @@ void cl_timer_callback( unsigned long data )
 	atomic_set(&sk->sk_cl_block_flag, 0);
 
 	cl_ctr = 1;
+
+	// do a push
+	tcp_push( sk, 0, mss, 0, mss );
 
 	cl_timer_start( sk );
 }
