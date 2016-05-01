@@ -2436,7 +2436,7 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 
 	// set retransmission flags
 	atomic_set(&sk->sk_timeout_flag, 0);
-	atmoic_set(&sk->sk_fast_retransmit_flag, 0);
+	atomic_set(&sk->sk_fast_retransmit_flag, 0);
 #endif
 
 	/*
