@@ -2363,6 +2363,9 @@ extern __u32 sysctl_rmem_default;
 	// Method to insert node to the tail of the list
 	extern void cl_sock_list_insert_tail( struct cl_sock_list *node );
 
+	// Method to delete node and free memory
+	extern void cl_sock_list_delete( struct sock *sk );
+
 	extern int cl_timer_init( struct sock *sk );
 
 	extern int cl_timer_start( struct sock *sk );
