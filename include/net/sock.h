@@ -435,7 +435,7 @@ struct sock {
 	atomic_t sk_timeout_flag;
 	atomic_t sk_fast_retransmit_flag;
 #endif
-	
+
 	void			(*sk_state_change)(struct sock *sk);
 	void			(*sk_data_ready)(struct sock *sk, int bytes);
 	void			(*sk_write_space)(struct sock *sk);
@@ -2335,19 +2335,30 @@ extern __u32 sysctl_rmem_default;
 	typedef struct {
 		struct sock *node;
 		struct cl_sock_list *next;
-		// put simple spinlock here
+		spinlock_t sock_lock = SPIN_LOCK_UNLOCKED;
+		// TODO put simple spinlock here
 		// refer: https://www.kernel.org/pub/linux/kernel/people/rusty/kernel-locking/c93.html
-	}cl_sock_list;
+	} cl_sock_list;
 
 	#define DEFAULT_CL_DELAY_MS 200
 
 	extern int cl_ctr;
 
-	extern cl_sock_list *cl_sock_list_ptr;
+	// Pointer to head of socket list
+	extern cl_sock_list *cl_sock_list_head;
 
-	extern cl_sock_list *init_cl_sock_list( void );
+	// Lock used during modification of the sock list
+	extern spinlock_t sock_list_lock;
+
+	// Variable used during transfer iteration for mutual exclusion
+	extern atomic_t xfer_in_progress;
+
+	extern cl_sock_list *init_cl_sock_list( );
 
 	extern void cl_timer_callback( unsigned long data );
+
+	// Method to insert node to the tail of the list
+	extern void cl_sock_list_insert_tail( struct cl_sock_list *node );
 
 	extern int cl_timer_init( struct sock *sk );
 

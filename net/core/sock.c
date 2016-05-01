@@ -989,20 +989,37 @@ set_rcvbuf:
 		// TODO: remove
 		cl_ctr++;
 
-		// allocate sock_list if it hasn't been allocated yet
-		if (cl_sock_list_ptr == NULL) {
-			cl_sock_list_ptr = init_cl_sock_list();
+		// allocate sock_list
+		cl_sock_list_node = init_cl_sock_list();
+		cl_sock_list_node->node = sk;
+
+		// Insert to node list
+		if (cl_sock_list_head == NULL) {
+			spin_lock(&sock_list_lock);
+			// Double check
+			if (cl_sock_list_head == NULL) {
+				// List does not exist, create it
+				cl_sock_list_head = cl_sock_list_node;
+			} else {
+				// List was created before we acquired the lock,
+				// just insert
+				cl_sock_list_insert_tail(cl_sock_list_node);
+			}
+			spin_unlock(&sock_list_lock);
+		} else {
+			// List exists, insert
+			cl_sock_list_insert_tail(cl_sock_list_node);
 		}
 
 		printk("sockopt: sk port pair: src(%d), dest(%d), sk(%u)\n", inet->inet_sport, inet->inet_dport, sk);
 
 		// TODO: replace with linked list insertion
-		cl_sock_list_ptr->node = sk;
+		// cl_sock_list_node->node = sk;
 
 		sk->sk_delay_enabled = 1;
 		if(copy_from_user(&sk->sk_delay_ms, optval, sizeof(sk->sk_delay_ms)))
 			sk->sk_delay_ms = DEFAULT_CL_DELAY_MS;
-		
+
 		// TODO: implement EDF here
 
 		cl_timer_init( sk );
@@ -3068,18 +3085,28 @@ subsys_initcall(proto_init);
 int cl_ctr = 0;
 
 // initial sock list is empty
-cl_sock_list *cl_sock_list_ptr = NULL;
+cl_sock_list *cl_sock_list_head = NULL;
+spinlock_t sock_list_lock = SPIN_LOCK_UNLOCKED;
+atomic_t xfer_in_progress = ATOMIC_INIT(0);
 
 // allocates a sock list element
-cl_sock_list *init_cl_sock_list( void ) {
+cl_sock_list *init_cl_sock_list( ) {
 	cl_sock_list *ptr;
+
 	ptr = kmalloc(sizeof(cl_sock_list), GFP_KERNEL);
+
 	if (ptr == NULL) {
 		printk("init_cl_sock_list: Allocation failed\n");
 	} else {
 		printk("init_cl_sock_list: Sock_list_ptr(%u)\n", ptr);
 	}
+
 	return ptr;
+}
+
+// Method to insert node to the tail of the list
+void cl_sock_list_insert_tail( struct cl_sock_list *node ) {
+
 }
 
 // basic callback
