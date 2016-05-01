@@ -988,6 +988,10 @@ set_rcvbuf:
 		printk("sockopt: sk(%u)\n", sk);
 		cl_ctr++;
 		printk("sockopt: sk port pair: src(%d), dest(%d)", inet->inet_sport, inet->inet_dport);
+
+		// TODO: replace with linked list insertion
+		cl_sock_list_ptr->node = sk;
+
 		sk->sk_delay_enabled = 1;
 		if(copy_from_user(&sk->sk_delay_ms, optval, sizeof(sk->sk_delay_ms)))
 			sk->sk_delay_ms = DEFAULT_CL_DELAY_MS;
@@ -2420,6 +2424,11 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 	sk->sk_delay_enabled = 0;
 	sk->sk_delay_ms = 0;
 	atomic_set(&sk->sk_cl_block_flag, 0);
+
+	if (cl_sock_list_ptr == NULL) {
+		cl_sock_list_ptr = init_cl_sock_list();
+	}
+
 	printk("sock_init_data: called, sk_ref(%u)", sk);
 #endif
 
