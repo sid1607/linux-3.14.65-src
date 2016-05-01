@@ -3090,7 +3090,7 @@ void cl_timer_callback( unsigned long data )
 
 	cl_ctr = 1;
 
-	// cl_timer_start( sk );
+	cl_timer_start( sk );
 }
 
 // timer init fucntion
@@ -3104,6 +3104,7 @@ int cl_timer_init( struct sock *sk ) {
 int cl_timer_start( struct sock *sk  ) {
 	int ret;
 
+	cl_ctr = 1;
 	// block socket
 	atomic_set(&sk->sk_cl_block_flag, 1);
 
