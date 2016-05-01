@@ -987,7 +987,7 @@ set_rcvbuf:
 		struct inet_sock *inet = inet_sk(sk);
 		printk("sockopt: sk(%u)\n", sk);
 		cl_ctr++;
-		printk("sockopt: sk port pair: src(%d), dest(%d)", inet->inet_sport, inet->inet_dport);
+		printk("sockopt: sk port pair: src(%d), dest(%d)\n", inet->inet_sport, inet->inet_dport);
 
 		// TODO: replace with linked list insertion
 		cl_sock_list_ptr->node = sk;
@@ -2429,7 +2429,7 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 		cl_sock_list_ptr = init_cl_sock_list();
 	}
 
-	printk("sock_init_data: called, sk_ref(%u)", sk);
+	// printk("sock_init_data: called, sk_ref(%u)", sk);
 #endif
 
 	/*
@@ -3070,7 +3070,7 @@ cl_sock_list *init_cl_sock_list( void ) {
 	if (ptr == NULL) {
 		printk("init_cl_sock_list: Allocation failed\n");
 	} else {
-		printk("init_cl_sock_list: Sock_list_ptr(%u)", ptr);
+		printk("init_cl_sock_list: Sock_list_ptr(%u)\n", ptr);
 	}
 	return ptr;
 }
@@ -3079,7 +3079,7 @@ cl_sock_list *init_cl_sock_list( void ) {
 void cl_timer_callback( unsigned long data )
 {
 	struct sock *sk = cl_sock_list_ptr->node;
-	printk( "cl_timer_callback: callback for sock(%u)", sk );
+	printk( "cl_timer_callback: callback for sock(%u)\n", sk );
 	cl_timer_start( sk );
 }
 
