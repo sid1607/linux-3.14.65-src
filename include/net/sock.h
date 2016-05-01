@@ -430,6 +430,8 @@ struct sock {
 #ifdef CROSS_LAYER_DELAY
 	char 	sk_delay_enabled;
 	int 	sk_delay_ms;
+	struct timer_list sk_cl_timer;
+	atomic_t sk_cl_block_flag;
 #endif
 	
 	void			(*sk_state_change)(struct sock *sk);
@@ -2328,23 +2330,27 @@ extern __u32 sysctl_wmem_default;
 extern __u32 sysctl_rmem_default;
 
 #ifdef CROSS_LAYER_DELAY
+	typedef struct {
+		struct sock *node;
+		struct cl_sock_list *next;
+		struct socket_lock_t *lock;
+	}cl_sock_list;
+
 	#define DEFAULT_CL_DELAY_MS 200
 
-	extern int cl_delay_ms, cl_ctr;
+	extern int cl_ctr;
 
-	extern struct sock *sk_ref;
+	extern cl_sock_list *cl_sock_list_ptr;
 
-	extern struct timer_list cl_timer;
-
-	extern atomic_t cl_block_flag;
+	extern cl_sock_list *init_cl_sock_list( void );
 
 	extern void cl_timer_callback( unsigned long data );
 
-	extern int cl_timer_init( void );
+	extern int cl_timer_init( struct sock *sk );
 
-	extern int cl_timer_start( void );
+	extern int cl_timer_start( struct sock *sk );
 
-	extern void cl_cleanup_timer( void );
+	extern void cl_cleanup_timer( struct sock *sk );
 #endif
 
 

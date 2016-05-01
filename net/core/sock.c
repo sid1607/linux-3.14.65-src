@@ -984,27 +984,20 @@ set_rcvbuf:
 
 #ifdef CROSS_LAYER_DELAY
 	case SO_CROSS_LAYER_DELAY:{
-		struct inet_sock *inet_ref = inet_sk(sk_ref);
 		struct inet_sock *inet = inet_sk(sk);
-		printk("sockopt: sk_ref(%u), sk(%u)\n", sk_ref, sk);
-		sk_ref = sk;
+		printk("sockopt: sk(%u)\n", sk);
 		cl_ctr++;
-		printk("sockopt: Ref port pair: src(%d), dest(%d)", inet_ref->inet_sport, inet_ref->inet_dport);
 		printk("sockopt: sk port pair: src(%d), dest(%d)", inet->inet_sport, inet->inet_dport);
-		sk_ref->sk_delay_enabled = 1;
-		if(copy_from_user(&sk_ref->sk_delay_ms, optval, sizeof(sk->sk_delay_ms)))
+		sk->sk_delay_enabled = 1;
+		if(copy_from_user(&sk->sk_delay_ms, optval, sizeof(sk->sk_delay_ms)))
 			sk->sk_delay_ms = DEFAULT_CL_DELAY_MS;
 		
 		// TODO: implement EDF here
-		cl_delay_ms = sk_ref->sk_delay_ms;
 
-		printk("CLdelay: Reached this case, status:%d delay_ms:%d, cl_ctr(%d)\n",
-			sk_ref->sk_delay_enabled, cl_delay_ms, cl_ctr);
+		cl_timer_init( sk );
 
-		cl_timer_init();
-
-		printk("CLdelay: Reached this case, status:%d delay_ms:%d, cl_ctr(%d)\n",
-					sk_ref->sk_delay_enabled, cl_delay_ms, cl_ctr);
+		printk("ClDelay: DelayStatus:(%d) DelayMS:(%d), cl_ctr(%d)\n",
+					sk->sk_delay_enabled, sk->sk_delay_ms, cl_ctr);
 
 		break;
 	}
@@ -1485,7 +1478,7 @@ void sk_free(struct sock *sk)
 	 */
 #ifdef CROSS_LAYER_DELAY
 		if (sk->sk_delay_enabled)
-			cl_cleanup_timer();
+			cl_cleanup_timer(sk);
 #endif
 
 	if (atomic_dec_and_test(&sk->sk_wmem_alloc))
@@ -2426,9 +2419,8 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 #ifdef CROSS_LAYER_DELAY
 	sk->sk_delay_enabled = 0;
 	sk->sk_delay_ms = 0;
-	atomic_set(&cl_block_flag, 0);
-	sk_ref = sk;
-	printk("sock_init_data: called, sk_ref(%u)", sk_ref);
+	atomic_set(&sk->sk_cl_block_flag, 0);
+	printk("sock_init_data: called, sk_ref(%u)", sk);
 #endif
 
 	/*
@@ -3056,43 +3048,63 @@ subsys_initcall(proto_init);
 
 #ifdef CROSS_LAYER_DELAY
 
-int cl_delay_ms, cl_ctr = 0;
-struct timer_list cl_timer;
-atomic_t cl_block_flag;
-struct sock *sk_ref;
+// for debug
+int cl_ctr = 0;
 
-void cl_timer_callback( unsigned long data )
-{
-   atomic_set(&cl_block_flag, 0);
-  printk( "timer_callback: (%ld).\n, flag value:(%d)\n", jiffies, atomic_read(&cl_block_flag));
+// initial sock list is empty
+cl_sock_list *cl_sock_list_ptr = NULL;
+
+// allocates a sock list element
+cl_sock_list *init_cl_sock_list( void ) {
+	cl_sock_list *ptr;
+	ptr = kmalloc(sizeof(cl_sock_list), GFP_KERNEL);
+	if (ptr == NULL) {
+		printk("init_cl_sock_list: Allocation failed\n");
+	} else {
+		printk("init_cl_sock_list: Sock_list_ptr(%u)", ptr);
+	}
+	return ptr;
 }
 
-int cl_timer_init( void ) {
-	printk("timer_init: Timer module installing\n");
-	printk("timer_init: sk_ref_delay_enabled: %d\n", sk_ref->sk_delay_enabled);
-	setup_timer( &cl_timer, cl_timer_callback, 0 );
+// basic callback
+void cl_timer_callback( unsigned long data )
+{
+	struct sock *sk = cl_sock_list_ptr->node;
+	printk( "cl_timer_callback: callback for sock(%u)", sk );
+	cl_timer_start( sk );
+}
+
+// timer init fucntion
+int cl_timer_init( struct sock *sk ) {
+	printk("timer_init: Timer module installing, sk_ref_delay_enabled: %d\n", sk->sk_delay_enabled);
+	setup_timer( &sk->sk_cl_timer, cl_timer_callback, 0 );
 	return 0;
 }
 
-int cl_timer_start( void ) {
+// timer start function
+int cl_timer_start( struct sock *sk  ) {
 	int ret;
 
-	atomic_set(&cl_block_flag, 1);
-	printk( "timer_start: Starting timer to fire in %dms (%ld), cl_block flag val (%d)\n", cl_delay_ms, jiffies, atomic_read(&cl_block_flag) );
+	atomic_set(&sk->sk_cl_block_flag, 1);
+	printk( "timer_start: Starting timer to fire in %dms (%ld), cl_block flag val (%d)\n", sk->sk_delay_ms, jiffies, atomic_read(&sk->sk_cl_block_flag) );
 	// TODO: make this to set value
-	ret = mod_timer( &cl_timer, jiffies + msecs_to_jiffies(cl_delay_ms) );
+	ret = mod_timer( &sk->sk_cl_timer, jiffies + msecs_to_jiffies(sk->sk_delay_ms) );
 	if (ret) printk("Error in mod_timer\n");
 
 	return 0;
 }
 
-void cl_cleanup_timer( void ) {
+// timer cleanup function
+void cl_cleanup_timer( struct sock *sk ) {
 	int ret;
 
-	ret = del_timer_sync( &cl_timer );
+	ret = del_timer_sync( &sk->sk_cl_timer );
 	if (ret) printk("The timer is still in use...\n");
 
-	printk("Timer module uninstalling, sk_ref(%u)\n", sk_ref);
+	printk("Timer module uninstalling, sk_ref(%u)\n", sk);
+
+	// TODO: add function to delete this sk from the list
+	kfree(cl_sock_list_ptr);
 
 	return;
 }

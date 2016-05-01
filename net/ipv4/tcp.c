@@ -647,8 +647,8 @@ static void tcp_push(struct sock *sk, int flags, int mss_now,
 	struct sk_buff *skb;
 
 #ifdef CROSS_LAYER_DELAY
-	if (cl_ctr > 0 && sk_ref->sk_delay_enabled) {
-		printk("tcp_push: push called in cl delay\n");
+//	if (cl_ctr > 0 && sk_ref->sk_delay_enabled) {
+//		printk("tcp_push: push called in cl delay\n");
 		// printk("tcp_push: blocked\n");
 		// return;
 //		int is_blocked = atomic_read(&cl_block_flag)
@@ -656,13 +656,13 @@ static void tcp_push(struct sock *sk, int flags, int mss_now,
 //			printk("tcp_push: socket is blocked, not pushing");
 //			return;
 //		}
-	}
-	else if (cl_ctr > 0 && cl_ctr < 100 && !sk_ref->sk_delay_enabled){
-		struct inet_sock *inet_ref = inet_sk(sk_ref);
-		cl_ctr++;
-		printk("sockopt: Ref port pair: src(%d), dest(%d)", inet_ref->inet_sport, inet_ref->inet_dport);
-		printk("tcp_push: sk_ref(%u), cl_ctr(%d), delay_enable(%d)\n", sk_ref, cl_ctr, sk_ref->sk_delay_enabled);
-	}
+//	}
+//	else if (cl_ctr > 0 && cl_ctr < 100 && !sk_ref->sk_delay_enabled){
+//		struct inet_sock *inet_ref = inet_sk(sk_ref);
+//		cl_ctr++;
+//		printk("sockopt: Ref port pair: src(%d), dest(%d)", inet_ref->inet_sport, inet_ref->inet_dport);
+//		printk("tcp_push: sk_ref(%u), cl_ctr(%d), delay_enable(%d)\n", sk_ref, cl_ctr, sk_ref->sk_delay_enabled);
+//	}
 #endif
 
 	if (!tcp_send_head(sk))
