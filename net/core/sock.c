@@ -3150,6 +3150,15 @@ void cl_sock_list_insert_tail( struct cl_sock_list *node ) {
 
 // basic callback
 void cl_timer_callback( unsigned long data ) {
+	// 0) Try to acquire right to traverse
+	// int atomic_cmpxchg(atomic_t *v, int old, int new);
+	if (xfer_in_progress == 0 && atomic_cmpxchg(xfer_in_progress, 0, 1) == 0) {
+		// We acquired the right to perform the callback
+		// no need to do anything
+	} else {
+		return;
+	}
+
 	// 1) Lock list
 	spin_lock(&sock_list_lock);
 
@@ -3180,6 +3189,9 @@ void cl_timer_callback( unsigned long data ) {
 			curr = next;
 		}
 	}
+
+	// Unset the transfer variable
+	xfer_in_progress = 0;
 }
 
 void cl_timer_callback_send( struct sock *sk ) {
