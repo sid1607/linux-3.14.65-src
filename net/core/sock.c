@@ -3084,7 +3084,13 @@ void cl_timer_callback( unsigned long data )
 {
 	struct sock *sk = cl_sock_list_ptr->node;
 	printk( "cl_timer_callback: callback for sock(%u)\n", sk );
-	cl_timer_start( sk );
+
+	// unblock socket
+	atomic_set(&sl->sk_cl_block_flag, 0);
+
+	cl_ctr = 1;
+
+	// cl_timer_start( sk );
 }
 
 // timer init fucntion
@@ -3098,7 +3104,9 @@ int cl_timer_init( struct sock *sk ) {
 int cl_timer_start( struct sock *sk  ) {
 	int ret;
 
+	// block socket
 	atomic_set(&sk->sk_cl_block_flag, 1);
+
 	printk( "timer_start: Starting timer to fire in %dms (%ld), cl_block flag val (%d)\n", sk->sk_delay_ms, jiffies, atomic_read(&sk->sk_cl_block_flag) );
 	// TODO: make this to set value
 	ret = mod_timer( &sk->sk_cl_timer, jiffies + msecs_to_jiffies(sk->sk_delay_ms) );
