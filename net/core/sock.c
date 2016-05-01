@@ -3112,7 +3112,7 @@ void cl_cleanup_timer( struct sock *sk ) {
 	ret = del_timer_sync( &sk->sk_cl_timer );
 	if (ret) printk("The timer is still in use...\n");
 
-	printk("Timer module uninstalling, freeing sock_list(%u)\n", cl_sock_list);
+	printk("Timer module uninstalling, freeing sock_list(%u)\n", cl_sock_list_ptr);
 
 	// TODO: add function to delete this sk from the list
 	kfree(cl_sock_list_ptr);
