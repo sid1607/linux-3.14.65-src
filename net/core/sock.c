@@ -985,9 +985,16 @@ set_rcvbuf:
 #ifdef CROSS_LAYER_DELAY
 	case SO_CROSS_LAYER_DELAY:{
 		struct inet_sock *inet = inet_sk(sk);
-		printk("sockopt: sk(%u)\n", sk);
+
+		// TODO: remove
 		cl_ctr++;
-		printk("sockopt: sk port pair: src(%d), dest(%d)\n", inet->inet_sport, inet->inet_dport);
+
+		// allocate sock_list if it hasn't been allocated yet
+		if (cl_sock_list_ptr == NULL) {
+			cl_sock_list_ptr = init_cl_sock_list();
+		}
+
+		printk("sockopt: sk port pair: src(%d), dest(%d), sk(%u)\n", inet->inet_sport, inet->inet_dport, sk);
 
 		// TODO: replace with linked list insertion
 		cl_sock_list_ptr->node = sk;
@@ -2426,11 +2433,6 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 	sk->sk_delay_enabled = 0;
 	sk->sk_delay_ms = 0;
 	atomic_set(&sk->sk_cl_block_flag, 0);
-
-	if (cl_sock_list_ptr == NULL) {
-		cl_sock_list_ptr = init_cl_sock_list();
-	}
-
 	// printk("sock_init_data: called, sk_ref(%u)", sk);
 #endif
 
@@ -3117,6 +3119,7 @@ void cl_cleanup_timer( struct sock *sk ) {
 	// TODO: add function to delete this sk from the list
 	kfree(cl_sock_list_ptr);
 
+	cl_sock_list_ptr = NULL;
 	return;
 }
 #endif /* CL_DELAY */
