@@ -432,6 +432,8 @@ struct sock {
 	int 	sk_delay_ms;
 	struct timer_list sk_cl_timer;
 	atomic_t sk_cl_block_flag;
+	atomic_t sk_timeout_flag;
+	atomic_t sk_fast_retransmit_flag;
 #endif
 	
 	void			(*sk_state_change)(struct sock *sk);

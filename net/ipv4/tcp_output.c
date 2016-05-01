@@ -2512,6 +2512,26 @@ void tcp_xmit_retransmit_queue(struct sock *sk)
 	int mib_idx;
 	int fwd_rexmitting = 0;
 
+#ifdef CROSS_LAYER_DELAY
+	if (sk->sk_delay_enabled){
+		// sockopt has been set
+		int is_blocked = atomic_read(&sk->sk_cl_block_flag);
+		if (is_blocked) {
+			if (cl_ctr > 1 && cl_ctr < 20) {
+				cl_ctr++;
+				printk("tcp_xmit_retransmit_queue: Fast Retransmission blocked\n");
+			}
+			atomic_set(&sk->sk_fast_retransmit_flag, 1);
+			return;
+		} else {
+			if (cl_ctr > 1 && cl_ctr < 20) {
+				cl_ctr++;
+				printk("tcp_xmit_retransmit_queue: Fast Retransmission NOT blocked\n");
+			}
+		}
+	}
+#endif
+
 	if (!tp->packets_out)
 		return;
 

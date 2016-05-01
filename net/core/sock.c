@@ -2433,7 +2433,10 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 	sk->sk_delay_enabled = 0;
 	sk->sk_delay_ms = 0;
 	atomic_set(&sk->sk_cl_block_flag, 0);
-	// printk("sock_init_data: called, sk_ref(%u)", sk);
+
+	// set retransmission flags
+	atomic_set(&sk->sk_timeout_flag, 0);
+	atmoic_set(&sk->sk_fast_retransmit_flag, 0);
 #endif
 
 	/*
@@ -3082,7 +3085,7 @@ cl_sock_list *init_cl_sock_list( void ) {
 // basic callback
 void cl_timer_callback( unsigned long data )
 {
-	int mss = 21888;
+	int mss = 21888, needs_retransmit;
 	struct sock *sk = cl_sock_list_ptr->node;
 	printk( "cl_timer_callback: callback for sock(%u)\n", sk );
 
@@ -3091,8 +3094,27 @@ void cl_timer_callback( unsigned long data )
 
 	cl_ctr = 1;
 
-	// do a push
+	// check if retransmits are required first
+	needs_retransmit = atomic_read(&sk->sk_timeout_flag);
+	if (needs_retransmit) {
+		// do timeout-based retransmit
+		printk("cl_timer_callback: doing timeout based retransmit\n");
+		tcp_retransmit_timer(sk);
+	}
+
+	needs_retransmit = atomic_read(&sk->sk_fast_retransmit_flag);
+	if (needs_retransmit) {
+		// do fast rentransmit
+		printk("cl_timer_callback: doing fast retransmit\n");
+		tcp_xmit_retransmit_queue(sk);
+	}
+
+	// then do a push
 	tcp_push_callback( sk, 0, mss, 0, mss );
+
+	// reset retransmit flags
+	atomic_set(&sk->sk_timeout_flag, 0);
+	atomic_set(&sk->sk_fast_retransmit_flag, 0);
 
 	cl_timer_start( sk );
 }
