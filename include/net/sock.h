@@ -2335,7 +2335,8 @@ extern __u32 sysctl_rmem_default;
 	typedef struct {
 		struct sock *node;
 		struct cl_sock_list *next;
-		struct socket_lock_t *lock;
+		// put simple spinlock here
+		// refer: https://www.kernel.org/pub/linux/kernel/people/rusty/kernel-locking/c93.html
 	}cl_sock_list;
 
 	#define DEFAULT_CL_DELAY_MS 200
