@@ -3086,7 +3086,7 @@ void cl_timer_callback( unsigned long data )
 	printk( "cl_timer_callback: callback for sock(%u)\n", sk );
 
 	// unblock socket
-	atomic_set(&sl->sk_cl_block_flag, 0);
+	atomic_set(&sk->sk_cl_block_flag, 0);
 
 	cl_ctr = 1;
 
