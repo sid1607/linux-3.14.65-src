@@ -990,26 +990,11 @@ set_rcvbuf:
 		cl_ctr++;
 
 		// allocate sock_list
-		cl_sock_list_node = init_cl_sock_list();
+		cl_sock_list *cl_sock_list_node = init_cl_sock_list();
 		cl_sock_list_node->node = sk;
 
 		// Insert to node list
-		if (cl_sock_list_head == NULL) {
-			spin_lock(&sock_list_lock);
-			// Double check
-			if (cl_sock_list_head == NULL) {
-				// List does not exist, create it
-				cl_sock_list_head = cl_sock_list_node;
-			} else {
-				// List was created before we acquired the lock,
-				// just insert
-				cl_sock_list_insert_tail(cl_sock_list_node);
-			}
-			spin_unlock(&sock_list_lock);
-		} else {
-			// List exists, insert
-			cl_sock_list_insert_tail(cl_sock_list_node);
-		}
+		cl_sock_list_insert(cl_sock_list_node);
 
 		printk("sockopt: sk port pair: src(%d), dest(%d), sk(%u)\n", inet->inet_sport, inet->inet_dport, sk);
 
@@ -3104,9 +3089,63 @@ cl_sock_list *init_cl_sock_list( ) {
 	return ptr;
 }
 
-// Method to insert node to the tail of the list
-void cl_sock_list_insert_tail( struct cl_sock_list *node ) {
+// Method to insert node, makes appropriate checks
+void cl_sock_list_insert( struct cl_sock_list *node ) {
+	if (cl_sock_list_head == NULL) {
+		spin_lock(&sock_list_lock);
+		// Double check
+		if (cl_sock_list_head == NULL) {
+			// List does not exist, create it
+			cl_sock_list_head = cl_sock_list_node;
+		} else {
+			// List was created before we acquired the lock,
+			// just insert
+			cl_sock_list_insert_tail(cl_sock_list_node);
+		}
+		spin_unlock(&sock_list_lock);
+	} else {
+		// List exists, insert
+		cl_sock_list_insert_tail(cl_sock_list_node);
+	}
+}
 
+// Method to insert node to the tail of the list
+// 1) Lock list
+// 2) Check head
+// 3) Lock head, unlock list
+// 4) Traverse, hand-over-hand
+// 5) Insert to tail
+// 6) Unlock & return
+void cl_sock_list_insert_tail( struct cl_sock_list *node ) {
+	// 1) Lock list
+	spin_lock(&sock_list_lock);
+
+	// 2) Check head
+	// If head was destroyed before insert call
+	if (cl_sock_list_head == NULL) {
+		// List does not exist, create it
+		cl_sock_list_head = cl_sock_list_node;
+		spin_unlock(&sock_list_lock);
+		return;
+	}
+	// 3) Lock head, unlock list
+	spin_lock(&cl_sock_list_head->sock_lock);
+	spin_unlock(&sock_list_lock);
+
+	// 4) Traverse, hand-over-hand
+	cl_sock_list *curr = cl_sock_list_head;
+	while(curr->next != NULL) {
+		cl_sock_list *next = curr->next;
+		spin_lock(&next->sock_lock);
+		spin_unlock(&curr->sock_lock);
+		curr = next;
+	}
+
+	// 5) Insert to tail
+	curr->next = node;
+
+	// 6) Unlock & return
+	spin_unlock(&curr->sock_lock);
 }
 
 // basic callback
