@@ -3117,6 +3117,8 @@ void cl_cleanup_timer( struct sock *sk ) {
 	printk("Timer module uninstalling, freeing sock_list(%u)\n", cl_sock_list_ptr);
 
 	// TODO: add function to delete this sk from the list
+
+	// avoids memory leaks?
 	kfree(cl_sock_list_ptr);
 
 	cl_sock_list_ptr = NULL;
