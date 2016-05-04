@@ -16,7 +16,7 @@ void error(const char *msg)
 int main() {
 	int sockfd, newsockfd;
 	socklen_t clilen;
-	char buffer[256];
+	char buffer[256], outbuffer[256];
 	int delay_ms = 10000;
 	int port = 15744;
 	struct sockaddr_in serv_addr, cli_addr;
@@ -67,8 +67,11 @@ int main() {
 		}
 		if (n < 0) error("ERROR reading from socket");
 		printf("Here is the message: %s\n",buffer);
-		sprintf(buffer, "Received message:%s\r\n", buffer);
-		n = write(newsockfd,buffer,strlen(buffer));
+		strcat(outbuffer, "Received message: ");
+		strcat(outbuffer, buffer);
+		strcat(outbuffer, "\r\n");
+
+		n = write(newsockfd,outbuffer,strlen(outbuffer));
 		if (n < 0) error("ERROR writing to socket");
 	}
 
