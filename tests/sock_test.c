@@ -67,7 +67,8 @@ int main() {
 		}
 		if (n < 0) error("ERROR reading from socket");
 		printf("Here is the message: %s\n",buffer);
-		n = write(newsockfd,"I got your message\r\n",20);
+		sprintf(buffer, "Received message:%s\r\n", buffer);
+		n = write(newsockfd,buffer,strlen(buffer));
 		if (n < 0) error("ERROR writing to socket");
 	}
 
