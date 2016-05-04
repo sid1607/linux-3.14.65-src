@@ -2332,40 +2332,47 @@ extern __u32 sysctl_wmem_default;
 extern __u32 sysctl_rmem_default;
 
 #ifdef CROSS_LAYER_DELAY
-	typedef struct {
-		struct sock *node;
-		struct cl_sock_list *next;
-		spinlock_t sock_lock = SPIN_LOCK_UNLOCKED;
-	} cl_sock_list;
 
 	#define DEFAULT_CL_DELAY_MS 200
 
 	extern int cl_ctr;
 
-	// Pointer to head of socket list
-	extern cl_sock_list *cl_sock_list_head;
+	typedef struct {
+		struct sock *sk;
 
-	// Lock used during modification of the sock list
-	extern spinlock_t sock_list_lock;
+		struct cl_list_node *next;
 
-	// Variable used during transfer iteration for mutual exclusion
-	extern atomic_t xfer_in_progress;
+		spinlock_t sock_lock;
+	} cl_list_node;
 
-	extern cl_sock_list *init_cl_sock_list( );
+	typedef struct {
+		// Pointer to head of socket list
+		cl_list_node *head;
+
+		// Lock used during modification of the sock list
+		spinlock_t cl_list_lock = SPIN_LOCK_UNLOCKED;
+
+		// Variable used during transfer iteration for mutual exclusion
+		atomic_t xfer_in_progress = 0;
+	} cl_list;
+
+	extern cl_list sock_list;
+
+	extern cl_list_node *init_cl_list_node( );
 
 	extern void cl_timer_callback( unsigned long data );
 
-	// Inititate sending on a socket
+	// Initiate sending on a socket
 	extern void cl_timer_callback_send( struct sock *sk );
 
 	// Method to insert node, makes appropriate checks
-	extern void cl_sock_list_insert( struct cl_sock_list *node );
+	extern void cl_list_insert( struct cl_list_node *node );
 
 	// Method to insert node to the tail of the list
-	extern void cl_sock_list_insert_tail( struct cl_sock_list *node );
+	extern void cl_list_push_back( struct cl_list_node *node );
 
 	// Method to delete node and free memory
-	extern void cl_sock_list_delete( struct sock *sk );
+	extern void cl_list_delete( struct sock *sk );
 
 	extern int cl_timer_init( struct sock *sk );
 
