@@ -3207,7 +3207,7 @@ void cl_timer_callback( unsigned long data ) {
 		printk("cl_timer_callback: Canceling timer for (%u)\n", curr);
 		del_timer (&curr->sk->sk_cl_timer);
 		// Initiate send
-	//		cl_timer_callback_send(curr->sk);
+		cl_timer_callback_send(curr->sk);
 		if (curr->next == NULL) {
 			spin_unlock(&curr->sock_lock);
 			printk("cl_timer_callback: list end reached\n");
