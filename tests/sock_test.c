@@ -68,7 +68,7 @@ int main() {
 		}
 		if (n < 0) error("ERROR reading from socket");
 		printf("Here is the message: %s\n",buffer);
-		outbuffer = "Received message: ";
+		strcat(outbuffer, "Received message: ");
 		strcat(outbuffer, buffer);
 		strcat(outbuffer, "\r\n");
 
