@@ -3128,7 +3128,7 @@ void cl_list_insert( struct sock *sk ) {
 // 4) Traverse, hand-over-hand
 // 5) Insert to tail
 // 6) Unlock & return
-void cl_list_push_back( struct cl_list_node *node ) {
+void cl_list_push_back( cl_list_node *node ) {
 	// 1) Lock list
 	spin_lock(&sock_list.cl_list_lock);
 
@@ -3166,7 +3166,7 @@ void cl_list_push_back( struct cl_list_node *node ) {
 void cl_timer_callback( unsigned long data ) {
 	// 0) Try to acquire right to traverse
 	// int atomic_cmpxchg(atomic_t *v, int old, int new);
-	if (xfer_in_progress == 0 && atomic_cmpxchg(&xfer_in_progress, 0, 1) == 0) {
+	if (sock_list.xfer_in_progress == 0 && atomic_cmpxchg(&sock_list.xfer_in_progress, 0, 1) == 0) {
 		// We acquired the right to perform the callback
 		// no need to do anything
 	} else {
@@ -3181,7 +3181,7 @@ void cl_timer_callback( unsigned long data ) {
 	// If head was destroyed before insert call
 	if (sock_list.head == NULL) {
 		// List does not exist, just return
-		spin_unlock(&sock_list.);
+		spin_unlock(&sock_list.cl_list_lock);
 		return;
 	}
 	// 3) Lock head, unlock list
@@ -3236,7 +3236,7 @@ void cl_list_delete( struct sock *sk ) {
 	spin_lock(&sock_list.head->sock_lock);
 
 	// Check if the node to be deleted is the head node
-	if (sk == sock_list.head->node) {
+	if (sk == sock_list.head->sk) {
 		cl_list_node *deleted = sock_list.head;
 		sock_list.head = sock_list.head->next;
 		spin_unlock(&deleted->sock_lock);
@@ -3254,7 +3254,7 @@ void cl_list_delete( struct sock *sk ) {
 
 	while(curr->next != NULL) {
 		// Check if we found the node we're looking for
-		if (curr->node == sk) {
+		if (curr->sk == sk) {
 			break;
 		}
 		spin_lock(&curr->next->sock_lock);
@@ -3266,7 +3266,7 @@ void cl_list_delete( struct sock *sk ) {
 		curr = next;
 	}
 
-	if (curr->node != sk) {
+	if (curr->sk != sk) {
 		// The desired node is not found, return
 		spin_unlock(&prev->sock_lock);
 		spin_unlock(&curr->sock_lock);
@@ -3353,7 +3353,7 @@ void cl_cleanup_timer( struct sock *sk ) {
 	}
 
 	// TODO: add function to delete this sk from the list
-	cl_sock_list_delete(sk);
+	cl_list_delete(sk);
 
 	return;
 }
