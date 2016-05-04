@@ -3209,7 +3209,7 @@ void cl_timer_callback( unsigned long data ) {
 		printk("cl_timer_callback(%d): Canceling timer for (%u)\n", curr->sk->sk_id, curr);
 		del_timer (&curr->sk->sk_cl_timer);
 		// Initiate send
-		if (curr->sk->state == TCP_ESTABLISHED) {
+		if (curr->sk->sk_state == TCP_ESTABLISHED) {
 			// Send only if socket is open
 			cl_timer_callback_send(curr->sk);
 		}
