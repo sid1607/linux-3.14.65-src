@@ -3168,7 +3168,6 @@ void cl_timer_callback( unsigned long data ) {
 	cl_list_node *curr, *next;
 
 	printk("cl_timer_callback: called\n");
-	printk("cl_timer_callback: before progress(%d)\n", progress);
 	// 0) Try to acquire right to traverse
 	// int atomic_cmpxchg(atomic_t *v, int old, int new);
 	int progress = atomic_read(&sock_list.xfer_in_progress);
