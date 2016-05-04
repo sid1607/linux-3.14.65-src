@@ -3181,11 +3181,12 @@ void cl_timer_callback( unsigned long data ) {
 		return;
 	}
 
-	printk("cl_timer_callback: passed CAS\n");
-	return;
 	// 1) Lock list
 	spin_lock(&sock_list.cl_list_lock);
-
+	printk("cl_timer_callback: lock acquired CAS\n");
+	spin_unlock(&sock_list.cl_list_lock);
+	printk("cl_timer_callback: lock released CAS\n");
+	return;
 	// 2) Check head
 	// If head was destroyed before insert call
 	if (sock_list.head == NULL) {
