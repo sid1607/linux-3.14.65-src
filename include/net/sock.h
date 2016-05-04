@@ -434,6 +434,9 @@ struct sock {
 	atomic_t sk_cl_block_flag;
 	atomic_t sk_timeout_flag;
 	atomic_t sk_fast_retransmit_flag;
+
+	// TODO: remove this field
+	int 	sk_id;
 #endif
 
 	void			(*sk_state_change)(struct sock *sk);

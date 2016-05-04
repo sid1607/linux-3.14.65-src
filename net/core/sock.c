@@ -996,8 +996,8 @@ set_rcvbuf:
 		// Insert socket to node list
 		cl_list_insert( sk );
 
-		printk("sockopt: sk port pair: src(%d), dest(%d), sk(%u), progress(%d)\n", inet->inet_sport, inet->inet_dport,
-				sk, atomic_read(&sock_list.xfer_in_progress));
+		printk("sockopt(%d): sk port pair: src(%d), dest(%d), progress(%d)\n", sk->sk_id, inet->inet_sport, inet->inet_dport,
+				atomic_read(&sock_list.xfer_in_progress));
 
 		// TODO: replace with linked list insertion
 		// cl_sock_list_node->node = sk;
@@ -1010,7 +1010,7 @@ set_rcvbuf:
 
 		cl_timer_init( sk );
 
-		printk("ClDelay: DelayStatus:(%d) DelayMS:(%d), cl_ctr(%d), sk(%u)\n",
+		printk("ClDelay(%d): DelayStatus:(%d) DelayMS:(%d), cl_ctr(%d)\n", sk->sk_id,
 					sk->sk_delay_enabled, sk->sk_delay_ms, cl_ctr, sk);
 
 		cl_timer_start( sk );
@@ -2446,6 +2446,8 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 		init_cl_list();
 		is_list_initialized = 1;
 	}
+
+	sk->sk_id = is_list_initialized++;
 #endif
 
 	/*
@@ -3159,7 +3161,7 @@ void cl_list_push_back( cl_list_node *node ) {
 	// 5) Insert to tail
 	curr->next = node;
 
-	printk("push_back: pushed back (%u)\n", node);
+	printk("push_back(%d): pushed back (%u)\n", node->sk->sk_id, node);
 	// 6) Unlock & return
 	spin_unlock(&curr->sock_lock);
 }
@@ -3184,7 +3186,7 @@ void cl_timer_callback( unsigned long data ) {
 
 	// 1) Lock list
 	spin_lock(&sock_list.cl_list_lock);
-	printk("cl_timer_callback: lock acquired\n");
+	// printk("cl_timer_callback: lock acquired\n");
 
 	// 2) Check head
 	// If head was destroyed before insert call
@@ -3201,13 +3203,13 @@ void cl_timer_callback( unsigned long data ) {
 	// 4) Traverse, hand-over-hand
 	curr = sock_list.head;
 
-	printk("cl_timer_callback: reached traverse section (%u)\n", curr->next);
+	// printk("cl_timer_callback: reached traverse section (%u)\n", curr->next);
 	while(curr != NULL) {
 		// delete current timer
-		printk("cl_timer_callback: Canceling timer for (%u)\n", curr);
+		printk("cl_timer_callback(%d): Canceling timer for (%u)\n", curr->sk->sk_id, curr);
 		del_timer (&curr->sk->sk_cl_timer);
 		// Initiate send
-		if (curr->sk->state == TCP_ESTABLISHED) {
+		if (curr->sk->sk_state == TCP_ESTABLISHED) {
 			// Send only if socket is open
 			cl_timer_callback_send(curr->sk);
 		}
@@ -3289,7 +3291,7 @@ void cl_list_delete( struct sock *sk ) {
 		return;
 	}
 
-	printk("list_delete: Freeing cl_sock_list(%u)\n", curr);
+	printk("list_delete(%d): Freeing cl_sock_list(%u)\n", curr->sk->sk_id, curr);
 
 	// 5) Remove node from list
 	deleted = curr;
@@ -3304,7 +3306,7 @@ void cl_list_delete( struct sock *sk ) {
 void cl_timer_callback_send( struct sock *sk ) {
 	int mss = 21888, needs_retransmit;
 
-	printk( "cl_timer_callback: callback for sock(%u)\n", sk );
+	printk( "cl_timer_callback(%d): callback for sock(%u)\n", sk->sk_id, sk );
 
 	// unblock socket
 	atomic_set(&sk->sk_cl_block_flag, 0);
@@ -3315,14 +3317,14 @@ void cl_timer_callback_send( struct sock *sk ) {
 	needs_retransmit = atomic_read(&sk->sk_timeout_flag);
 	if (needs_retransmit) {
 		// do timeout-based retransmit
-		printk("cl_timer_callback: doing timeout based retransmit\n");
+		printk("cl_timer_callback(%d): doing timeout based retransmit\n", sk->sk_id);
 		tcp_retransmit_timer(sk);
 	}
 
 	needs_retransmit = atomic_read(&sk->sk_fast_retransmit_flag);
 	if (needs_retransmit) {
 		// do fast rentransmit
-		printk("cl_timer_callback: doing fast retransmit\n");
+		printk("cl_timer_callback(%d): doing fast retransmit\n", sk->sk_id);
 		tcp_xmit_retransmit_queue(sk);
 	}
 
@@ -3338,7 +3340,7 @@ void cl_timer_callback_send( struct sock *sk ) {
 
 // timer init fucntion
 int cl_timer_init( struct sock *sk ) {
-	printk("timer_init: Timer module installing, sk_ref_delay_enabled: %d\n", sk->sk_delay_enabled);
+	printk("timer_init(%d): Timer module installing, sk_ref_delay_enabled: %d\n", sk->sk_id, sk->sk_delay_enabled);
 	setup_timer( &sk->sk_cl_timer, cl_timer_callback, 0 );
 	return 0;
 }
@@ -3351,7 +3353,8 @@ int cl_timer_start( struct sock *sk  ) {
 	// block socket
 	atomic_set(&sk->sk_cl_block_flag, 1);
 
-	printk( "timer_start: Starting timer to fire in %dms (%ld), cl_block flag val (%d)\n", sk->sk_delay_ms, jiffies, atomic_read(&sk->sk_cl_block_flag) );
+	printk( "timer_start(%d): Starting timer to fire in %dms (%ld), cl_block flag val (%d)\n", sk->sk_id, sk->sk_delay_ms,
+			jiffies, atomic_read(&sk->sk_cl_block_flag) );
 	// TODO: make this to set value
 	ret = mod_timer( &sk->sk_cl_timer, jiffies + msecs_to_jiffies(sk->sk_delay_ms) );
 	if (ret) printk("Error in mod_timer\n");
@@ -3365,10 +3368,10 @@ void cl_cleanup_timer( struct sock *sk ) {
 
 	ret = del_timer_sync( &sk->sk_cl_timer );
 	if (ret) {
-		printk("The timer is still in use...\n");
+		printk("cl_cleanup_timer(%d): The timer is still in use...\n", sk->sk_id);
 	}
 
-	printk("cl_cleanup_timer: timer deleting\n");
+	printk("cl_cleanup_timer(%d): timer deleting\n", sk->sk_id);
 	// TODO: add function to delete this sk from the list
 	cl_list_delete(sk);
 
