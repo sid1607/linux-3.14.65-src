@@ -2369,10 +2369,10 @@ extern __u32 sysctl_rmem_default;
 	extern void cl_timer_callback_send( struct sock *sk );
 
 	// Method to insert node, makes appropriate checks
-	extern void cl_list_insert( struct cl_list_node *node );
+	extern void cl_list_insert( struct sock *sk );
 
 	// Method to insert node to the tail of the list
-	extern void cl_list_push_back( struct cl_list_node *node );
+	extern void cl_list_push_back( cl_list_node *node );
 
 	// Method to delete node and free memory
 	extern void cl_list_delete( struct sock *sk );
