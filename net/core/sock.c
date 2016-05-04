@@ -146,6 +146,10 @@
 static DEFINE_MUTEX(proto_list_mutex);
 static LIST_HEAD(proto_list);
 
+#ifdef CROSS_LAYER_DELAY
+static int is_list_initialized = 0;
+#endif
+
 /**
  * sk_ns_capable - General socket capability test
  * @sk: Socket to use a capability on or through
@@ -2435,6 +2439,12 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 	// set retransmission flags
 	atomic_set(&sk->sk_timeout_flag, 0);
 	atomic_set(&sk->sk_fast_retransmit_flag, 0);
+
+	// initialized the sock list, if it isn't already initialized
+	if (is_list_initialized == 0){
+		init_cl_list();
+		is_list_initialized = 1;
+	}
 #endif
 
 	/*
@@ -3068,6 +3078,12 @@ int cl_ctr = 0;
 // initial sock list is empty
 cl_list sock_list;
 
+void init_cl_list() {
+	sock_list.head = NULL;
+	spin_lock_init(&sock_list.cl_list_lock);
+	atomic_set(&sock_list.xfer_in_progress, 0);
+}
+
 // allocates a sock list element
 cl_list_node *init_cl_list_node( ) {
 	cl_list_node *ptr;
@@ -3079,8 +3095,7 @@ cl_list_node *init_cl_list_node( ) {
 	} else {
 		printk("init_cl_sock_list: Sock_list_ptr(%u)\n", ptr);
 	}
-
-	ptr->sock_lock = SPIN_LOCK_UNLOCKED;
+	spin_lock_init(&ptr->sock_lock);
 	return ptr;
 }
 

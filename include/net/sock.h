@@ -2350,15 +2350,18 @@ extern __u32 sysctl_rmem_default;
 		cl_list_node *head;
 
 		// Lock used during modification of the sock list
-		spinlock_t cl_list_lock = SPIN_LOCK_UNLOCKED;
+		spinlock_t cl_list_lock;
 
 		// Variable used during transfer iteration for mutual exclusion
-		atomic_t xfer_in_progress = 0;
+		atomic_t xfer_in_progress;
 	} cl_list;
 
 	extern cl_list sock_list;
 
-	extern cl_list_node *init_cl_list_node( );
+	// initializes the global list
+	extern void init_cl_list( void );
+
+	extern cl_list_node *init_cl_list_node( void );
 
 	extern void cl_timer_callback( unsigned long data );
 
