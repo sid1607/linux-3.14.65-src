@@ -7,16 +7,18 @@
 #include <netinet/in.h>
 #include <pthread.h>
 
+static int delay_ms = 10000;
+
 void error(const char *msg)
 {
     perror(msg);
     exit(1);
 }
 
-void client_thread(int *fd) {
+void* client_thread(void *fd) {
 	char buffer[256], outbuffer[256];
-	int newsockfd = *fd;
-	int n, yes=1;
+	int newsockfd = *((int *) fd);
+	int n;
 	free(fd);
 
 	if (setsockopt(newsockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &delay_ms,
@@ -31,7 +33,7 @@ void client_thread(int *fd) {
 		n = read(newsockfd,buffer,255);
 		if (!strcmp(buffer, "quit\r\n")) {
 			close(newsockfd);
-			return;
+			return NULL;
 		}
 		if (n < 0) error("ERROR reading from socket");
 		printf("Here is the message: %s\n",buffer);
@@ -47,11 +49,10 @@ void client_thread(int *fd) {
 int main() {
 	int sockfd, newsockfd;
 	socklen_t clilen;
-	int delay_ms = 10000;
 	int port = 15744, i=-1;
 	struct sockaddr_in serv_addr, cli_addr;
 	pthread_t pool[100];
-	int *fd;
+	int *fd, yes=1;
 	
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -86,7 +87,7 @@ int main() {
 		i++;
 		fd = malloc(sizeof(int));
 		*fd = newsockfd;
-		pthread_create(&pool[i], NULL, client_thread, fd);
+		pthread_create(&pool[i], NULL, client_thread, (void *)fd);
 	}
 
 
