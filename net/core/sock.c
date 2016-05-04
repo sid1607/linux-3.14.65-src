@@ -3096,6 +3096,7 @@ cl_list_node *init_cl_list_node( ) {
 	} else {
 		printk("init_cl_sock_list: Sock_list_ptr(%u)\n", ptr);
 	}
+	ptr->next = NULL;
 	spin_lock_init(&ptr->sock_lock);
 	return ptr;
 }
