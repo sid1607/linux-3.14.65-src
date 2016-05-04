@@ -30,10 +30,10 @@ void* client_thread(void *args) {
 
 	local_delay = delay_ms/dividend;
 
-//	if (setsockopt(newsockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &local_delay,
-//									 sizeof(delay_ms)) == -1) {
-//		error("Setsockopt error: can't config sock delay");
-//	}
+	if (setsockopt(newsockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &local_delay,
+									 sizeof(delay_ms)) == -1) {
+		error("Setsockopt error: can't config sock delay");
+	}
 
 
 	for (;;) {
