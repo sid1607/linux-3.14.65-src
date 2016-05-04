@@ -59,6 +59,7 @@ int main() {
 
 	for (;;) {
 		bzero(buffer,256);
+		bzero(outbuffer,256);
 		n = read(newsockfd,buffer,255);
 		if (!strcmp(buffer, "quit\r\n")) {
 			close(newsockfd);
@@ -67,7 +68,7 @@ int main() {
 		}
 		if (n < 0) error("ERROR reading from socket");
 		printf("Here is the message: %s\n",buffer);
-		strcat(outbuffer, "Received message: ");
+		outbuffer = "Received message: ";
 		strcat(outbuffer, buffer);
 		strcat(outbuffer, "\r\n");
 
