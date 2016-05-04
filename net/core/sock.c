@@ -3245,57 +3245,61 @@ void cl_list_delete( struct sock *sk ) {
 		return;
 	}
 
-	// 3) Lock head
-	spin_lock(&sock_list.head->sock_lock);
-
-	// Check if the node to be deleted is the head node
-	if (sk == sock_list.head->sk) {
-		deleted = sock_list.head;
-		sock_list.head = sock_list.head->next;
-		spin_unlock(&deleted->sock_lock);
-		spin_unlock(&sock_list.head->sock_lock);
-		kfree(deleted);
-		deleted = NULL;
-		return;
-	}
-
-	// Unlock list
+	printk("cl_list_delete: fishy case fixed\n");
 	spin_unlock(&sock_list.cl_list_lock);
+	return;
 
-	// 4) Traverse, hand-over-hand
-	curr = sock_list.head;
-
-	while(curr->next != NULL) {
-		// Check if we found the node we're looking for
-		if (curr->sk == sk) {
-			break;
-		}
-		spin_lock(&curr->next->sock_lock);
-		next = curr->next;
-		if (prev != NULL) {
-			spin_unlock(&prev->sock_lock);
-		}
-		prev = curr;
-		curr = next;
-	}
-
-	if (curr->sk != sk) {
-		// The desired node is not found, return
-		spin_unlock(&prev->sock_lock);
-		spin_unlock(&curr->sock_lock);
-		return;
-	}
-
-	printk("list_delete: Freeing cl_sock_list(%u)\n", curr);
-
-	// 5) Remove node from list
-	deleted = curr;
-	// Bypass current node
-	prev->next = next;
-	spin_unlock(&prev->sock_lock);
-	// Free memory
-	spin_unlock(&deleted->sock_lock);
-	kfree(deleted);
+//	// 3) Lock head
+//	spin_lock(&sock_list.head->sock_lock);
+//
+//	// Check if the node to be deleted is the head node
+//	if (sk == sock_list.head->sk) {
+//		deleted = sock_list.head;
+//		sock_list.head = sock_list.head->next;
+//		spin_unlock(&deleted->sock_lock);
+//		spin_unlock(&sock_list.head->sock_lock);
+//		kfree(deleted);
+//		deleted = NULL;
+//		return;
+//	}
+//
+//	// Unlock list
+//	spin_unlock(&sock_list.cl_list_lock);
+//
+//	// 4) Traverse, hand-over-hand
+//	curr = sock_list.head;
+//
+//	while(curr->next != NULL) {
+//		// Check if we found the node we're looking for
+//		if (curr->sk == sk) {
+//			break;
+//		}
+//		spin_lock(&curr->next->sock_lock);
+//		next = curr->next;
+//		if (prev != NULL) {
+//			spin_unlock(&prev->sock_lock);
+//		}
+//		prev = curr;
+//		curr = next;
+//	}
+//
+//	if (curr->sk != sk) {
+//		// The desired node is not found, return
+//		spin_unlock(&prev->sock_lock);
+//		spin_unlock(&curr->sock_lock);
+//		return;
+//	}
+//
+//	printk("list_delete: Freeing cl_sock_list(%u)\n", curr);
+//
+//	// 5) Remove node from list
+//	deleted = curr;
+//	// Bypass current node
+//	prev->next = next;
+//	spin_unlock(&prev->sock_lock);
+//	// Free memory
+//	spin_unlock(&deleted->sock_lock);
+//	kfree(deleted);
 }
 
 void cl_timer_callback_send( struct sock *sk ) {
