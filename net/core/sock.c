@@ -3166,7 +3166,8 @@ void cl_list_push_back( cl_list_node *node ) {
 void cl_timer_callback( unsigned long data ) {
 	// 0) Try to acquire right to traverse
 	// int atomic_cmpxchg(atomic_t *v, int old, int new);
-	if (sock_list.xfer_in_progress == 0 && atomic_cmpxchg(&sock_list.xfer_in_progress, 0, 1) == 0) {
+	int progress = atomic_read(&sock_list.xfer_in_progress);
+	if (progress == 0 && atomic_cmpxchg(&sock_list.xfer_in_progress, 0, 1) == 0) {
 		// We acquired the right to perform the callback
 		// no need to do anything
 	} else {
@@ -3185,11 +3186,11 @@ void cl_timer_callback( unsigned long data ) {
 		return;
 	}
 	// 3) Lock head, unlock list
-	spin_lock(&sock_list->head->sock_lock);
+	spin_lock(&sock_list.head->sock_lock);
 	spin_unlock(&sock_list.cl_list_lock);
 
 	// 4) Traverse, hand-over-hand
-	cl_list_node *curr = sock_list->head;
+	cl_list_node *curr = sock_list.head;
 	cl_list_node *next;
 	while(curr != NULL) {
 		// delete current timer
@@ -3210,7 +3211,7 @@ void cl_timer_callback( unsigned long data ) {
 	}
 
 	// Unset the transfer variable
-	xfer_in_progress = 0;
+	sock_list.xfer_in_progress = 0;
 }
 
 // Method to delete node and free memory
@@ -3250,7 +3251,7 @@ void cl_list_delete( struct sock *sk ) {
 
 	// 4) Traverse, hand-over-hand
 	cl_list_node *curr = sock_list.head;
-	cl_list_node *prev, *next;
+	cl_list_node *prev, *next, *deleted;
 
 	while(curr->next != NULL) {
 		// Check if we found the node we're looking for
@@ -3276,7 +3277,7 @@ void cl_list_delete( struct sock *sk ) {
 	printk("list_delete: Freeing cl_sock_list(%u)\n", curr);
 
 	// 5) Remove node from list
-	cl_list_node *deleted = curr;
+	deleted = curr;
 	// Bypass current node
 	prev->next = next;
 	spin_unlock(&prev->sock_lock);
