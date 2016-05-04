@@ -2337,10 +2337,10 @@ extern __u32 sysctl_rmem_default;
 
 	extern int cl_ctr;
 
-	typedef struct {
+	typedef struct cl_list_node{
 		struct sock *sk;
 
-		cl_list_node *next;
+		struct cl_list_node *next;
 
 		spinlock_t sock_lock;
 	} cl_list_node;
