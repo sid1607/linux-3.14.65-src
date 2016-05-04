@@ -3213,14 +3213,11 @@ void cl_timer_callback( unsigned long data ) {
 			printk("cl_timer_callback: list end reached\n");
 			break;
 		} else {
-	//			// Jump to next node
-	//			spin_lock(&curr->next->sock_lock);
-	//			next = curr->next;
-	//			spin_unlock(&curr->sock_lock);
-	//			curr = next;
-	//		}
-			printk("cl_timer_callback: tried continuing\n");
-			return;
+			// Jump to next node
+			spin_lock(&curr->next->sock_lock);
+			next = curr->next;
+			spin_unlock(&curr->sock_lock);
+			curr = next;
 		}
 	}
 
@@ -3368,8 +3365,9 @@ void cl_cleanup_timer( struct sock *sk ) {
 		printk("The timer is still in use...\n");
 	}
 
+	printk("cl_cleanup_timer: timer deleting\n");
 	// TODO: add function to delete this sk from the list
-	// cl_list_delete(sk);
+	cl_list_delete(sk);
 
 	return;
 }
