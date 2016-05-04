@@ -2447,7 +2447,7 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 		is_list_initialized = 1;
 	}
 
-	printk("sock_init_data: is_list_initialized(%d)\n", is_list_initialized);
+	// printk("sock_init_data: is_list_initialized(%d)\n", is_list_initialized);
 	sk->sk_id = is_list_initialized++;
 #endif
 
