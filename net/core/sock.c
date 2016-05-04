@@ -2447,6 +2447,7 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 		is_list_initialized = 1;
 	}
 
+	printk("sock_init_data: is_list_initialized(%d)\n", is_list_initialized);
 	sk->sk_id = is_list_initialized++;
 #endif
 
@@ -3286,7 +3287,7 @@ void cl_list_delete( struct sock *sk ) {
 
 	if (curr->sk != sk) {
 		// The desired node is not found, return
-		printk("list_delete: Desired node is not found(%u)\n", curr);
+		printk("list_delete(%d): Desired node is not found\n", curr->sk->sk_id);
 		if (prev != NULL) {
 			spin_unlock(&prev->sock_lock);
 		}
