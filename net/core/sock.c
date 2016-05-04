@@ -3248,10 +3248,10 @@ void cl_list_delete( struct sock *sk ) {
 		return;
 	}
 
-//	// 3) Lock head
+	// 3) Lock head
 	spin_lock(&sock_list.head->sock_lock);
-//
-//	// Check if the node to be deleted is the head node
+
+	// Check if the node to be deleted is the head node
 	if (sk == sock_list.head->sk) {
 		deleted = sock_list.head;
 		sock_list.head = sock_list.head->next;
@@ -3284,7 +3284,10 @@ void cl_list_delete( struct sock *sk ) {
 
 	if (curr->sk != sk) {
 		// The desired node is not found, return
-		spin_unlock(&prev->sock_lock);
+		printk("list_delete: Desired node is not found(%u)\n", curr);
+		if (prev != NULL) {
+			spin_unlock(&prev->sock_lock);
+		}
 		spin_unlock(&curr->sock_lock);
 		return;
 	}
@@ -3294,7 +3297,7 @@ void cl_list_delete( struct sock *sk ) {
 	// 5) Remove node from list
 	deleted = curr;
 	// Bypass current node
-	prev->next = next;
+	prev->next = curr->next;
 	spin_unlock(&prev->sock_lock);
 	// Free memory
 	spin_unlock(&deleted->sock_lock);
