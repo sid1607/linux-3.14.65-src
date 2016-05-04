@@ -996,7 +996,8 @@ set_rcvbuf:
 		// Insert socket to node list
 		cl_list_insert( sk );
 
-		printk("sockopt: sk port pair: src(%d), dest(%d), sk(%u)\n", inet->inet_sport, inet->inet_dport, sk);
+		printk("sockopt: sk port pair: src(%d), dest(%d), sk(%u), progress(%d)\n", inet->inet_sport, inet->inet_dport,
+				sk, atomic_read(&sock_list.xfer_in_progress));
 
 		// TODO: replace with linked list insertion
 		// cl_sock_list_node->node = sk;
@@ -3166,17 +3167,22 @@ void cl_list_push_back( cl_list_node *node ) {
 void cl_timer_callback( unsigned long data ) {
 	cl_list_node *curr, *next;
 
+	printk("cl_timer_callback: called\n");
+	printk("cl_timer_callback: before progress(%d)\n", progress);
 	// 0) Try to acquire right to traverse
 	// int atomic_cmpxchg(atomic_t *v, int old, int new);
 	int progress = atomic_read(&sock_list.xfer_in_progress);
+	printk("cl_timer_callback: after progress(%d)\n", progress);
 	if (progress == 0 && atomic_cmpxchg(&sock_list.xfer_in_progress, 0, 1) == 0) {
 		// We acquired the right to perform the callback
 		// no need to do anything
 	} else {
 		// somebody else won, go back
+		printk("cl_timer_callback: CAS reutrned\n");
 		return;
 	}
 
+	printk("cl_timer_callback: passed CAS\n");
 	// 1) Lock list
 	spin_lock(&sock_list.cl_list_lock);
 
@@ -3195,7 +3201,7 @@ void cl_timer_callback( unsigned long data ) {
 	curr = sock_list.head;
 	while(curr != NULL) {
 		// delete current timer
-		printk("cl_timer_callback: Canceling timer for (%u)", curr);
+		printk("cl_timer_callback: Canceling timer for (%u)\n", curr);
 		del_timer (&curr->sk->sk_cl_timer);
 		// Initiate send
 		cl_timer_callback_send(curr->sk);
