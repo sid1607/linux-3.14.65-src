@@ -3129,6 +3129,7 @@ void cl_list_insert( struct sock *sk ) {
 // 5) Insert to tail
 // 6) Unlock & return
 void cl_list_push_back( cl_list_node *node ) {
+	cl_list_node *curr, *next;
 	// 1) Lock list
 	spin_lock(&sock_list.cl_list_lock);
 
@@ -3145,8 +3146,7 @@ void cl_list_push_back( cl_list_node *node ) {
 	spin_unlock(&sock_list.cl_list_lock);
 
 	// 4) Traverse, hand-over-hand
-	cl_list_node *curr = sock_list.head;
-	cl_list_node *next;
+	curr = sock_list.head;
 	while(curr->next != NULL) {
 		spin_lock(&curr->next->sock_lock);
 		next = curr->next;
@@ -3164,6 +3164,8 @@ void cl_list_push_back( cl_list_node *node ) {
 
 // basic callback
 void cl_timer_callback( unsigned long data ) {
+	cl_list_node *curr, *next;
+
 	// 0) Try to acquire right to traverse
 	// int atomic_cmpxchg(atomic_t *v, int old, int new);
 	int progress = atomic_read(&sock_list.xfer_in_progress);
@@ -3190,8 +3192,7 @@ void cl_timer_callback( unsigned long data ) {
 	spin_unlock(&sock_list.cl_list_lock);
 
 	// 4) Traverse, hand-over-hand
-	cl_list_node *curr = sock_list.head;
-	cl_list_node *next;
+	curr = sock_list.head;
 	while(curr != NULL) {
 		// delete current timer
 		printk("cl_timer_callback: Canceling timer for (%u)", curr);
@@ -3211,7 +3212,7 @@ void cl_timer_callback( unsigned long data ) {
 	}
 
 	// Unset the transfer variable
-	sock_list.xfer_in_progress = 0;
+	atomic_set(&sock_list.xfer_in_progress , 0);
 }
 
 // Method to delete node and free memory
@@ -3221,6 +3222,7 @@ void cl_timer_callback( unsigned long data ) {
 // 4) Traverse, hand-over-hand
 // 5) Remove node from list
 void cl_list_delete( struct sock *sk ) {
+	cl_list_node *curr, *prev, *next, *deleted;
 	// 1) Lock list
 	spin_lock(&sock_list.cl_list_lock);
 
@@ -3238,11 +3240,12 @@ void cl_list_delete( struct sock *sk ) {
 
 	// Check if the node to be deleted is the head node
 	if (sk == sock_list.head->sk) {
-		cl_list_node *deleted = sock_list.head;
+		deleted = sock_list.head;
 		sock_list.head = sock_list.head->next;
 		spin_unlock(&deleted->sock_lock);
 		spin_unlock(&sock_list.head->sock_lock);
 		kfree(deleted);
+		deleted = NULL;
 		return;
 	}
 
@@ -3250,8 +3253,7 @@ void cl_list_delete( struct sock *sk ) {
 	spin_unlock(&sock_list.cl_list_lock);
 
 	// 4) Traverse, hand-over-hand
-	cl_list_node *curr = sock_list.head;
-	cl_list_node *prev, *next, *deleted;
+	curr = sock_list.head;
 
 	while(curr->next != NULL) {
 		// Check if we found the node we're looking for
@@ -3287,9 +3289,9 @@ void cl_list_delete( struct sock *sk ) {
 }
 
 void cl_timer_callback_send( struct sock *sk ) {
-	printk( "cl_timer_callback: callback for sock(%u)\n", sk );
-
 	int mss = 21888, needs_retransmit;
+
+	printk( "cl_timer_callback: callback for sock(%u)\n", sk );
 
 	// unblock socket
 	atomic_set(&sk->sk_cl_block_flag, 0);
