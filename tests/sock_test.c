@@ -9,19 +9,30 @@
 
 static int delay_ms = 10000;
 
+typedef struct {
+	int fd;
+	int id;
+}thread_args;
+
 void error(const char *msg)
 {
     perror(msg);
     exit(1);
 }
 
-void* client_thread(void *fd) {
+void* client_thread(void *args) {
 	char buffer[256], outbuffer[256];
-	int newsockfd = *((int *) fd);
-	int n;
-	free(fd);
+	thread_args *a = (thread_args *) args;
+	int newsockfd = a->fd, dividend = a->id;
+	int n, local_delay;
+	free(args);
+	a = NULL;
 
-	if (setsockopt(newsockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &delay_ms,
+	local_delay = delay_ms/dividend;
+
+	printf("ID(%d), Local delay(%d)\n", dividend, local_delay);
+
+	if (setsockopt(newsockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &local_delay,
 									 sizeof(delay_ms)) == -1) {
 		error("Setsockopt error: can't config sock delay");
 	}
@@ -49,10 +60,11 @@ void* client_thread(void *fd) {
 int main() {
 	int sockfd, newsockfd;
 	socklen_t clilen;
-	int port = 15744, i=-1;
+	int port = 15744, i=0;
 	struct sockaddr_in serv_addr, cli_addr;
 	pthread_t pool[100];
-	int *fd, yes=1;
+	int yes=1;
+	thread_args* args;
 	
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -85,9 +97,11 @@ int main() {
 		if (newsockfd < 0)
 			error("ERROR on accept");
 		i++;
-		fd = malloc(sizeof(int));
-		*fd = newsockfd;
-		pthread_create(&pool[i], NULL, client_thread, (void *)fd);
+
+		args = malloc(sizeof(thread_args));
+		args->fd = newsockfd;
+		args->id = i;
+		pthread_create(&pool[i], NULL, client_thread, (void *)args);
 	}
 
 
