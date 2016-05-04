@@ -3222,7 +3222,7 @@ void cl_timer_callback( unsigned long data ) {
 // 4) Traverse, hand-over-hand
 // 5) Remove node from list
 void cl_list_delete( struct sock *sk ) {
-	cl_list_node *curr, *prev, *next, *deleted;
+	cl_list_node *curr, *prev = NULL, *next = NULL, *deleted;
 	// 1) Lock list
 	spin_lock(&sock_list.cl_list_lock);
 
