@@ -5,6 +5,9 @@
 #include <sys/types.h> 
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <pthread.h>
+
+static int delay_ms = 10000;
 
 void error(const char *msg)
 {
@@ -12,15 +15,44 @@ void error(const char *msg)
     exit(1);
 }
 
+void* client_thread(void *fd) {
+	char buffer[256], outbuffer[256];
+	int newsockfd = *((int *) fd);
+	int n;
+	free(fd);
 
+	if (setsockopt(newsockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &delay_ms,
+									 sizeof(delay_ms)) == -1) {
+		error("Setsockopt error: can't config sock delay");
+	}
+
+
+	for (;;) {
+		bzero(buffer,256);
+		bzero(outbuffer,256);
+		n = read(newsockfd,buffer,255);
+		if (!strcmp(buffer, "quit\r\n")) {
+			close(newsockfd);
+			return NULL;
+		}
+		if (n < 0) error("ERROR reading from socket");
+		printf("Here is the message: %s\n",buffer);
+		strcat(outbuffer, "Received message: ");
+		strcat(outbuffer, buffer);
+		strcat(outbuffer, "\r\n");
+
+		n = write(newsockfd,outbuffer,strlen(outbuffer));
+		if (n < 0) error("ERROR writing to socket");
+	}
+
+}
 int main() {
 	int sockfd, newsockfd;
 	socklen_t clilen;
-	char buffer[256];
-	int delay_ms = 10000;
-	int port = 15744;
+	int port = 15744, i=-1;
 	struct sockaddr_in serv_addr, cli_addr;
-	int n, yes=1;
+	pthread_t pool[100];
+	int *fd, yes=1;
 	
 	sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
@@ -45,31 +77,19 @@ int main() {
 	         error("ERROR on binding");
 	listen(sockfd,5);
 	clilen = sizeof(cli_addr);
-	newsockfd = accept(sockfd, 
-	            (struct sockaddr *) &cli_addr, 
-	            &clilen);
-	if (newsockfd < 0) 
-		error("ERROR on accept");
-
-	if (setsockopt(newsockfd, SOL_SOCKET, SO_CROSS_LAYER_DELAY, &delay_ms,
-		 							 sizeof(delay_ms)) == -1) {
-		 	error("Setsockopt error: can't config sock delay");
-		}
-
 
 	for (;;) {
-		bzero(buffer,256);
-		n = read(newsockfd,buffer,255);
-		if (!strcmp(buffer, "quit\r\n")) {
-			close(newsockfd);
-			close(sockfd);	
-			return 0;   
-		}
-		if (n < 0) error("ERROR reading from socket");
-		printf("Here is the message: %s\n",buffer);
-		n = write(newsockfd,"I got your message\r\n",20);
-		if (n < 0) error("ERROR writing to socket");
+		newsockfd = accept(sockfd,
+			            (struct sockaddr *) &cli_addr,
+			            &clilen);
+		if (newsockfd < 0)
+			error("ERROR on accept");
+		i++;
+		fd = malloc(sizeof(int));
+		*fd = newsockfd;
+		pthread_create(&pool[i], NULL, client_thread, (void *)fd);
 	}
+
 
 	return 0;
 }

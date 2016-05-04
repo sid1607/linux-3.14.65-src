@@ -146,6 +146,10 @@
 static DEFINE_MUTEX(proto_list_mutex);
 static LIST_HEAD(proto_list);
 
+#ifdef CROSS_LAYER_DELAY
+static int is_list_initialized = 0;
+#endif
+
 /**
  * sk_ns_capable - General socket capability test
  * @sk: Socket to use a capability on or through
@@ -989,20 +993,19 @@ set_rcvbuf:
 		// TODO: remove
 		cl_ctr++;
 
-		// allocate sock_list if it hasn't been allocated yet
-		if (cl_sock_list_ptr == NULL) {
-			cl_sock_list_ptr = init_cl_sock_list();
-		}
+		// Insert socket to node list
+		cl_list_insert( sk );
 
-		printk("sockopt: sk port pair: src(%d), dest(%d), sk(%u)\n", inet->inet_sport, inet->inet_dport, sk);
+		printk("sockopt: sk port pair: src(%d), dest(%d), sk(%u), progress(%d)\n", inet->inet_sport, inet->inet_dport,
+				sk, atomic_read(&sock_list.xfer_in_progress));
 
 		// TODO: replace with linked list insertion
-		cl_sock_list_ptr->node = sk;
+		// cl_sock_list_node->node = sk;
 
 		sk->sk_delay_enabled = 1;
 		if(copy_from_user(&sk->sk_delay_ms, optval, sizeof(sk->sk_delay_ms)))
 			sk->sk_delay_ms = DEFAULT_CL_DELAY_MS;
-		
+
 		// TODO: implement EDF here
 
 		cl_timer_init( sk );
@@ -2437,6 +2440,12 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 	// set retransmission flags
 	atomic_set(&sk->sk_timeout_flag, 0);
 	atomic_set(&sk->sk_fast_retransmit_flag, 0);
+
+	// initialized the sock list, if it isn't already initialized
+	if (is_list_initialized == 0){
+		init_cl_list();
+		is_list_initialized = 1;
+	}
 #endif
 
 	/*
@@ -3068,25 +3077,230 @@ subsys_initcall(proto_init);
 int cl_ctr = 0;
 
 // initial sock list is empty
-cl_sock_list *cl_sock_list_ptr = NULL;
+cl_list sock_list;
+
+void init_cl_list() {
+	sock_list.head = NULL;
+	spin_lock_init(&sock_list.cl_list_lock);
+	atomic_set(&sock_list.xfer_in_progress, 0);
+}
 
 // allocates a sock list element
-cl_sock_list *init_cl_sock_list( void ) {
-	cl_sock_list *ptr;
-	ptr = kmalloc(sizeof(cl_sock_list), GFP_KERNEL);
+cl_list_node *init_cl_list_node( ) {
+	cl_list_node *ptr;
+
+	ptr = kmalloc(sizeof(cl_list_node), GFP_KERNEL);
+
 	if (ptr == NULL) {
 		printk("init_cl_sock_list: Allocation failed\n");
 	} else {
 		printk("init_cl_sock_list: Sock_list_ptr(%u)\n", ptr);
 	}
+	ptr->next = NULL;
+	spin_lock_init(&ptr->sock_lock);
 	return ptr;
 }
 
+// Method to insert node, makes appropriate checks
+void cl_list_insert( struct sock *sk ) {
+	cl_list_node *node = init_cl_list_node();
+	node->sk = sk;
+	if (sock_list.head == NULL) {
+		spin_lock(&sock_list.cl_list_lock);
+		// Double check
+		if (sock_list.head == NULL) {
+			// List does not exist, create it
+			sock_list.head = node;
+		} else {
+			// List was created before we acquired the lock,
+			// just insert
+			cl_list_push_back(node);
+		}
+		spin_unlock(&sock_list.cl_list_lock);
+	} else {
+		// List exists, insert
+		cl_list_push_back(node);
+	}
+}
+
+// Method to insert node to the tail of the list
+// 1) Lock list
+// 2) Check head
+// 3) Lock head, unlock list
+// 4) Traverse, hand-over-hand
+// 5) Insert to tail
+// 6) Unlock & return
+void cl_list_push_back( cl_list_node *node ) {
+	cl_list_node *curr, *next;
+	// 1) Lock list
+	spin_lock(&sock_list.cl_list_lock);
+
+	// 2) Check head
+	// If head was destroyed before insert call
+	if (sock_list.head == NULL) {
+		// List does not exist, create it
+		sock_list.head = node;
+		spin_unlock(&sock_list.cl_list_lock);
+		return;
+	}
+	// 3) Lock head, unlock list
+	spin_lock(&sock_list.head->sock_lock);
+	spin_unlock(&sock_list.cl_list_lock);
+
+	// 4) Traverse, hand-over-hand
+	curr = sock_list.head;
+	while(curr->next != NULL) {
+		spin_lock(&curr->next->sock_lock);
+		next = curr->next;
+		spin_unlock(&curr->sock_lock);
+		curr = next;
+	}
+
+	// 5) Insert to tail
+	curr->next = node;
+
+	printk("push_back: pushed back (%u)\n", node);
+	// 6) Unlock & return
+	spin_unlock(&curr->sock_lock);
+}
+
 // basic callback
-void cl_timer_callback( unsigned long data )
-{
+void cl_timer_callback( unsigned long data ) {
+	cl_list_node *curr, *next;
+
+	printk("cl_timer_callback: called\n");
+	// 0) Try to acquire right to traverse
+	// int atomic_cmpxchg(atomic_t *v, int old, int new);
+	int progress = atomic_read(&sock_list.xfer_in_progress);
+	printk("cl_timer_callback: after progress(%d)\n", progress);
+	if (progress == 0 && atomic_cmpxchg(&sock_list.xfer_in_progress, 0, 1) == 0) {
+		// We acquired the right to perform the callback
+		// no need to do anything
+	} else {
+		// somebody else won, go back
+		printk("cl_timer_callback: CAS returned\n");
+		return;
+	}
+
+	// 1) Lock list
+	spin_lock(&sock_list.cl_list_lock);
+	printk("cl_timer_callback: lock acquired\n");
+
+	// 2) Check head
+	// If head was destroyed before insert call
+	if (sock_list.head == NULL) {
+		// List does not exist, just return
+		spin_unlock(&sock_list.cl_list_lock);
+		return;
+	}
+
+	// 3) Lock head, unlock list
+	spin_lock(&sock_list.head->sock_lock);
+	spin_unlock(&sock_list.cl_list_lock);
+
+	// 4) Traverse, hand-over-hand
+	curr = sock_list.head;
+
+	printk("cl_timer_callback: reached traverse section (%u)\n", curr->next);
+	while(curr != NULL) {
+		// delete current timer
+		printk("cl_timer_callback: Canceling timer for (%u)\n", curr);
+		del_timer (&curr->sk->sk_cl_timer);
+		// Initiate send
+		cl_timer_callback_send(curr->sk);
+		if (curr->next == NULL) {
+			spin_unlock(&curr->sock_lock);
+			printk("cl_timer_callback: list end reached\n");
+			break;
+		} else {
+			// Jump to next node
+			spin_lock(&curr->next->sock_lock);
+			next = curr->next;
+			spin_unlock(&curr->sock_lock);
+			curr = next;
+		}
+	}
+
+	// Unset the transfer variable
+	atomic_set(&sock_list.xfer_in_progress , 0);
+}
+
+// Method to delete node and free memory
+// 1) Lock list
+// 2) Check head
+// 3) Lock head, unlock list
+// 4) Traverse, hand-over-hand
+// 5) Remove node from list
+void cl_list_delete( struct sock *sk ) {
+	cl_list_node *curr, *prev = NULL, *next = NULL, *deleted;
+	// 1) Lock list
+	spin_lock(&sock_list.cl_list_lock);
+
+	// 2) Check head
+	// If head was destroyed before insert call, shouldn't happen,
+	// since this is the method that would've deleted it
+	if (sock_list.head == NULL) {
+		printk("list_delete: Something fishy is going on with the list...\n");
+		spin_unlock(&sock_list.cl_list_lock);
+		return;
+	}
+
+//	// 3) Lock head
+	spin_lock(&sock_list.head->sock_lock);
+//
+//	// Check if the node to be deleted is the head node
+	if (sk == sock_list.head->sk) {
+		deleted = sock_list.head;
+		sock_list.head = sock_list.head->next;
+		spin_unlock(&deleted->sock_lock);
+		spin_unlock(&sock_list.cl_list_lock);
+		kfree(deleted);
+		deleted = NULL;
+		return;
+	}
+
+	// Unlock list
+	spin_unlock(&sock_list.cl_list_lock);
+
+	// 4) Traverse, hand-over-hand
+	curr = sock_list.head;
+
+	while(curr->next != NULL) {
+		// Check if we found the node we're looking for
+		if (curr->sk == sk) {
+			break;
+		}
+		spin_lock(&curr->next->sock_lock);
+		next = curr->next;
+		if (prev != NULL) {
+			spin_unlock(&prev->sock_lock);
+		}
+		prev = curr;
+		curr = next;
+	}
+
+	if (curr->sk != sk) {
+		// The desired node is not found, return
+		spin_unlock(&prev->sock_lock);
+		spin_unlock(&curr->sock_lock);
+		return;
+	}
+
+	printk("list_delete: Freeing cl_sock_list(%u)\n", curr);
+
+	// 5) Remove node from list
+	deleted = curr;
+	// Bypass current node
+	prev->next = next;
+	spin_unlock(&prev->sock_lock);
+	// Free memory
+	spin_unlock(&deleted->sock_lock);
+	kfree(deleted);
+}
+
+void cl_timer_callback_send( struct sock *sk ) {
 	int mss = 21888, needs_retransmit;
-	struct sock *sk = cl_sock_list_ptr->node;
+
 	printk( "cl_timer_callback: callback for sock(%u)\n", sk );
 
 	// unblock socket
@@ -3147,16 +3361,15 @@ void cl_cleanup_timer( struct sock *sk ) {
 	int ret;
 
 	ret = del_timer_sync( &sk->sk_cl_timer );
-	if (ret) printk("The timer is still in use...\n");
+	if (ret) {
+		printk("The timer is still in use...\n");
+	}
 
-	printk("Timer module uninstalling, freeing sock_list(%u)\n", cl_sock_list_ptr);
-
+	printk("cl_cleanup_timer: timer deleting\n");
 	// TODO: add function to delete this sk from the list
+	cl_list_delete(sk);
 
-	// avoids memory leaks?
-	kfree(cl_sock_list_ptr);
-
-	cl_sock_list_ptr = NULL;
 	return;
 }
+
 #endif /* CL_DELAY */

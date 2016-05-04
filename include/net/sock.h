@@ -435,7 +435,7 @@ struct sock {
 	atomic_t sk_timeout_flag;
 	atomic_t sk_fast_retransmit_flag;
 #endif
-	
+
 	void			(*sk_state_change)(struct sock *sk);
 	void			(*sk_data_ready)(struct sock *sk, int bytes);
 	void			(*sk_write_space)(struct sock *sk);
@@ -2332,22 +2332,50 @@ extern __u32 sysctl_wmem_default;
 extern __u32 sysctl_rmem_default;
 
 #ifdef CROSS_LAYER_DELAY
-	typedef struct {
-		struct sock *node;
-		struct cl_sock_list *next;
-		// put simple spinlock here
-		// refer: https://www.kernel.org/pub/linux/kernel/people/rusty/kernel-locking/c93.html
-	}cl_sock_list;
 
 	#define DEFAULT_CL_DELAY_MS 200
 
 	extern int cl_ctr;
 
-	extern cl_sock_list *cl_sock_list_ptr;
+	typedef struct cl_list_node{
+		struct sock *sk;
 
-	extern cl_sock_list *init_cl_sock_list( void );
+		struct cl_list_node *next;
+
+		spinlock_t sock_lock;
+	} cl_list_node;
+
+	typedef struct {
+		// Pointer to head of socket list
+		cl_list_node *head;
+
+		// Lock used during modification of the sock list
+		spinlock_t cl_list_lock;
+
+		// Variable used during transfer iteration for mutual exclusion
+		atomic_t xfer_in_progress;
+	} cl_list;
+
+	extern cl_list sock_list;
+
+	// initializes the global list
+	extern void init_cl_list( void );
+
+	extern cl_list_node *init_cl_list_node( void );
 
 	extern void cl_timer_callback( unsigned long data );
+
+	// Initiate sending on a socket
+	extern void cl_timer_callback_send( struct sock *sk );
+
+	// Method to insert node, makes appropriate checks
+	extern void cl_list_insert( struct sock *sk );
+
+	// Method to insert node to the tail of the list
+	extern void cl_list_push_back( cl_list_node *node );
+
+	// Method to delete node and free memory
+	extern void cl_list_delete( struct sock *sk );
 
 	extern int cl_timer_init( struct sock *sk );
 
