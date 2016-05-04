@@ -3172,14 +3172,14 @@ void cl_timer_callback( unsigned long data ) {
 	// int atomic_cmpxchg(atomic_t *v, int old, int new);
 	int progress = atomic_read(&sock_list.xfer_in_progress);
 	printk("cl_timer_callback: after progress(%d)\n", progress);
-//	if (progress == 0 && atomic_cmpxchg(&sock_list.xfer_in_progress, 0, 1) == 0) {
-//		// We acquired the right to perform the callback
-//		// no need to do anything
-//	} else {
-//		// somebody else won, go back
-//		printk("cl_timer_callback: CAS reutrned\n");
-//		return;
-//	}
+	if (progress == 0 && atomic_cmpxchg(&sock_list.xfer_in_progress, 0, 1) == 0) {
+		// We acquired the right to perform the callback
+		// no need to do anything
+	} else {
+		// somebody else won, go back
+		printk("cl_timer_callback: CAS returned\n");
+		return;
+	}
 
 	printk("cl_timer_callback: passed CAS\n");
 	return;
@@ -3362,7 +3362,7 @@ void cl_cleanup_timer( struct sock *sk ) {
 	}
 
 	// TODO: add function to delete this sk from the list
-	cl_list_delete(sk);
+	// cl_list_delete(sk);
 
 	return;
 }
