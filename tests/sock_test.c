@@ -60,7 +60,7 @@ void* client_thread(void *args) {
 int main() {
 	int sockfd, newsockfd;
 	socklen_t clilen;
-	int port = 15744, i=-1;
+	int port = 15744, i=0;
 	struct sockaddr_in serv_addr, cli_addr;
 	pthread_t pool[100];
 	int yes=1;
