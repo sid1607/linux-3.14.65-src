@@ -3245,23 +3245,19 @@ void cl_list_delete( struct sock *sk ) {
 		return;
 	}
 
-	printk("cl_list_delete: fishy case fixed\n");
-	spin_unlock(&sock_list.cl_list_lock);
-	return;
-
 //	// 3) Lock head
-//	spin_lock(&sock_list.head->sock_lock);
+	spin_lock(&sock_list.head->sock_lock);
 //
 //	// Check if the node to be deleted is the head node
-//	if (sk == sock_list.head->sk) {
-//		deleted = sock_list.head;
-//		sock_list.head = sock_list.head->next;
-//		spin_unlock(&deleted->sock_lock);
-//		spin_unlock(&sock_list.head->sock_lock);
-//		kfree(deleted);
-//		deleted = NULL;
-//		return;
-//	}
+	if (sk == sock_list.head->sk) {
+		deleted = sock_list.head;
+		sock_list.head = sock_list.head->next;
+		spin_unlock(&deleted->sock_lock);
+		spin_unlock(&sock_list.cl_list_lock);
+		kfree(deleted);
+		deleted = NULL;
+		return;
+	}
 //
 //	// Unlock list
 //	spin_unlock(&sock_list.cl_list_lock);
