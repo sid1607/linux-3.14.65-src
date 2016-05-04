@@ -3200,25 +3200,28 @@ void cl_timer_callback( unsigned long data ) {
 	// 4) Traverse, hand-over-hand
 	curr = sock_list.head;
 
-	printk("cl_timer_callback: reached traverse section (%u)\n", curr);
-	spin_unlock(&sock_list.head->sock_lock);
-	//	while(curr != NULL) {
-	//		// delete current timer
-	//		printk("cl_timer_callback: Canceling timer for (%u)\n", curr);
-	//		del_timer (&curr->sk->sk_cl_timer);
-	//		// Initiate send
+	printk("cl_timer_callback: reached traverse section (%u)\n", curr->next);
+	while(curr != NULL) {
+		// delete current timer
+		printk("cl_timer_callback: Canceling timer for (%u)\n", curr);
+		del_timer (&curr->sk->sk_cl_timer);
+		// Initiate send
 	//		cl_timer_callback_send(curr->sk);
-	//		if (curr->next == NULL) {
-	//			spin_unlock(&curr->sock_lock);
-	//			break;
-	//		} else {
+		if (curr->next == NULL) {
+			spin_unlock(&curr->sock_lock);
+			printk("cl_timer_callback: list end reached\n");
+			break;
+		} else {
 	//			// Jump to next node
 	//			spin_lock(&curr->next->sock_lock);
 	//			next = curr->next;
 	//			spin_unlock(&curr->sock_lock);
 	//			curr = next;
 	//		}
-	//	}
+			printk("cl_timer_callback: tried continuing\n");
+			return;
+		}
+	}
 
 	// Unset the transfer variable
 	atomic_set(&sock_list.xfer_in_progress , 0);
