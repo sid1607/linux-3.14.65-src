@@ -3183,10 +3183,8 @@ void cl_timer_callback( unsigned long data ) {
 
 	// 1) Lock list
 	spin_lock(&sock_list.cl_list_lock);
-	printk("cl_timer_callback: lock acquired CAS\n");
-	spin_unlock(&sock_list.cl_list_lock);
-	printk("cl_timer_callback: lock released CAS\n");
-	return;
+	printk("cl_timer_callback: lock acquired\n");
+
 	// 2) Check head
 	// If head was destroyed before insert call
 	if (sock_list.head == NULL) {
@@ -3194,29 +3192,33 @@ void cl_timer_callback( unsigned long data ) {
 		spin_unlock(&sock_list.cl_list_lock);
 		return;
 	}
+
 	// 3) Lock head, unlock list
 	spin_lock(&sock_list.head->sock_lock);
 	spin_unlock(&sock_list.cl_list_lock);
 
 	// 4) Traverse, hand-over-hand
 	curr = sock_list.head;
-	while(curr != NULL) {
-		// delete current timer
-		printk("cl_timer_callback: Canceling timer for (%u)\n", curr);
-		del_timer (&curr->sk->sk_cl_timer);
-		// Initiate send
-		cl_timer_callback_send(curr->sk);
-		if (curr->next == NULL) {
-			spin_unlock(&curr->sock_lock);
-			break;
-		} else {
-			// Jump to next node
-			spin_lock(&curr->next->sock_lock);
-			next = curr->next;
-			spin_unlock(&curr->sock_lock);
-			curr = next;
-		}
-	}
+
+	printk("cl_timer_callback: reached traverse section (%u)\n", curr);
+	spin_unlock(&sock_list.head->sock_lock);
+	//	while(curr != NULL) {
+	//		// delete current timer
+	//		printk("cl_timer_callback: Canceling timer for (%u)\n", curr);
+	//		del_timer (&curr->sk->sk_cl_timer);
+	//		// Initiate send
+	//		cl_timer_callback_send(curr->sk);
+	//		if (curr->next == NULL) {
+	//			spin_unlock(&curr->sock_lock);
+	//			break;
+	//		} else {
+	//			// Jump to next node
+	//			spin_lock(&curr->next->sock_lock);
+	//			next = curr->next;
+	//			spin_unlock(&curr->sock_lock);
+	//			curr = next;
+	//		}
+	//	}
 
 	// Unset the transfer variable
 	atomic_set(&sock_list.xfer_in_progress , 0);
