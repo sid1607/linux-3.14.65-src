@@ -69,6 +69,11 @@ def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
     for x in range(1, int(numPacketsToSend)):
         fd.send(packetBody.encode())
 
+    while True:
+        data = conn.recv(4096)
+        if not data:
+            break
+
     fd.close()
     print("Transfer complete, sent " + str(numPacketsToSend) + " packets.")
 
