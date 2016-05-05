@@ -862,7 +862,6 @@ static int tcp_transmit_skb(struct sock *sk, struct sk_buff *skb, int clone_it,
 	struct tcphdr *th;
 	int err;
 
-	int block;
 	BUG_ON(!skb || !tcp_skb_pcount(skb));
 
 
