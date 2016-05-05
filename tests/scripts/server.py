@@ -33,6 +33,7 @@ def main(argv):
         sys.exit(1)
        
     fd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    fd.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     fd.bind((addr, port))
     fd.listen(1)
     print("Started listening on port " + str(port) + ".")
@@ -56,7 +57,6 @@ def main(argv):
             # load next batch
             data = conn.recv(4096)
             
-        print("Received "+ str(total_size)+ " bytes.")
         end = time.time()
         print('Batch received in ' + str(end-start) + ' seconds.')
         conn.send('ack'.encode())
