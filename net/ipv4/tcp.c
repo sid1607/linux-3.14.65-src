@@ -1002,11 +1002,32 @@ new_segment:
 		if (skb->len < size_goal || (flags & MSG_OOB))
 			continue;
 
+		int block;
 		if (forced_push(tp)) {
 			tcp_mark_push(tp, skb);
 			__tcp_push_pending_frames(sk, mss_now, TCP_NAGLE_PUSH);
-		} else if (skb == tcp_send_head(sk))
+
+			#ifdef CROSS_LAYER_DELAY
+				if (sk->sk_delay_enabled) {
+					block = atomic_read(&sk->sk_cl_block_flag);
+					if (block == 1) {
+						printk("do_tcp_sendpages: not blocked\n");
+					}
+				}
+			#endif
+
+		} else if (skb == tcp_send_head(sk)){
+			#ifdef CROSS_LAYER_DELAY
+				if (sk->sk_delay_enabled) {
+					block = atomic_read(&sk->sk_cl_block_flag);
+					if (block == 1) {
+						printk("do_tcp_sendpages: not blocked\n");
+					}
+				}
+			#endif
+
 			tcp_push_one(sk, mss_now);
+		}
 		continue;
 
 wait_for_sndbuf:
