@@ -67,7 +67,7 @@ def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
 
     # Start the transfer
     for x in range(1, int(numPacketsToSend)):
-        fd.send(packetBody)
+        fd.send(packetBody.encode())
 
     fd.close()
     print("Transfer complete, sent " + str(numPacketsToSend) + " packets.")
