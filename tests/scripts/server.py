@@ -3,6 +3,7 @@
 import socket
 import getopt
 import sys
+import time
 
 addr = "localhost"
 port = -1

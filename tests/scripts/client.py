@@ -70,7 +70,7 @@ def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
         fd.send(packetBody.encode())
 
     while True:
-        data = conn.recv(4096)
+        data = fd.recv(4096)
         if not data:
             break
 
