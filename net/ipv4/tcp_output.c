@@ -863,14 +863,6 @@ static int tcp_transmit_skb(struct sock *sk, struct sk_buff *skb, int clone_it,
 	int err;
 
 	int block;
-#ifdef CROSS_LAYER_DELAY
-	if (sk->sk_delay_enabled) {
-		block = atomic_read(&sk->sk_cl_block_flag);
-		if (block == 1) {
-			printk("tcp_transmit_skb: not blocked\n");
-		}
-	}
-#endif
 	BUG_ON(!skb || !tcp_skb_pcount(skb));
 
 
