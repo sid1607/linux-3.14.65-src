@@ -3125,12 +3125,14 @@ void tcp_send_delayed_ack(struct sock *sk)
 void tcp_send_ack(struct sock *sk)
 {
 	struct sk_buff *buff;
-	int block;
+	int count, block;
 #ifdef CROSS_LAYER_DELAY
 	if (sk->sk_delay_enabled) {
 		block = atomic_read(&sk->sk_cl_block_flag);
 		if (block == 1) {
-			printk("tcp_send_ack: not blocked\n");
+			count = atomic_read(&sk->sk_pending_ack_count);
+			atomic_inc(&sk->sk_pending_ack_count);
+			printk("tcp_send_ack: blocked(%d)\n", count + 1);
 		}
 	}
 #endif

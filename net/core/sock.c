@@ -2441,6 +2441,9 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 	atomic_set(&sk->sk_timeout_flag, 0);
 	atomic_set(&sk->sk_fast_retransmit_flag, 0);
 
+	// initialize # of pending acks
+	atomic_set(&sk->sk_pending_ack_count, 0);
+
 	// initialized the sock list, if it isn't already initialized
 	if (is_list_initialized == 0){
 		init_cl_list();
@@ -3308,7 +3311,7 @@ void cl_list_delete( struct sock *sk ) {
 }
 
 void cl_timer_callback_send( struct sock *sk ) {
-	int mss = 21888, needs_retransmit;
+	int mss = 21888, needs_retransmit, ack_count, i;
 
 	printk( "cl_timer_callback(%d): callback for sock(%u)\n", sk->sk_id, sk );
 
@@ -3330,6 +3333,12 @@ void cl_timer_callback_send( struct sock *sk ) {
 		// do fast rentransmit
 		printk("cl_timer_callback(%d): doing fast retransmit\n", sk->sk_id);
 		tcp_xmit_retransmit_queue(sk);
+	}
+
+	// send all the pending acks
+	ack_count = atomic_read(&sk->sk_pending_ack_count);
+	for ( i=0; i < ack_count; i++) {
+		tcp_send_ack(sk);
 	}
 
 	// then do a push
