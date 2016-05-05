@@ -3,11 +3,8 @@
 import socket
 import getopt
 import sys
-<<<<<<< HEAD
-=======
 import time
 import marshal
->>>>>>> socket-list
 
 addr = "localhost"
 port = -1

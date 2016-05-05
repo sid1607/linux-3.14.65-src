@@ -53,8 +53,10 @@ def main(argv):
 
 
 def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
+    yes = 1
     # Create socket and connect
     fd = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    fd.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, yes)
     fd.bind((sourceAddr, sourcePort))  # select source port to reduce nondeterminism
     if delayToleranceInMs != 0:
         print("Delay set to " + str(delayToleranceInMs) + " ms.")
