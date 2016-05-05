@@ -116,5 +116,5 @@ print_options
 if [ "$program_to_run" = "$client_program" ]; then
     python $program_to_run -a $ip_to_send -p $port_to_send -n $num_packets -d $delay_ms
 else
-    python $program_to_run -a $ip_to_send -p $port_to_send -d 10000
+    python $program_to_run -a $ip_to_send -p $port_to_send
 fi
