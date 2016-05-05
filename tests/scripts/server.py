@@ -43,10 +43,10 @@ def main(argv):
 
         # receive first batch of data
         data = conn.recv(4096)
-
+        print(data)
         # unmarshal first 4 bytes for size
-        total_size = marshal.loads(data[:4]) + 4
-        print(total_size + ' bytes to be received')
+        total_size = marshal.loads(data) + 4
+        print(str(total_size) + ' bytes to be received')
     
         while True:
             if total_size <= len(data):
