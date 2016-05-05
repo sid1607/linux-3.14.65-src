@@ -36,14 +36,18 @@ def main(argv):
     print("Started listening on port " + str(port) + ".")
     while True:
         conn, clientAddr = fd.accept()
-
+        start = time.time()
+        recv_size = 0
         while True:
-            data = conn.recv(32)
+            data = conn.recv(4096)
             if not data:
                     break
-            # conn.send(data)
-            print("Received 32 bytes.")
+            recv_size += len(data)
 
+        print("Received "+ str(redv_size)+ " bytes.")
+        end = time.time()
+        print('Batch received in ' + str(end-start) + ' seconds.')
+        conn.send('ack'.encode())
         conn.close()
 
 if __name__ == "__main__":
