@@ -4,6 +4,7 @@ import socket
 import getopt
 import sys
 import time
+import marshal
 
 addr = "localhost"
 port = -1
@@ -38,14 +39,24 @@ def main(argv):
     while True:
         conn, clientAddr = fd.accept()
         start = time.time()
-        recv_size = 0
-        while True:
-            data = conn.recv(4096)
-            if not data:
-                    break
-            recv_size += len(data)
 
-        print("Received "+ str(redv_size)+ " bytes.")
+        # receive first batch of data
+        data = conn.recv(4096)
+
+        # unmarshal first 4 bytes for size
+        total_size = marshal.loads(data[:4]) + 4
+        print(total_size + ' bytes to be received')
+    
+        while True:
+            if total_size <= len(data):
+                # received everything, break
+                break
+            total_size -= len(data)
+
+            # load next batch
+            data = conn.recv(4096)
+            
+        print("Received "+ str(total_size)+ " bytes.")
         end = time.time()
         print('Batch received in ' + str(end-start) + ' seconds.')
         conn.send('ack'.encode())
