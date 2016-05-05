@@ -27,13 +27,13 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv[1:], "ha:p:n:d:", ["addr=", "port=", "npack=", "delay="])
     except getopt.GetoptError:
-        print argv[0] + ' -a <dest_addr> -p <dest_port> -n <num_packets> -d <delay_tolerance_ms>'
+        print(argv[0] + ' -a <dest_addr> -p <dest_port> -n <num_packets> -d <delay_tolerance_ms>')
         sys.exit(2)
 
     # Read arguments
     for opt, arg in opts:
         if opt == '-h':
-            print argv[0] + '-a <dest_addr> -p <dest_port>'
+            print(argv[0] + '-a <dest_addr> -p <dest_port>')
             sys.exit()
         elif opt in ("-a", "--addr"):
             destAddr = str(arg)
@@ -45,7 +45,7 @@ def main(argv):
             delayToleranceInMs = int(arg)
 
     if destAddr == -1 or destPort == -1:
-        print "Usage: " + argv[0] + '-a <dest_addr> -p <dest_port>'
+        print("Usage: " + argv[0] + '-a <dest_addr> -p <dest_port>')
         sys.exit(1)
     # Start transfer
     transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs)
