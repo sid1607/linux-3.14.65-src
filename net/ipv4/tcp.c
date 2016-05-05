@@ -1295,9 +1295,11 @@ new_segment:
 			if (skb->len < max || (flags & MSG_OOB) || unlikely(tp->repair))
 				continue;
 
+			int block;
 			if (forced_push(tp)) {
 				tcp_mark_push(tp, skb);
 				__tcp_push_pending_frames(sk, mss_now, TCP_NAGLE_PUSH);
+
 			} else if (skb == tcp_send_head(sk))
 				tcp_push_one(sk, mss_now);
 			continue;

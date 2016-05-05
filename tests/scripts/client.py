@@ -3,6 +3,7 @@
 import socket
 import sys
 import getopt
+import marshal
 import random
 from time import sleep
 
@@ -27,13 +28,13 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv[1:], "ha:p:n:d:", ["addr=", "port=", "npack=", "delay="])
     except getopt.GetoptError:
-        print argv[0] + ' -a <dest_addr> -p <dest_port> -n <num_packets> -d <delay_tolerance_ms>'
+        print(argv[0] + ' -a <dest_addr> -p <dest_port> -n <num_packets> -d <delay_tolerance_ms>')
         sys.exit(2)
 
     # Read arguments
     for opt, arg in opts:
         if opt == '-h':
-            print argv[0] + '-a <dest_addr> -p <dest_port>'
+            print(argv[0] + '-a <dest_addr> -p <dest_port>')
             sys.exit()
         elif opt in ("-a", "--addr"):
             destAddr = str(arg)
@@ -45,7 +46,7 @@ def main(argv):
             delayToleranceInMs = int(arg)
 
     if destAddr == -1 or destPort == -1:
-        print "Usage: " + argv[0] + '-a <dest_addr> -p <dest_port>'
+        print("Usage: " + argv[0] + '-a <dest_addr> -p <dest_port>')
         sys.exit(1)
     # Start transfer
     transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs)
@@ -60,14 +61,20 @@ def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
         fd.setsockopt(socket.SOL_SOCKET, socketFlagNum, delayToleranceInMs)
     fd.connect((destAddr, destPort))
 
-    print("Transfer about to begin.")
+    print("Transfer will begin in " + str(sleepDuration) + " seconds")
 
     # Sleep for 'sleepDuration' seconds before starting
-    sleep(sleepDuration)
+    # sleep(sleepDuration)
+
+    # send a marshaled "size" header field
+    fd.send(marshal.dumps(packetLength * numPacketsToSend))
 
     # Start the transfer
-    for x in xrange(1, int(numPacketsToSend)):
-        fd.send(packetBody)
+    for x in range(int(numPacketsToSend)):
+        fd.send(packetBody.encode())
+
+    # exactly the size of ack msg
+    data = fd.recv(3)
 
     fd.close()
     print("Transfer complete, sent " + str(numPacketsToSend) + " packets.")

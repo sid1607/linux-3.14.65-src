@@ -864,6 +864,7 @@ static int tcp_transmit_skb(struct sock *sk, struct sk_buff *skb, int clone_it,
 
 	BUG_ON(!skb || !tcp_skb_pcount(skb));
 
+
 	if (clone_it) {
 		const struct sk_buff *fclone = skb + 1;
 
@@ -3126,6 +3127,17 @@ void tcp_send_delayed_ack(struct sock *sk)
 void tcp_send_ack(struct sock *sk)
 {
 	struct sk_buff *buff;
+	int count, block;
+#ifdef CROSS_LAYER_DELAY
+	if (sk->sk_delay_enabled) {
+		block = atomic_read(&sk->sk_cl_block_flag);
+		if (block == 1) {
+			count = atomic_read(&sk->sk_pending_ack_count);
+			atomic_inc(&sk->sk_pending_ack_count);
+			printk("tcp_send_ack: blocked(%d)\n", count + 1);
+		}
+	}
+#endif
 
 	/* If we have been reset, we may not send again. */
 	if (sk->sk_state == TCP_CLOSE)
