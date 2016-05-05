@@ -3,6 +3,7 @@
 import socket
 import sys
 import getopt
+import marshal
 import random
 from time import sleep
 
@@ -63,16 +64,17 @@ def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
     print("Transfer will begin in " + str(sleepDuration) + " seconds")
 
     # Sleep for 'sleepDuration' seconds before starting
-    sleep(sleepDuration)
+    # sleep(sleepDuration)
+
+    # send a marshaled "size" header field
+    fd.send(marshal.dumps(packetLength * numPacketsToSend))
 
     # Start the transfer
     for x in range(1, int(numPacketsToSend)):
         fd.send(packetBody.encode())
 
-    while True:
-        data = fd.recv(4096)
-        if not data:
-            break
+    # exactly the size of ack msg
+    data = fd.recv(3)
 
     fd.close()
     print("Transfer complete, sent " + str(numPacketsToSend) + " packets.")
