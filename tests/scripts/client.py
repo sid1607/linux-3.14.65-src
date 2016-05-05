@@ -25,15 +25,15 @@ def main(argv):
 
     # Parse argument list
     try:
-        opts, args = getopt.getopt(argv, "ha:p:n:d:", ["addr=", "port=", "npack=", "delay="])
+        opts, args = getopt.getopt(argv[1:], "ha:p:n:d:", ["addr=", "port=", "npack=", "delay="])
     except getopt.GetoptError:
-        print 'Sender.py -a <dest_addr> -p <dest_port> -n <num_packets> -d <delay_tolerance_ms>'
+        print argv[0] + ' -a <dest_addr> -p <dest_port> -n <num_packets> -d <delay_tolerance_ms>'
         sys.exit(2)
 
     # Read arguments
     for opt, arg in opts:
         if opt == '-h':
-            print 'Sender.py -a <dest_addr> -p <dest_port>'
+            print argv[0] + '-a <dest_addr> -p <dest_port>'
             sys.exit()
         elif opt in ("-a", "--addr"):
             destAddr = str(arg)
@@ -44,6 +44,9 @@ def main(argv):
         elif opt in ("-d", "--delay"):
             delayToleranceInMs = int(arg)
 
+    if destAddr == -1 or destPort == -1:
+        print "Usage: " + argv[0] + '-a <dest_addr> -p <dest_port>'
+        sys.exit(1)
     # Start transfer
     transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs)
 
@@ -71,4 +74,4 @@ def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    main(sys.argv)
