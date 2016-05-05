@@ -60,7 +60,7 @@ def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
         fd.setsockopt(socket.SOL_SOCKET, socketFlagNum, delayToleranceInMs)
     fd.connect((destAddr, destPort))
 
-    print("Transfer will begin in " + sleepDuration + " seconds")
+    print("Transfer will begin in " + str(sleepDuration) + " seconds")
 
     # Sleep for 'sleepDuration' seconds before starting
     sleep(sleepDuration)
