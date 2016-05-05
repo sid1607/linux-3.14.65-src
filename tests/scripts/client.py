@@ -66,7 +66,7 @@ def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
     sleep(sleepDuration)
 
     # Start the transfer
-    for x in xrange(1, int(numPacketsToSend)):
+    for x in range(1, int(numPacketsToSend)):
         fd.send(packetBody)
 
     fd.close()
