@@ -1857,17 +1857,6 @@ static bool tcp_write_xmit(struct sock *sk, unsigned int mss_now, int nonagle,
 	int cwnd_quota;
 	int result;
 
-	int block;
-
-	#ifdef CROSS_LAYER_DELAY
-		if (sk->sk_delay_enabled) {
-			block = atomic_read(&sk->sk_cl_block_flag);
-			if (block == 1) {
-				printk("write_xmit: not blocked\n");
-			}
-		}
-	#endif
-
 	sent_pkts = 0;
 
 	if (!push_one) {
@@ -2108,6 +2097,18 @@ void __tcp_push_pending_frames(struct sock *sk, unsigned int cur_mss,
 	 * all will be happy.
 	 */
 	//
+
+	int block;
+
+	#ifdef CROSS_LAYER_DELAY
+		if (sk->sk_delay_enabled) {
+			block = atomic_read(&sk->sk_cl_block_flag);
+			if (block == 1) {
+				printk("push_pending: not blocked\n");
+			}
+		}
+	#endif
+
 	if (unlikely(sk->sk_state == TCP_CLOSE))
 		return;
 
@@ -2122,6 +2123,17 @@ void __tcp_push_pending_frames(struct sock *sk, unsigned int cur_mss,
 void tcp_push_one(struct sock *sk, unsigned int mss_now)
 {
 	struct sk_buff *skb = tcp_send_head(sk);
+
+	int block;
+
+	#ifdef CROSS_LAYER_DELAY
+		if (sk->sk_delay_enabled) {
+			block = atomic_read(&sk->sk_cl_block_flag);
+			if (block == 1) {
+				printk("push_one: not blocked\n");
+			}
+		}
+	#endif
 
 	BUG_ON(!skb || skb->len < mss_now);
 
