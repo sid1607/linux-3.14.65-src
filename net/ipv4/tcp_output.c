@@ -861,7 +861,18 @@ static int tcp_transmit_skb(struct sock *sk, struct sk_buff *skb, int clone_it,
 	struct tcp_md5sig_key *md5;
 	struct tcphdr *th;
 	int err;
+
+	int block;
+#ifdef CROSS_LAYER_DELAY
+	if (sk->sk_delay_enabled) {
+		block = atomic_read(&sk->sk_cl_block_flag);
+		if (block == 1) {
+			printk("tcp_transmit_skb: not blocked\n");
+		}
+	}
+#endif
 	BUG_ON(!skb || !tcp_skb_pcount(skb));
+
 
 	if (clone_it) {
 		const struct sk_buff *fclone = skb + 1;

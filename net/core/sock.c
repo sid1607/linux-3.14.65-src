@@ -3341,6 +3341,9 @@ void cl_timer_callback_send( struct sock *sk ) {
 		tcp_send_ack(sk);
 	}
 
+	// reset pending ack count
+	atomic_set(&sk->sk_pending_ack_count, 0);
+
 	// then do a push
 	tcp_push_callback( sk, 0, mss, 0, mss );
 
