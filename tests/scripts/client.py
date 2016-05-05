@@ -72,7 +72,7 @@ def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
     fd.send(marshal.dumps(packetLength * numPacketsToSend))
 
     # Start the transfer
-    for x in range(1, int(numPacketsToSend)):
+    for x in range(int(numPacketsToSend)):
         fd.send(packetBody.encode())
 
     # exactly the size of ack msg
