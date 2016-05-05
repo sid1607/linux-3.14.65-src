@@ -1118,17 +1118,6 @@ int tcp_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
 	bool sg;
 	long timeo;
 
-	int block;
-	#ifdef CROSS_LAYER_DELAY
-			if (sk->sk_delay_enabled) {
-				block = atomic_read(&sk->sk_cl_block_flag);
-				if (block == 1) {
-					printk("tcp_sendmsg: blocked\n");
-					return 0;
-				}
-			}
-	#endif
-
 	lock_sock(sk);
 
 	flags = msg->msg_flags;
