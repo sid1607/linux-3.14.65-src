@@ -68,18 +68,20 @@ def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
     # Sleep for 'sleepDuration' seconds before starting
     # sleep(sleepDuration)
 
-    # send a marshaled "size" header field
-    fd.send(marshal.dumps(packetLength * numPacketsToSend))
+    # keep sending
+    while True:
+        # send a marshaled "size" header field
+        fd.send(marshal.dumps(packetLength * numPacketsToSend))
 
-    # Start the transfer
-    for x in range(int(numPacketsToSend)):
-        fd.send(packetBody.encode())
+        # Start the transfer
+        for x in range(int(numPacketsToSend)):
+            fd.send(packetBody.encode())
 
-    # exactly the size of ack msg
-    data = fd.recv(3)
+        # exactly the size of ack msg
+        data = fd.recv(3)
 
-    fd.close()
-    print("Transfer complete, sent " + str(numPacketsToSend) + " packets.")
+        fd.close()
+        print("Transfer complete, sent " + str(numPacketsToSend) + " packets.")
 
 
 if __name__ == "__main__":

@@ -5,10 +5,38 @@ import getopt
 import sys
 import time
 import marshal
+from threading import Thread, Lock
 
 addr = "localhost"
 port = -1
 
+lock = Lock()
+
+def server_thread(new_conn):
+    conn = new_conn
+    lock.release()
+    while True:
+        start = time.time()
+        # receive first batch of data
+        data = conn.recv(4096)
+        print(data)
+        # unmarshal first 4 bytes for size
+        total_size = marshal.loads(data) + 4
+        print(str(total_size) + ' bytes to be received')
+        
+        while True:
+            if total_size <= len(data):
+                # received everything, break
+                break
+            total_size -= len(data)
+
+            # load next batch
+            data = conn.recv(4096)
+            
+        end = time.time()
+        print('Batch received in ' + str(end-start) + ' seconds.')
+        conn.send('ack'.encode())
+    conn.close()
 
 def main(argv):
     global addr, port
@@ -39,28 +67,9 @@ def main(argv):
     print("Started listening on port " + str(port) + ".")
     while True:
         conn, clientAddr = fd.accept()
-        start = time.time()
-
-        # receive first batch of data
-        data = conn.recv(4096)
-        print(data)
-        # unmarshal first 4 bytes for size
-        total_size = marshal.loads(data) + 4
-        print(str(total_size) + ' bytes to be received')
-    
-        while True:
-            if total_size <= len(data):
-                # received everything, break
-                break
-            total_size -= len(data)
-
-            # load next batch
-            data = conn.recv(4096)
-            
-        end = time.time()
-        print('Batch received in ' + str(end-start) + ' seconds.')
-        conn.send('ack'.encode())
-        conn.close()
+        lock.acquire()
+        t = Thread(target=server_thread, args=(conn,))
+        t.start()        
 
 if __name__ == "__main__":
     main(sys.argv)
