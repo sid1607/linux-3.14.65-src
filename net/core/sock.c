@@ -3197,6 +3197,9 @@ void cl_timer_callback( unsigned long data ) {
 	if (sock_list.head == NULL) {
 		// List does not exist, just return
 		spin_unlock(&sock_list.cl_list_lock);
+
+		// releasexfer in progress before returning
+		atomic_set(&sock_list.xfer_in_progress , 0);
 		return;
 	}
 
