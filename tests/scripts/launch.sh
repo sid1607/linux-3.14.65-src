@@ -12,6 +12,8 @@ num_packets=1024
 set_delay=
 delay_ms=0
 
+run_time=""
+
 dump_packets=
 
 client_program="$srcdir/client.py"
@@ -31,6 +33,7 @@ show_help() {
     echo "  -p  Destination port (default: 15744)" >&2
     echo "  -r  Program to run (values: client, server)" >&2
     echo "  -s  Dump packets (default: off) (requires superuser privileges)" >&2
+    echo "  -t  Run time in s" >&2
 }
 
 print_options() {
@@ -50,7 +53,7 @@ print_options() {
 }
 
 # Parse arguments
-options=":hn:d:a:p:s:r:"
+options=":hn:d:a:p:s:r:t:"
 
 while getopts $options opt; do
     case "$opt" in
@@ -78,6 +81,8 @@ while getopts $options opt; do
         ;;
     s)  dump_packets=true
         ;;
+    t)  run_time=$OPTARG
+        ;;
     \?) echo "Invalid option: -$OPTARG" >&2
         show_help
         exit 1
@@ -95,6 +100,11 @@ if [ "$program_to_run" = "" ]; then
     show_help
     exit 1
 fi
+
+if [ "$run_time" = "" ]; then
+    echo "Specify a run time"
+    show_help
+    exit 1
 
 # Check if required arguments are provided
 if [ "$ip_to_send" = "" ] || [ "$port_to_send" = "" ]; then
@@ -114,7 +124,13 @@ print_options
 
 # Start the program
 if [ "$program_to_run" = "$client_program" ]; then
-    python $program_to_run -a $ip_to_send -p $port_to_send -n $num_packets -d $delay_ms
+    pid=python $program_to_run -a $ip_to_send -p $port_to_send -n $num_packets -d $delay_ms &
 else
-    python $program_to_run -a $ip_to_send -p $port_to_send
+    pid=python $program_to_run -a $ip_to_send -p $port_to_send
 fi
+
+# sleep till the run time
+sleep $run_time
+
+# kill the process
+kill $pid
