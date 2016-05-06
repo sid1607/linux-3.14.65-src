@@ -53,7 +53,7 @@ print_options() {
 }
 
 # Parse arguments
-options=":hn:d:a:p:s:r:t:"
+options=":hn:d:a:p:s:r:t:o:"
 
 while getopts $options opt; do
     case "$opt" in
@@ -83,6 +83,7 @@ while getopts $options opt; do
         ;;
     t)  run_time=$OPTARG
         ;;
+
     \?) echo "Invalid option: -$OPTARG" >&2
         show_help
         exit 1
@@ -105,6 +106,7 @@ if [ "$run_time" = "" ]; then
     echo "Specify a run time"
     show_help
     exit 1
+fi
 
 # Check if required arguments are provided
 if [ "$ip_to_send" = "" ] || [ "$port_to_send" = "" ]; then
@@ -124,13 +126,16 @@ print_options
 
 # Start the program
 if [ "$program_to_run" = "$client_program" ]; then
-    pid=python $program_to_run -a $ip_to_send -p $port_to_send -n $num_packets -d $delay_ms &
+    python $program_to_run -a $ip_to_send -p $port_to_send -n $num_packets -d $delay_ms &
+    pid=$!
 else
-    pid=python $program_to_run -a $ip_to_send -p $port_to_send
+    python $program_to_run -a $ip_to_send -p $port_to_send &
+    pid=$!
 fi
 
 # sleep till the run time
 sleep $run_time
 
+echo "Killing:$pid"
 # kill the process
 kill $pid
