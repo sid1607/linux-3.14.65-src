@@ -80,9 +80,9 @@ def transfer(destAddr, destPort, numPacketsToSend, delayToleranceInMs):
         # exactly the size of ack msg
         data = fd.recv(3)
 
-        fd.close()
         print("Transfer complete, sent " + str(numPacketsToSend) + " packets.")
 
+    fd.close()
 
 if __name__ == "__main__":
     main(sys.argv)
