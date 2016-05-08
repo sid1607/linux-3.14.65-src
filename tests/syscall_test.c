@@ -2,7 +2,7 @@
 #include <unistd.h>
 
 int main() {
-	sys_push_packets_now(0);
+	syscall(316);
 	printf("Pushed packets\n");
 	return 0;
 }
