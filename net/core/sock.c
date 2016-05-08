@@ -3089,6 +3089,8 @@ void init_cl_list() {
 	sock_list.head = NULL;
 	spin_lock_init(&sock_list.cl_list_lock);
 	atomic_set(&sock_list.xfer_in_progress, 0);
+	sock_list.nic_callback_count = 0;
+	sock_list.callback_count = 0;
 }
 
 // allocates a sock list element
@@ -3100,7 +3102,7 @@ cl_list_node *init_cl_list_node( ) {
 	if (ptr == NULL) {
 		printk("init_cl_sock_list: Allocation failed\n");
 	} else {
-		printk("init_cl_sock_list: Sock_list_ptr(%u)\n", ptr);
+		// printk("init_cl_sock_list: Sock_list_ptr(%u)\n", ptr);
 	}
 	ptr->next = NULL;
 	spin_lock_init(&ptr->sock_lock);
@@ -3165,7 +3167,7 @@ void cl_list_push_back( cl_list_node *node ) {
 	// 5) Insert to tail
 	curr->next = node;
 
-	printk("push_back(%d): pushed back (%u)\n", node->sk->sk_id, node);
+	// printk("push_back(%d): pushed back (%u)\n", node->sk->sk_id, node);
 	// 6) Unlock & return
 	spin_unlock(&curr->sock_lock);
 }
@@ -3174,20 +3176,29 @@ void cl_list_push_back( cl_list_node *node ) {
 void cl_timer_callback( unsigned long data ) {
 	cl_list_node *curr, *next;
 
-	printk("cl_timer_callback: called(%lu)\n", data);
 	// 0) Try to acquire right to traverse
 	// int atomic_cmpxchg(atomic_t *v, int old, int new);
 	int progress = atomic_read(&sock_list.xfer_in_progress);
-	printk("cl_timer_callback: after progress(%d)\n", progress);
+	// printk("cl_timer_callback: after progress(%d)\n", progress);
 	if (progress == 0 && atomic_cmpxchg(&sock_list.xfer_in_progress, 0, 1) == 0) {
 		// We acquired the right to perform the callback
 		// no need to do anything
 	} else {
 		// somebody else won, go back
-		printk("cl_timer_callback: CAS returned\n");
+		 printk("cl_timer_callback: CAS returned\n");
 		return;
 	}
 
+	// print if this came from sys call or natural callback
+	if (data == 0){
+		// natural callback
+		sock_list.callback_count++;
+		printk("clcallback: (%ld)\n", sock_list.callback_count);
+	} else {
+		// syscall callback
+		sock_list.nic_callback_count++;
+		printk("niccallback: (%ld)\n", sock_list.nic_callback_count);
+	}
 	// 1) Lock list
 	spin_lock(&sock_list.cl_list_lock);
 	// printk("cl_timer_callback: lock acquired\n");
@@ -3213,7 +3224,7 @@ void cl_timer_callback( unsigned long data ) {
 	// printk("cl_timer_callback: reached traverse section (%u)\n", curr->next);
 	while(curr != NULL) {
 		// delete current timer
-		printk("cl_timer_callback(%d): Canceling timer for (%u)\n", curr->sk->sk_id, curr);
+		// printk("cl_timer_callback(%d): Canceling timer for (%u)\n", curr->sk->sk_id, curr);
 		del_timer (&curr->sk->sk_cl_timer);
 		// Initiate send
 		if (curr->sk->sk_state == TCP_ESTABLISHED) {
@@ -3222,7 +3233,7 @@ void cl_timer_callback( unsigned long data ) {
 		}
 		if (curr->next == NULL) {
 			spin_unlock(&curr->sock_lock);
-			printk("cl_timer_callback: list end reached\n");
+			// printk("cl_timer_callback: list end reached\n");
 			break;
 		} else {
 			// Jump to next node

@@ -2358,6 +2358,13 @@ extern __u32 sysctl_rmem_default;
 
 		// Variable used during transfer iteration for mutual exclusion
 		atomic_t xfer_in_progress;
+
+		// # of nic callbacks
+		long nic_callback_count;
+
+		// # of natural callbacks
+		long callback_count;
+
 	} cl_list;
 
 	extern cl_list sock_list;

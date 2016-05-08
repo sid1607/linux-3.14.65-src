@@ -3134,7 +3134,7 @@ void tcp_send_ack(struct sock *sk)
 		if (block == 1) {
 			count = atomic_read(&sk->sk_pending_ack_count);
 			atomic_inc(&sk->sk_pending_ack_count);
-			printk("tcp_send_ack: blocked(%d)\n", count + 1);
+			// printk("tcp_send_ack: blocked(%d)\n", count + 1);
 		}
 	}
 #endif
