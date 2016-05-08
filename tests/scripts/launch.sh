@@ -21,7 +21,7 @@ server_program="$srcdir/server.py"
 
 program_to_run=""
 
-ip_to_send="localhost"
+ip_to_send="0.0.0.0"
 port_to_send="15744"
 
 show_help() {
