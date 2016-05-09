@@ -3337,7 +3337,8 @@ void cl_list_delete( struct sock *sk ) {
 }
 
 void cl_timer_callback_send( struct sock *sk ) {
-	int mss = 21888, needs_retransmit, ack_count, i;
+	int mss = 21888, ack_count, i;
+//	int needs_retransmit;
 
 	// printk( "cl_timer_callback(%d): callback for sock(%u)\n", sk->sk_id, sk );
 
@@ -3347,19 +3348,19 @@ void cl_timer_callback_send( struct sock *sk ) {
 	cl_ctr = 1;
 
 	// check if retransmits are required first
-	needs_retransmit = atomic_read(&sk->sk_timeout_flag);
-	if (needs_retransmit) {
-		// do timeout-based retransmit
-		printk("cl_timer_callback(%d): doing timeout based retransmit\n", sk->sk_id);
-		tcp_retransmit_timer(sk);
-	}
+//	needs_retransmit = atomic_read(&sk->sk_timeout_flag);
+//	if (needs_retransmit) {
+//		// do timeout-based retransmit
+//		printk("cl_timer_callback(%d): doing timeout based retransmit\n", sk->sk_id);
+//		tcp_retransmit_timer(sk);
+//	}
 
-	needs_retransmit = atomic_read(&sk->sk_fast_retransmit_flag);
-	if (needs_retransmit) {
-		// do fast rentransmit
-		printk("cl_timer_callback(%d): doing fast retransmit\n", sk->sk_id);
-		tcp_xmit_retransmit_queue(sk);
-	}
+//	needs_retransmit = atomic_read(&sk->sk_fast_retransmit_flag);
+//	if (needs_retransmit) {
+//		// do fast rentransmit
+//		printk("cl_timer_callback(%d): doing fast retransmit\n", sk->sk_id);
+//		tcp_xmit_retransmit_queue(sk);
+//	}
 
 	// send all the pending acks
 	ack_count = atomic_read(&sk->sk_pending_ack_count);

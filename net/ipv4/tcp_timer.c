@@ -346,25 +346,25 @@ void tcp_retransmit_timer(struct sock *sk)
 	struct tcp_sock *tp = tcp_sk(sk);
 	struct inet_connection_sock *icsk = inet_csk(sk);
 
-#ifdef CROSS_LAYER_DELAY
-	if (sk->sk_delay_enabled){
-		// sockopt has been set
-		int is_blocked = atomic_read(&sk->sk_cl_block_flag);
-		if (is_blocked) {
-			if (cl_ctr > 1 && cl_ctr < 20) {
-				cl_ctr++;
-				printk("tcp_retransmit_timer: Retransmission blocked\n");
-			}
-			atomic_set(&sk->sk_timeout_flag, 1);
-			return;
-		} else {
-			if (cl_ctr > 1 && cl_ctr < 20) {
-				cl_ctr++;
-				printk("tcp_retransmit_timer: Retransmission NOT blocked\n");
-			}
-		}
-	}
-#endif
+//#ifdef CROSS_LAYER_DELAY
+//	if (sk->sk_delay_enabled){
+//		// sockopt has been set
+//		int is_blocked = atomic_read(&sk->sk_cl_block_flag);
+//		if (is_blocked) {
+//			if (cl_ctr > 1 && cl_ctr < 20) {
+//				cl_ctr++;
+//				printk("tcp_retransmit_timer: Retransmission blocked\n");
+//			}
+//			atomic_set(&sk->sk_timeout_flag, 1);
+//			return;
+//		} else {
+//			if (cl_ctr > 1 && cl_ctr < 20) {
+//				cl_ctr++;
+//				printk("tcp_retransmit_timer: Retransmission NOT blocked\n");
+//			}
+//		}
+//	}
+//#endif
 
 	if (tp->fastopen_rsk) {
 		WARN_ON_ONCE(sk->sk_state != TCP_SYN_RECV &&
