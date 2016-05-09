@@ -12,8 +12,9 @@ port = -1
 
 lock = Lock()
 
-def server_thread(new_conn):
+def server_thread(new_conn, connid):
     conn = new_conn
+    local_conn_id = connid
     total_batch_size = total_time = 0
     lock.release()
     while True:
@@ -39,7 +40,7 @@ def server_thread(new_conn):
         print('Throughput: ' + str(batch_size/((end-start)*1000000)) + ' Mbps')
         total_batch_size += batch_size
         total_time += end-start
-        print('Average Throughput: ' + str(total_batch_size/(total_time*1000000)) + ' Mbps')
+        print('Average Throughput(' + str(connid) +'): ' + str(total_batch_size/(total_time*1000000)) + ' Mbps')
         conn.send('ack'.encode())
     conn.close()
 
@@ -69,11 +70,13 @@ def main(argv):
     fd.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     fd.bind((addr, port))
     fd.listen(1)
+    connid = 0
     print("Started listening on port " + str(port) + ".")
     while True:
         conn, clientAddr = fd.accept()
         lock.acquire()
-        t = Thread(target=server_thread, args=(conn,))
+        connid += 1
+        t = Thread(target=server_thread, args=(conn,connid,))
         t.start()        
 
 if __name__ == "__main__":

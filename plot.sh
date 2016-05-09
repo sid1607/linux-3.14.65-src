@@ -2,7 +2,6 @@
 gnuplot -persist <<EOF
 set style data linespoints
 show timestamp
-set title "$1"
 set term png
 set output "tcp1.png"
 set xlabel "time (seconds)"
