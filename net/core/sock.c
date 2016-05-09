@@ -3384,7 +3384,7 @@ int cl_timer_start( struct sock *sk  ) {
 	atomic_set(&sk->sk_cl_block_flag, 1);
 
 	//	printk( "timer_start(%d): Starting timer to fire in %dms (%ld), cl_block flag val (%d)\n", sk->sk_id, sk->sk_delay_ms,
-			jiffies, atomic_read(&sk->sk_cl_block_flag) );
+	//		jiffies, atomic_read(&sk->sk_cl_block_flag) );
 	// TODO: make this to set value
 	ret = mod_timer( &sk->sk_cl_timer, jiffies + msecs_to_jiffies(sk->sk_delay_ms) );
 	if (ret) printk("Error in mod_timer\n");
