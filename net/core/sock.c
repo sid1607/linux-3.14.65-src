@@ -3206,6 +3206,8 @@ void cl_timer_callback( unsigned long data ) {
 			printk("power:niccallback: (%ld)\n", sock_list.nic_callback_count);
 		}
 	} else {
+		// releasexfer in progress before returning
+		atomic_set(&sock_list.xfer_in_progress , 0);
 		return;
 	}
 
