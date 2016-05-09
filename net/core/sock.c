@@ -996,7 +996,7 @@ set_rcvbuf:
 		// Insert socket to node list
 		cl_list_insert( sk );
 
-		printk("sockopt(%d): sk port pair: src(%d), dest(%d), progress(%d)\n", sk->sk_id, inet->inet_sport, inet->inet_dport,
+		printk("sockopt: sk port pair: src(%d), dest(%d), progress(%d)\n", inet->inet_sport, inet->inet_dport,
 				atomic_read(&sock_list.xfer_in_progress));
 
 		// TODO: replace with linked list insertion
@@ -1010,8 +1010,9 @@ set_rcvbuf:
 
 		cl_timer_init( sk );
 
-		printk("ClDelay(%d): DelayStatus:(%d) DelayMS:(%d), cl_ctr(%d)\n", sk->sk_id,
-					sk->sk_delay_enabled, sk->sk_delay_ms, cl_ctr, sk);
+		printk("ClDelay: DelayStatus:(%d) DelayMS:(%d), cl_ctr(%d)\n",sk->sk_delay_enabled, sk->sk_delay_ms, cl_ctr);
+
+		atomic_incr(&sock_list.ref_count);
 
 		cl_timer_start( sk );
 
@@ -3091,6 +3092,7 @@ void init_cl_list() {
 	atomic_set(&sock_list.xfer_in_progress, 0);
 	sock_list.nic_callback_count = 0;
 	sock_list.callback_count = 0;
+	atomic_set(&sock_list.ref_count, 0);
 }
 
 // allocates a sock list element
@@ -3175,6 +3177,7 @@ void cl_list_push_back( cl_list_node *node ) {
 // basic callback
 void cl_timer_callback( unsigned long data ) {
 	cl_list_node *curr, *next;
+	int ref_count;
 
 	// 0) Try to acquire right to traverse
 	// int atomic_cmpxchg(atomic_t *v, int old, int new);
@@ -3189,16 +3192,23 @@ void cl_timer_callback( unsigned long data ) {
 		return;
 	}
 
-	// print if this came from sys call or natural callback
-	if (data == 0){
-		// natural callback
-		sock_list.callback_count++;
-		printk("power:clcallback: (%ld)\n", sock_list.callback_count);
+	int ref_count = atomic_read(&sock_list.ref_count);
+
+	if (ref_count > 0) {
+		// print if this came from sys call or natural callback
+		if (data == 0){
+			// natural callback
+			sock_list.callback_count++;
+			printk("power:clcallback: (%ld)\n", sock_list.callback_count);
+		} else {
+			// syscall callback
+			sock_list.nic_callback_count++;
+			printk("power:niccallback: (%ld)\n", sock_list.nic_callback_count);
+		}
 	} else {
-		// syscall callback
-		sock_list.nic_callback_count++;
-		printk("power:niccallback: (%ld)\n", sock_list.nic_callback_count);
+		return;
 	}
+
 	// 1) Lock list
 	spin_lock(&sock_list.cl_list_lock);
 	// printk("cl_timer_callback: lock acquired\n");

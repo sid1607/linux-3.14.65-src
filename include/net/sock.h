@@ -2365,6 +2365,8 @@ extern __u32 sysctl_rmem_default;
 		// # of natural callbacks
 		long callback_count;
 
+		atomic_t ref_count;
+
 	} cl_list;
 
 	extern cl_list sock_list;
