@@ -3376,6 +3376,7 @@ void cl_timer_callback_send( struct sock *sk ) {
 	// push only if previous push call isn't already pushing
 	if(atomic_cmpxchg(&sk->sk_is_pushing, 0, 1) == 0){
 		// then do a push
+		printk("callback_send: CAS won, pushing\n");
 		tcp_push_callback( sk, 0, mss, 0, mss );
 		atomic_set(&sk->sk_is_pushing, 0);
 	}
