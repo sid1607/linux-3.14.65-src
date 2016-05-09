@@ -7,22 +7,23 @@ import time
 import marshal
 from threading import Thread, Lock
 
-addr = "localhost"
+addr = ""
 port = -1
 
 lock = Lock()
 
 def server_thread(new_conn):
     conn = new_conn
+    total_batch_size = total_time = 0
     lock.release()
     while True:
         start = time.time()
         # receive first batch of data
         data = conn.recv(4096)
-        print(data)
+        # print(data)
         # unmarshal first 4 bytes for size
-        total_size = marshal.loads(data) + 4
-        print(str(total_size) + ' bytes to be received')
+        total_size = batch_size = marshal.loads(data) + 4
+        # print(str(total_size) + ' bytes to be received')
         
         while True:
             if total_size <= len(data):
@@ -35,6 +36,10 @@ def server_thread(new_conn):
             
         end = time.time()
         print('Batch received in ' + str(end-start) + ' seconds.')
+        print('Throughput: ' + str(batch_size/((end-start)*1000000)) + ' Mbps')
+        total_batch_size += batch_size
+        total_time += end-start
+        print('Average Throughput: ' + str(total_batch_size/(total_time*1000000)) + ' Mbps')
         conn.send('ack'.encode())
     conn.close()
 
@@ -56,7 +61,7 @@ def main(argv):
         elif opt in ("-p", "--port"):
             port = int(arg)
 
-    if port == -1:
+    if port == -1 or addr == "":
         print('Usage: ' + argv[0] + ' -a <listen_addr> -p <listen_port>')
         sys.exit(1)
        

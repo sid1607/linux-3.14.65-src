@@ -1,0 +1,2002 @@
+Starting server
+Destination: 0.0.0.0:15744
+Number of packets to send: 1024
+Application delay: off
+Packet dump: off
+
+Started listening on port 15744.
+Batch received in 0.147725105286 seconds.
+Throughput: 0.00869181983331 Mbps
+Average Throughput: 0.00869181983331 Mbps
+Batch received in 0.149588108063 seconds.
+Throughput: 0.0085835700219 Mbps
+Average Throughput: 0.008637355774 Mbps
+Batch received in 0.150058984756 seconds.
+Throughput: 0.00855663525969 Mbps
+Average Throughput: 0.00861028024611 Mbps
+Batch received in 0.149806976318 seconds.
+Throughput: 0.00857102941102 Mbps
+Average Throughput: 0.00860043387307 Mbps
+Batch received in 0.150068998337 seconds.
+Throughput: 0.00855606430529 Mbps
+Average Throughput: 0.00859152318337 Mbps
+Batch received in 0.149803876877 seconds.
+Throughput: 0.00857120674558 Mbps
+Average Throughput: 0.00858813042467 Mbps
+Batch received in 0.149960041046 seconds.
+Throughput: 0.00856228093192 Mbps
+Average Throughput: 0.00858442808825 Mbps
+Batch received in 0.149965047836 seconds.
+Throughput: 0.00856199506835 Mbps
+Average Throughput: 0.00858161753424 Mbps
+Batch received in 0.149887084961 seconds.
+Throughput: 0.00856644853914 Mbps
+Average Throughput: 0.00857992943798 Mbps
+Batch received in 0.150164842606 seconds.
+Throughput: 0.00855060330848 Mbps
+Average Throughput: 0.00857698777591 Mbps
+Batch received in 0.149622917175 seconds.
+Throughput: 0.00858157309215 Mbps
+Average Throughput: 0.00857740442035 Mbps
+Batch received in 0.149908065796 seconds.
+Throughput: 0.00856524959603 Mbps
+Average Throughput: 0.00857639020087 Mbps
+Batch received in 0.150027036667 seconds.
+Throughput: 0.00855845738559 Mbps
+Average Throughput: 0.0085750080859 Mbps
+Batch received in 0.149924039841 seconds.
+Throughput: 0.00856433698935 Mbps
+Average Throughput: 0.00857424498292 Mbps
+Batch received in 0.149984836578 seconds.
+Throughput: 0.00856086541341 Mbps
+Average Throughput: 0.00857335171065 Mbps
+Batch received in 0.149921894073 seconds.
+Throughput: 0.008564459567 Mbps
+Average Throughput: 0.00857279541075 Mbps
+Batch received in 0.149913072586 seconds.
+Throughput: 0.0085649635342 Mbps
+Average Throughput: 0.00857233431566 Mbps
+Batch received in 0.149975061417 seconds.
+Throughput: 0.00856142339847 Mbps
+Average Throughput: 0.00857172742405 Mbps
+Batch received in 0.14994597435 seconds.
+Throughput: 0.00856308417459 Mbps
+Average Throughput: 0.00857127208121 Mbps
+Batch received in 0.149853944778 seconds.
+Throughput: 0.00856834300824 Mbps
+Average Throughput: 0.00857112558 Mbps
+Batch received in 0.15008187294 seconds.
+Throughput: 0.00855533033302 Mbps
+Average Throughput: 0.00857037210296 Mbps
+Batch received in 0.149819850922 seconds.
+Throughput: 0.00857029286908 Mbps
+Average Throughput: 0.00857036850139 Mbps
+Batch received in 0.150017023087 seconds.
+Throughput: 0.00855902865943 Mbps
+Average Throughput: 0.00856987484 Mbps
+Batch received in 0.149851083755 seconds.
+Throughput: 0.00856850659882 Mbps
+Average Throughput: 0.00856981782122 Mbps
+Batch received in 0.150058984756 seconds.
+Throughput: 0.00855663525969 Mbps
+Average Throughput: 0.00856928973893 Mbps
+Batch received in 0.149875879288 seconds.
+Throughput: 0.00856708902128 Mbps
+Average Throughput: 0.00856920507504 Mbps
+Batch received in 0.150093793869 seconds.
+Throughput: 0.00855465084133 Mbps
+Average Throughput: 0.00856866514628 Mbps
+Batch received in 0.149960041046 seconds.
+Throughput: 0.00856228093192 Mbps
+Average Throughput: 0.00856843697469 Mbps
+Batch received in 0.150332927704 seconds.
+Throughput: 0.0085410430011 Mbps
+Average Throughput: 0.00856748943 Mbps
+Batch received in 0.149322986603 seconds.
+Throughput: 0.00859881006409 Mbps
+Average Throughput: 0.00856852977466 Mbps
+Batch received in 0.150212049484 seconds.
+Throughput: 0.00854791612529 Mbps
+Average Throughput: 0.00856786326651 Mbps
+Batch received in 0.149768829346 seconds.
+Throughput: 0.00857321250096 Mbps
+Average Throughput: 0.00856803032904 Mbps
+Batch received in 0.149816036224 seconds.
+Throughput: 0.00857051109053 Mbps
+Average Throughput: 0.00856810548253 Mbps
+Batch received in 0.149907112122 seconds.
+Throughput: 0.00856530408616 Mbps
+Average Throughput: 0.00856802306237 Mbps
+Batch received in 0.149930000305 seconds.
+Throughput: 0.00856399651428 Mbps
+Average Throughput: 0.00856790796559 Mbps
+Batch received in 0.149881124496 seconds.
+Throughput: 0.00856678920921 Mbps
+Average Throughput: 0.00856787688508 Mbps
+Batch received in 0.14998292923 seconds.
+Throughput: 0.00856097428283 Mbps
+Average Throughput: 0.00856769018191 Mbps
+Batch received in 0.149936914444 seconds.
+Throughput: 0.00856360159712 Mbps
+Average Throughput: 0.00856758253756 Mbps
+Batch received in 0.149927854538 seconds.
+Throughput: 0.00856411908219 Mbps
+Average Throughput: 0.00856749369602 Mbps
+Batch received in 0.149911880493 seconds.
+Throughput: 0.00856503164243 Mbps
+Average Throughput: 0.00856743212743 Mbps
+Batch received in 0.150168895721 seconds.
+Throughput: 0.00855037252443 Mbps
+Average Throughput: 0.00856701522966 Mbps
+Batch received in 0.14959692955 seconds.
+Throughput: 0.00858306386275 Mbps
+Average Throughput: 0.00856739664248 Mbps
+Batch received in 0.150668144226 seconds.
+Throughput: 0.00852204031977 Mbps
+Average Throughput: 0.00856633636163 Mbps
+Batch received in 0.149296998978 seconds.
+Throughput: 0.00860030682996 Mbps
+Average Throughput: 0.00856710543721 Mbps
+Batch received in 0.150093793869 seconds.
+Throughput: 0.00855465084133 Mbps
+Average Throughput: 0.00856682827444 Mbps
+Batch received in 0.149739980698 seconds.
+Throughput: 0.00857486420138 Mbps
+Average Throughput: 0.00856700280834 Mbps
+Batch received in 0.149991035461 seconds.
+Throughput: 0.00856051160691 Mbps
+Average Throughput: 0.00856686459518 Mbps
+Batch received in 0.149893045425 seconds.
+Throughput: 0.00856610789617 Mbps
+Average Throughput: 0.00856684882925 Mbps
+Batch received in 0.149936199188 seconds.
+Throughput: 0.00856364244893 Mbps
+Average Throughput: 0.00856678336892 Mbps
+Batch received in 0.150230884552 seconds.
+Throughput: 0.00854684443767 Mbps
+Average Throughput: 0.00856638367863 Mbps
+Batch received in 0.149824142456 seconds.
+Throughput: 0.00857004738323 Mbps
+Average Throughput: 0.00856645548587 Mbps
+Batch received in 0.149740934372 seconds.
+Throughput: 0.00857480958954 Mbps
+Average Throughput: 0.0085666159882 Mbps
+Batch received in 0.149918794632 seconds.
+Throughput: 0.0085646366298 Mbps
+Average Throughput: 0.00856657863334 Mbps
+Batch received in 0.15020108223 seconds.
+Throughput: 0.00854854026975 Mbps
+Average Throughput: 0.00856624389778 Mbps
+Batch received in 0.149649143219 seconds.
+Throughput: 0.00858006916966 Mbps
+Average Throughput: 0.00856649486868 Mbps
+Batch received in 0.150027036667 seconds.
+Throughput: 0.00855845738559 Mbps
+Average Throughput: 0.00856635120982 Mbps
+Batch received in 0.150027990341 seconds.
+Throughput: 0.00855840298254 Mbps
+Average Throughput: 0.00856621164 Mbps
+Batch received in 0.149813175201 seconds.
+Throughput: 0.00857067476391 Mbps
+Average Throughput: 0.00856628855104 Mbps
+Batch received in 0.149970054626 seconds.
+Throughput: 0.00856170922387 Mbps
+Average Throughput: 0.00856621089451 Mbps
+Batch received in 0.149964094162 seconds.
+Throughput: 0.00856204951709 Mbps
+Average Throughput: 0.00856614150507 Mbps
+Batch received in 0.149919033051 seconds.
+Throughput: 0.00856462300932 Mbps
+Average Throughput: 0.00856611660736 Mbps
+Batch received in 0.149972915649 seconds.
+Throughput: 0.00856154589274 Mbps
+Average Throughput: 0.00856604284743 Mbps
+Batch received in 0.149868011475 seconds.
+Throughput: 0.00856753877873 Mbps
+Average Throughput: 0.0085660665883 Mbps
+Batch received in 0.149942874908 seconds.
+Throughput: 0.00856326118053 Mbps
+Average Throughput: 0.00856602273966 Mbps
+Batch received in 0.149955034256 seconds.
+Throughput: 0.00856256681458 Mbps
+Average Throughput: 0.00856596955046 Mbps
+Batch received in 0.150007009506 seconds.
+Throughput: 0.00855960000954 Mbps
+Average Throughput: 0.00856587297153 Mbps
+Batch received in 0.149844884872 seconds.
+Throughput: 0.00856886106652 Mbps
+Average Throughput: 0.00856591755465 Mbps
+Batch received in 0.14991402626 seconds.
+Throughput: 0.0085649090484 Mbps
+Average Throughput: 0.00856590272195 Mbps
+Batch received in 0.150011062622 seconds.
+Throughput: 0.00855936873959 Mbps
+Average Throughput: 0.00856580795532 Mbps
+Batch received in 0.149965047836 seconds.
+Throughput: 0.00856199506835 Mbps
+Average Throughput: 0.00856575346159 Mbps
+Batch received in 0.1498939991 seconds.
+Throughput: 0.00856605339581 Mbps
+Average Throughput: 0.00856575768587 Mbps
+Batch received in 0.149868011475 seconds.
+Throughput: 0.00856753877873 Mbps
+Average Throughput: 0.0085657824182 Mbps
+Batch received in 0.150004863739 seconds.
+Throughput: 0.00855972245163 Mbps
+Average Throughput: 0.008565699347 Mbps
+Batch received in 0.149875879288 seconds.
+Throughput: 0.00856708902128 Mbps
+Average Throughput: 0.00856571812337 Mbps
+Batch received in 0.150020122528 seconds.
+Throughput: 0.00855885182843 Mbps
+Average Throughput: 0.00856562650031 Mbps
+Batch received in 0.14985704422 seconds.
+Throughput: 0.00856816579216 Mbps
+Average Throughput: 0.00856565990227 Mbps
+Batch received in 0.149943113327 seconds.
+Throughput: 0.00856324756443 Mbps
+Average Throughput: 0.0085656285645 Mbps
+Batch received in 0.150144100189 seconds.
+Throughput: 0.00855178457483 Mbps
+Average Throughput: 0.00856545079382 Mbps
+Batch received in 0.149779081345 seconds.
+Throughput: 0.00857262568627 Mbps
+Average Throughput: 0.00856554154019 Mbps
+Batch received in 0.149924993515 seconds.
+Throughput: 0.00856428251152 Mbps
+Average Throughput: 0.00856552580004 Mbps
+Batch received in 0.149919986725 seconds.
+Throughput: 0.00856456852785 Mbps
+Average Throughput: 0.00856551398056 Mbps
+Batch received in 0.150026082993 seconds.
+Throughput: 0.00855851178934 Mbps
+Average Throughput: 0.00856542851898 Mbps
+Batch received in 0.149884223938 seconds.
+Throughput: 0.00856661205739 Mbps
+Average Throughput: 0.00856544277653 Mbps
+Batch received in 0.306528806686 seconds.
+Throughput: 0.00418883958699 Mbps
+Average Throughput: 0.00846021137106 Mbps
+Batch received in 0.150011062622 seconds.
+Throughput: 0.00855936873959 Mbps
+Average Throughput: 0.00846136457134 Mbps
+Batch received in 0.149961948395 seconds.
+Throughput: 0.00856217202927 Mbps
+Average Throughput: 0.00846252310893 Mbps
+Batch received in 0.149919033051 seconds.
+Throughput: 0.00856462300932 Mbps
+Average Throughput: 0.00846368283974 Mbps
+Batch received in 0.149946928024 seconds.
+Throughput: 0.0085630297127 Mbps
+Average Throughput: 0.00846479883081 Mbps
+Batch received in 0.1499979496 seconds.
+Throughput: 0.00856011701108 Mbps
+Average Throughput: 0.00846585802848 Mbps
+Batch received in 0.15009188652 seconds.
+Throughput: 0.00855475955275 Mbps
+Average Throughput: 0.00846683567086 Mbps
+Batch received in 0.149701118469 seconds.
+Throughput: 0.00857709022571 Mbps
+Average Throughput: 0.00846803185393 Mbps
+Batch received in 0.149938106537 seconds.
+Throughput: 0.00856353351164 Mbps
+Average Throughput: 0.00846905846328 Mbps
+Batch received in 0.149918079376 seconds.
+Throughput: 0.00856467749148 Mbps
+Average Throughput: 0.00847007526818 Mbps
+Batch received in 0.150156974792 seconds.
+Throughput: 0.00855105133661 Mbps
+Average Throughput: 0.00847092864402 Mbps
+Batch received in 0.149717092514 seconds.
+Throughput: 0.00857617509423 Mbps
+Average Throughput: 0.00847202304719 Mbps
+Batch received in 0.149922132492 seconds.
+Throughput: 0.00856444594708 Mbps
+Average Throughput: 0.00847297550344 Mbps
+Batch received in 0.149966001511 seconds.
+Throughput: 0.00856194062032 Mbps
+Average Throughput: 0.00847388323677 Mbps
+Batch received in 0.150202035904 seconds.
+Throughput: 0.0085484859927 Mbps
+Average Throughput: 0.00847463791312 Mbps
+Batch received in 0.149624824524 seconds.
+Throughput: 0.00858146369819 Mbps
+Average Throughput: 0.008475703663 Mbps
+Batch received in 0.150156021118 seconds.
+Throughput: 0.00855110564624 Mbps
+Average Throughput: 0.00847645109994 Mbps
+Batch received in 0.149797916412 seconds.
+Throughput: 0.0085715477942 Mbps
+Average Throughput: 0.00847738230766 Mbps
+Batch received in 0.150192022324 seconds.
+Throughput: 0.0085490559361 Mbps
+Average Throughput: 0.00847807915641 Mbps
+Batch received in 0.14958190918 seconds.
+Throughput: 0.00858392573702 Mbps
+Average Throughput: 0.00847909424307 Mbps
+Batch received in 0.150030136108 seconds.
+Throughput: 0.00855828057819 Mbps
+Average Throughput: 0.00847984867226 Mbps
+Batch received in 0.149881124496 seconds.
+Throughput: 0.00856678920921 Mbps
+Average Throughput: 0.00848066835354 Mbps
+Batch received in 0.149915933609 seconds.
+Throughput: 0.00856480007888 Mbps
+Average Throughput: 0.00848145432546 Mbps
+Batch received in 0.14994096756 seconds.
+Throughput: 0.00856337011089 Mbps
+Average Throughput: 0.00848221263804 Mbps
+Batch received in 0.149939060211 seconds.
+Throughput: 0.00856347904403 Mbps
+Average Throughput: 0.00848295802944 Mbps
+Batch received in 0.149973154068 seconds.
+Throughput: 0.00856153228209 Mbps
+Average Throughput: 0.00848367233849 Mbps
+Batch received in 0.149888038635 seconds.
+Throughput: 0.00856639403445 Mbps
+Average Throughput: 0.00848441715742 Mbps
+Batch received in 0.15015912056 seconds.
+Throughput: 0.00855092914246 Mbps
+Average Throughput: 0.00848501174533 Mbps
+Batch received in 0.14968085289 seconds.
+Throughput: 0.00857825149449 Mbps
+Average Throughput: 0.00848583527433 Mbps
+Batch received in 0.149924993515 seconds.
+Throughput: 0.00856428251152 Mbps
+Average Throughput: 0.00848652319447 Mbps
+Batch received in 0.14995598793 seconds.
+Throughput: 0.00856251235927 Mbps
+Average Throughput: 0.00848718390195 Mbps
+Batch received in 0.149919033051 seconds.
+Throughput: 0.00856462300932 Mbps
+Average Throughput: 0.0084878512494 Mbps
+Batch received in 0.14996099472 seconds.
+Throughput: 0.00856222648025 Mbps
+Average Throughput: 0.00848848689334 Mbps
+Batch received in 0.149989128113 seconds.
+Throughput: 0.00856062046733 Mbps
+Average Throughput: 0.00848909826866 Mbps
+Batch received in 0.176564216614 seconds.
+Throughput: 0.00727214168661 Mbps
+Average Throughput: 0.00847707626557 Mbps
+Batch received in 0.149850130081 seconds.
+Throughput: 0.00856856113041 Mbps
+Average Throughput: 0.00847783690608 Mbps
+Batch received in 0.149880170822 seconds.
+Throughput: 0.00856684371893 Mbps
+Average Throughput: 0.0084785709868 Mbps
+Batch received in 0.149981021881 seconds.
+Throughput: 0.00856108315503 Mbps
+Average Throughput: 0.00847924638698 Mbps
+Batch received in 0.149919033051 seconds.
+Throughput: 0.00856462300932 Mbps
+Average Throughput: 0.00847993927592 Mbps
+Batch received in 0.150007009506 seconds.
+Throughput: 0.00855960000954 Mbps
+Average Throughput: 0.00848058094531 Mbps
+Batch received in 0.149780035019 seconds.
+Throughput: 0.00857257110294 Mbps
+Average Throughput: 0.00848131490426 Mbps
+Batch received in 0.14994096756 seconds.
+Throughput: 0.00856337011089 Mbps
+Average Throughput: 0.00848196510565 Mbps
+Batch received in 0.149868965149 seconds.
+Throughput: 0.00856748426016 Mbps
+Average Throughput: 0.00848263710744 Mbps
+Batch received in 0.149951934814 seconds.
+Throughput: 0.00856274379913 Mbps
+Average Throughput: 0.00848326201389 Mbps
+Batch received in 0.149996995926 seconds.
+Throughput: 0.00856017143593 Mbps
+Average Throughput: 0.00848385751213 Mbps
+Batch received in 0.149883985519 seconds.
+Throughput: 0.00856662568419 Mbps
+Average Throughput: 0.00848449297438 Mbps
+Batch received in 0.149921894073 seconds.
+Throughput: 0.008564459567 Mbps
+Average Throughput: 0.00848510240232 Mbps
+Batch received in 0.150069952011 seconds.
+Throughput: 0.00855600993265 Mbps
+Average Throughput: 0.00848563922932 Mbps
+Batch received in 0.14978313446 seconds.
+Throughput: 0.00857239371192 Mbps
+Average Throughput: 0.00848628985881 Mbps
+Batch received in 0.149947166443 seconds.
+Throughput: 0.00856301609733 Mbps
+Average Throughput: 0.0084868616173 Mbps
+Batch received in 0.150036096573 seconds.
+Throughput: 0.00855794058449 Mbps
+Average Throughput: 0.00848738768433 Mbps
+Batch received in 0.149826049805 seconds.
+Throughput: 0.00856993828292 Mbps
+Average Throughput: 0.00848799332328 Mbps
+Batch received in 0.14999294281 seconds.
+Throughput: 0.00856040274925 Mbps
+Average Throughput: 0.00848852127479 Mbps
+Batch received in 0.149981021881 seconds.
+Throughput: 0.00856108315503 Mbps
+Average Throughput: 0.00848904646686 Mbps
+Batch received in 0.149928092957 seconds.
+Throughput: 0.00856410546336 Mbps
+Average Throughput: 0.00848958563988 Mbps
+Batch received in 0.15064406395 seconds.
+Throughput: 0.0085234025579 Mbps
+Average Throughput: 0.00848982796872 Mbps
+Batch received in 0.149162054062 seconds.
+Throughput: 0.00860808741255 Mbps
+Average Throughput: 0.00849066115602 Mbps
+Batch received in 0.14988899231 seconds.
+Throughput: 0.00856633953044 Mbps
+Average Throughput: 0.00849119317376 Mbps
+Batch received in 0.149938106537 seconds.
+Throughput: 0.00856353351164 Mbps
+Average Throughput: 0.00849169833934 Mbps
+Batch received in 0.150108098984 seconds.
+Throughput: 0.00855383559377 Mbps
+Average Throughput: 0.00849212973099 Mbps
+Batch received in 0.149812936783 seconds.
+Throughput: 0.00857068840364 Mbps
+Average Throughput: 0.00849267031128 Mbps
+Batch received in 0.150588989258 seconds.
+Throughput: 0.0085265198095 Mbps
+Average Throughput: 0.00849290283571 Mbps
+Batch received in 0.149311065674 seconds.
+Throughput: 0.00859949658925 Mbps
+Average Throughput: 0.00849362394136 Mbps
+Batch received in 0.149894952774 seconds.
+Throughput: 0.00856599889614 Mbps
+Average Throughput: 0.00849411215617 Mbps
+Batch received in 0.14995598793 seconds.
+Throughput: 0.00856251235927 Mbps
+Average Throughput: 0.00849457065253 Mbps
+Batch received in 0.150202035904 seconds.
+Throughput: 0.0085484859927 Mbps
+Average Throughput: 0.0084949302335 Mbps
+Batch received in 0.149683952332 seconds.
+Throughput: 0.00857807386831 Mbps
+Average Throughput: 0.00849547918736 Mbps
+Batch received in 0.150004148483 seconds.
+Throughput: 0.00855976326643 Mbps
+Average Throughput: 0.00849590173357 Mbps
+Batch received in 0.149847984314 seconds.
+Throughput: 0.008568683829 Mbps
+Average Throughput: 0.00849637652251 Mbps
+Batch received in 0.149980068207 seconds.
+Throughput: 0.00856113759216 Mbps
+Average Throughput: 0.00849679661637 Mbps
+Batch received in 0.150040149689 seconds.
+Throughput: 0.00855770940421 Mbps
+Average Throughput: 0.00849718935671 Mbps
+Batch received in 0.14977312088 seconds.
+Throughput: 0.00857296684782 Mbps
+Average Throughput: 0.00849767395005 Mbps
+Batch received in 0.150038957596 seconds.
+Throughput: 0.00855777739711 Mbps
+Average Throughput: 0.00849805653988 Mbps
+Batch received in 0.150159835815 seconds.
+Throughput: 0.00855088841185 Mbps
+Average Throughput: 0.00849839098265 Mbps
+Batch received in 0.149682044983 seconds.
+Throughput: 0.00857818317586 Mbps
+Average Throughput: 0.00849889132847 Mbps
+Batch received in 0.149899959564 seconds.
+Throughput: 0.00856571278427 Mbps
+Average Throughput: 0.00849930833119 Mbps
+Batch received in 0.150018930435 seconds.
+Throughput: 0.00855891983949 Mbps
+Average Throughput: 0.00849967832432 Mbps
+Batch received in 0.149900913239 seconds.
+Throughput: 0.00856565828893 Mbps
+Average Throughput: 0.00850008500049 Mbps
+Batch received in 0.149933099747 seconds.
+Throughput: 0.00856381947795 Mbps
+Average Throughput: 0.00850047551316 Mbps
+Batch received in 0.150200843811 seconds.
+Throughput: 0.00854855383912 Mbps
+Average Throughput: 0.00850076882344 Mbps
+Batch received in 0.14968585968 seconds.
+Throughput: 0.00857796456354 Mbps
+Average Throughput: 0.00850123531875 Mbps
+Batch received in 0.149958133698 seconds.
+Throughput: 0.00856238983735 Mbps
+Average Throughput: 0.00850160332097 Mbps
+Batch received in 0.149924039841 seconds.
+Throughput: 0.00856433698935 Mbps
+Average Throughput: 0.00850197848298 Mbps
+Batch received in 0.149944067001 seconds.
+Throughput: 0.00856319310045 Mbps
+Average Throughput: 0.00850234243281 Mbps
+Batch received in 0.149928808212 seconds.
+Throughput: 0.00856406460713 Mbps
+Average Throughput: 0.00850270719451 Mbps
+Batch received in 0.149970054626 seconds.
+Throughput: 0.00856170922387 Mbps
+Average Throughput: 0.00850305392713 Mbps
+Batch received in 0.149856090546 seconds.
+Throughput: 0.00856822031941 Mbps
+Average Throughput: 0.0085034343604 Mbps
+Batch received in 0.15025305748 seconds.
+Throughput: 0.00854558317505 Mbps
+Average Throughput: 0.00850367963606 Mbps
+Batch received in 0.149651050568 seconds.
+Throughput: 0.00857995981405 Mbps
+Average Throughput: 0.00850411920534 Mbps
+Batch received in 0.150131940842 seconds.
+Throughput: 0.00855247719307 Mbps
+Average Throughput: 0.00850439715985 Mbps
+Batch received in 0.149734973907 seconds.
+Throughput: 0.00857515092495 Mbps
+Average Throughput: 0.00850480045469 Mbps
+Batch received in 0.149785995483 seconds.
+Throughput: 0.00857222997288 Mbps
+Average Throughput: 0.00850518275253 Mbps
+Batch received in 0.150006055832 seconds.
+Throughput: 0.00855965442781 Mbps
+Average Throughput: 0.00850549029223 Mbps
+Batch received in 0.149874925613 seconds.
+Throughput: 0.00856714353482 Mbps
+Average Throughput: 0.00850583612299 Mbps
+Batch received in 0.149953126907 seconds.
+Throughput: 0.00856267572728 Mbps
+Average Throughput: 0.00850615333875 Mbps
+Batch received in 0.149938821793 seconds.
+Throughput: 0.00856349266087 Mbps
+Average Throughput: 0.00850647153719 Mbps
+Batch received in 0.150188922882 seconds.
+Throughput: 0.00854923236255 Mbps
+Average Throughput: 0.00850670791569 Mbps
+Batch received in 0.149652957916 seconds.
+Throughput: 0.00857985046121 Mbps
+Average Throughput: 0.00850710859208 Mbps
+Batch received in 0.149970054626 seconds.
+Throughput: 0.00856170922387 Mbps
+Average Throughput: 0.00850740669279 Mbps
+Batch received in 0.149995088577 seconds.
+Throughput: 0.0085602802877 Mbps
+Average Throughput: 0.00850769384464 Mbps
+Batch received in 0.149940013885 seconds.
+Throughput: 0.00856342457711 Mbps
+Average Throughput: 0.00850799476852 Mbps
+Batch received in 0.149874925613 seconds.
+Throughput: 0.00856714353482 Mbps
+Average Throughput: 0.00850831229602 Mbps
+Batch received in 0.149978160858 seconds.
+Throughput: 0.00856124646851 Mbps
+Average Throughput: 0.00850859513812 Mbps
+Batch received in 0.149944067001 seconds.
+Throughput: 0.00856319310045 Mbps
+Average Throughput: 0.00850888525417 Mbps
+Batch received in 0.150217056274 seconds.
+Throughput: 0.00854763122008 Mbps
+Average Throughput: 0.00850909042046 Mbps
+Batch received in 0.149618148804 seconds.
+Throughput: 0.00858184658924 Mbps
+Average Throughput: 0.00850947212725 Mbps
+Batch received in 0.149976015091 seconds.
+Throughput: 0.00856136895771 Mbps
+Average Throughput: 0.00850974362141 Mbps
+Batch received in 0.149911880493 seconds.
+Throughput: 0.00856503164243 Mbps
+Average Throughput: 0.00851003122868 Mbps
+Batch received in 0.150255918503 seconds.
+Throughput: 0.0085454204586 Mbps
+Average Throughput: 0.00851021478823 Mbps
+Batch received in 0.149755001068 seconds.
+Throughput: 0.00857400414572 Mbps
+Average Throughput: 0.0085105428567 Mbps
+Batch received in 0.149761199951 seconds.
+Throughput: 0.0085736492524 Mbps
+Average Throughput: 0.00851086576534 Mbps
+Batch received in 0.14996099472 seconds.
+Throughput: 0.00856222648025 Mbps
+Average Throughput: 0.00851112758174 Mbps
+Batch received in 0.150109052658 seconds.
+Throughput: 0.00855378124945 Mbps
+Average Throughput: 0.00851134412283 Mbps
+Batch received in 0.149743080139 seconds.
+Throughput: 0.00857468671545 Mbps
+Average Throughput: 0.00851166329556 Mbps
+Batch received in 0.150106191635 seconds.
+Throughput: 0.00855394428446 Mbps
+Average Throughput: 0.00851187578571 Mbps
+Batch received in 0.14985704422 seconds.
+Throughput: 0.00856816579216 Mbps
+Average Throughput: 0.00851215680102 Mbps
+Batch received in 0.149859905243 seconds.
+Throughput: 0.00856800221459 Mbps
+Average Throughput: 0.00851243421715 Mbps
+Batch received in 0.150000095367 seconds.
+Throughput: 0.0085599945577 Mbps
+Average Throughput: 0.00851266952759 Mbps
+Batch received in 0.149894952774 seconds.
+Throughput: 0.00856599889614 Mbps
+Average Throughput: 0.00851293189882 Mbps
+Batch received in 0.149905920029 seconds.
+Throughput: 0.00856537219981 Mbps
+Average Throughput: 0.0085131886516 Mbps
+Batch received in 0.150001049042 seconds.
+Throughput: 0.0085599401351 Mbps
+Average Throughput: 0.00851341657997 Mbps
+Batch received in 0.149927139282 seconds.
+Throughput: 0.00856415993894 Mbps
+Average Throughput: 0.00851366264904 Mbps
+Batch received in 0.14989900589 seconds.
+Throughput: 0.00856576728029 Mbps
+Average Throughput: 0.00851391405299 Mbps
+Batch received in 0.150202989578 seconds.
+Throughput: 0.00854843171634 Mbps
+Average Throughput: 0.0085140801349 Mbps
+Batch received in 0.149827003479 seconds.
+Throughput: 0.00856988373381 Mbps
+Average Throughput: 0.0085143466828 Mbps
+Batch received in 0.149773836136 seconds.
+Throughput: 0.008572925907 Mbps
+Average Throughput: 0.00851462506008 Mbps
+Batch received in 0.150602817535 seconds.
+Throughput: 0.0085257369086 Mbps
+Average Throughput: 0.00851467790501 Mbps
+Batch received in 0.149199962616 seconds.
+Throughput: 0.00860590027965 Mbps
+Average Throughput: 0.0085151056773 Mbps
+Batch received in 0.149886131287 seconds.
+Throughput: 0.00856650304453 Mbps
+Average Throughput: 0.00851534666994 Mbps
+Batch received in 0.150036096573 seconds.
+Throughput: 0.00855794058449 Mbps
+Average Throughput: 0.00851554565074 Mbps
+Batch received in 0.149883985519 seconds.
+Throughput: 0.00856662568419 Mbps
+Average Throughput: 0.00851578292585 Mbps
+Batch received in 0.150122880936 seconds.
+Throughput: 0.00855299333451 Mbps
+Average Throughput: 0.00851595524805 Mbps
+Batch received in 0.149552106857 seconds.
+Throughput: 0.00858563631755 Mbps
+Average Throughput: 0.00851627523941 Mbps
+Batch received in 0.14988899231 seconds.
+Throughput: 0.00856633953044 Mbps
+Average Throughput: 0.00851650460826 Mbps
+Batch received in 0.149964094162 seconds.
+Throughput: 0.00856204951709 Mbps
+Average Throughput: 0.0085167124236 Mbps
+Batch received in 0.149896144867 seconds.
+Throughput: 0.00856593077253 Mbps
+Average Throughput: 0.00851693587945 Mbps
+Batch received in 0.150157928467 seconds.
+Throughput: 0.00855099702767 Mbps
+Average Throughput: 0.00851709008894 Mbps
+Batch received in 0.149569034576 seconds.
+Throughput: 0.00858466462417 Mbps
+Average Throughput: 0.00851739346001 Mbps
+Batch received in 0.149945020676 seconds.
+Throughput: 0.00856313863718 Mbps
+Average Throughput: 0.00851759842351 Mbps
+Batch received in 0.149893045425 seconds.
+Throughput: 0.00856610789617 Mbps
+Average Throughput: 0.0085178147284 Mbps
+Batch received in 0.150049209595 seconds.
+Throughput: 0.00855719269344 Mbps
+Average Throughput: 0.00851798971752 Mbps
+Batch received in 0.14986205101 seconds.
+Throughput: 0.00856787953551 Mbps
+Average Throughput: 0.00851821016463 Mbps
+Batch received in 0.14995598793 seconds.
+Throughput: 0.00856251235927 Mbps
+Average Throughput: 0.00851840518226 Mbps
+Batch received in 0.149919986725 seconds.
+Throughput: 0.00856456852785 Mbps
+Average Throughput: 0.00851860745369 Mbps
+Batch received in 0.149963855743 seconds.
+Throughput: 0.00856206312938 Mbps
+Average Throughput: 0.00851879708564 Mbps
+Batch received in 0.149949073792 seconds.
+Throughput: 0.00856290717597 Mbps
+Average Throughput: 0.00851898871819 Mbps
+Batch received in 0.149868965149 seconds.
+Throughput: 0.00856748426016 Mbps
+Average Throughput: 0.00851919838003 Mbps
+Batch received in 0.150027990341 seconds.
+Throughput: 0.00855840298254 Mbps
+Average Throughput: 0.00851936732283 Mbps
+Batch received in 0.149945020676 seconds.
+Throughput: 0.00856313863718 Mbps
+Average Throughput: 0.00851955503202 Mbps
+Batch received in 0.149924039841 seconds.
+Throughput: 0.00856433698935 Mbps
+Average Throughput: 0.00851974622857 Mbps
+Batch received in 0.149901866913 seconds.
+Throughput: 0.00856560379429 Mbps
+Average Throughput: 0.00851994115636 Mbps
+Batch received in 0.150063991547 seconds.
+Throughput: 0.00855634977296 Mbps
+Average Throughput: 0.00852009543018 Mbps
+Batch received in 0.149878025055 seconds.
+Throughput: 0.00856696636835 Mbps
+Average Throughput: 0.00852029295384 Mbps
+Batch received in 0.149822950363 seconds.
+Throughput: 0.00857011557233 Mbps
+Average Throughput: 0.00852050195885 Mbps
+Batch received in 0.149968147278 seconds.
+Throughput: 0.00856181811476 Mbps
+Average Throughput: 0.00852067472193 Mbps
+Batch received in 0.14999294281 seconds.
+Throughput: 0.00856040274925 Mbps
+Average Throughput: 0.00852084017976 Mbps
+Batch received in 0.149902105331 seconds.
+Throughput: 0.00856559017074 Mbps
+Average Throughput: 0.00852102566796 Mbps
+Batch received in 0.149863004684 seconds.
+Throughput: 0.00856782501261 Mbps
+Average Throughput: 0.00852121879979 Mbps
+Batch received in 0.14993596077 seconds.
+Throughput: 0.00856365606629 Mbps
+Average Throughput: 0.00852139329497 Mbps
+Batch received in 0.149923086166 seconds.
+Throughput: 0.00856439146787 Mbps
+Average Throughput: 0.00852156935745 Mbps
+Batch received in 0.150389194489 seconds.
+Throughput: 0.00853784744554 Mbps
+Average Throughput: 0.00852163594425 Mbps
+Batch received in 0.149368047714 seconds.
+Throughput: 0.00859621598895 Mbps
+Average Throughput: 0.00852193772226 Mbps
+Batch received in 0.149953126907 seconds.
+Throughput: 0.00856267572728 Mbps
+Average Throughput: 0.00852210253922 Mbps
+Batch received in 0.149907112122 seconds.
+Throughput: 0.00856530408616 Mbps
+Average Throughput: 0.00852227656564 Mbps
+Batch received in 0.150022029877 seconds.
+Throughput: 0.00855874301298 Mbps
+Average Throughput: 0.00852242298378 Mbps
+Batch received in 0.14989900589 seconds.
+Throughput: 0.00856576728029 Mbps
+Average Throughput: 0.00852259617993 Mbps
+Batch received in 0.150328874588 seconds.
+Throughput: 0.00854127328179 Mbps
+Average Throughput: 0.00852267072563 Mbps
+Batch received in 0.149369001389 seconds.
+Throughput: 0.00859616110481 Mbps
+Average Throughput: 0.00852296102275 Mbps
+Batch received in 0.149967193604 seconds.
+Throughput: 0.00856187256124 Mbps
+Average Throughput: 0.00852311473463 Mbps
+Batch received in 0.149884939194 seconds.
+Throughput: 0.00856657117724 Mbps
+Average Throughput: 0.00852328563132 Mbps
+Batch received in 0.150177955627 seconds.
+Throughput: 0.00854985669924 Mbps
+Average Throughput: 0.008523389918 Mbps
+Batch received in 0.149729967117 seconds.
+Throughput: 0.00857543766769 Mbps
+Average Throughput: 0.00852359279283 Mbps
+Batch received in 0.14995098114 seconds.
+Throughput: 0.00856279825739 Mbps
+Average Throughput: 0.00852374524071 Mbps
+Batch received in 0.149991035461 seconds.
+Throughput: 0.00856051160691 Mbps
+Average Throughput: 0.00852388768846 Mbps
+Batch received in 0.149842023849 seconds.
+Throughput: 0.00856902467688 Mbps
+Average Throughput: 0.00852406172004 Mbps
+Batch received in 0.150157928467 seconds.
+Throughput: 0.00855099702767 Mbps
+Average Throughput: 0.00852416539104 Mbps
+Batch received in 0.149739027023 seconds.
+Throughput: 0.00857491881392 Mbps
+Average Throughput: 0.00852435944554 Mbps
+Batch received in 0.149918079376 seconds.
+Throughput: 0.00856467749148 Mbps
+Average Throughput: 0.0085245131964 Mbps
+Batch received in 0.150078058243 seconds.
+Throughput: 0.00855554779315 Mbps
+Average Throughput: 0.00852463122101 Mbps
+Batch received in 0.149827957153 seconds.
+Throughput: 0.00856982918539 Mbps
+Average Throughput: 0.00852480217344 Mbps
+Batch received in 0.149959087372 seconds.
+Throughput: 0.00856233538429 Mbps
+Average Throughput: 0.00852494372383 Mbps
+Batch received in 0.149964094162 seconds.
+Throughput: 0.00856204951709 Mbps
+Average Throughput: 0.00852508314115 Mbps
+Batch received in 0.150450944901 seconds.
+Throughput: 0.00853434320967 Mbps
+Average Throughput: 0.00852511791581 Mbps
+Batch received in 0.149346113205 seconds.
+Throughput: 0.00859747851782 Mbps
+Average Throughput: 0.00852538665679 Mbps
+Batch received in 0.150247097015 seconds.
+Throughput: 0.00854592218756 Mbps
+Average Throughput: 0.00852546309846 Mbps
+Batch received in 0.149672031403 seconds.
+Throughput: 0.00857875708619 Mbps
+Average Throughput: 0.00852565999114 Mbps
+Batch received in 0.150244951248 seconds.
+Throughput: 0.00854604423865 Mbps
+Average Throughput: 0.00852573530894 Mbps
+Batch received in 0.149624824524 seconds.
+Throughput: 0.00858146369819 Mbps
+Average Throughput: 0.00852593961822 Mbps
+Batch received in 0.149958133698 seconds.
+Throughput: 0.00856238983735 Mbps
+Average Throughput: 0.00852607305799 Mbps
+Batch received in 0.149944067001 seconds.
+Throughput: 0.00856319310045 Mbps
+Average Throughput: 0.00852620844158 Mbps
+Batch received in 0.150060892105 seconds.
+Throughput: 0.00855652650059 Mbps
+Average Throughput: 0.0085263187008 Mbps
+Batch received in 0.149858951569 seconds.
+Throughput: 0.00856805673976 Mbps
+Average Throughput: 0.00852646973881 Mbps
+Batch received in 0.150112867355 seconds.
+Throughput: 0.00855356387911 Mbps
+Average Throughput: 0.00852656759616 Mbps
+Batch received in 0.149723052979 seconds.
+Throughput: 0.00857583367729 Mbps
+Average Throughput: 0.00852674443397 Mbps
+Batch received in 0.150057077408 seconds.
+Throughput: 0.00855674402154 Mbps
+Average Throughput: 0.00852685196918 Mbps
+Batch received in 0.149780035019 seconds.
+Throughput: 0.00857257110294 Mbps
+Average Throughput: 0.00852701496622 Mbps
+Batch received in 0.150228977203 seconds.
+Throughput: 0.00854695295077 Mbps
+Average Throughput: 0.00852708600779 Mbps
+Batch received in 0.149832010269 seconds.
+Throughput: 0.00856959736236 Mbps
+Average Throughput: 0.00852723654592 Mbps
+Batch received in 0.149724006653 seconds.
+Throughput: 0.0085757790531 Mbps
+Average Throughput: 0.00852740771154 Mbps
+Batch received in 0.149971961975 seconds.
+Throughput: 0.00856160033576 Mbps
+Average Throughput: 0.0085275280527 Mbps
+Batch received in 0.149937868118 seconds.
+Throughput: 0.00856354712865 Mbps
+Average Throughput: 0.00852765434886 Mbps
+Batch received in 0.14989900589 seconds.
+Throughput: 0.00856576728029 Mbps
+Average Throughput: 0.0085277874855 Mbps
+Batch received in 0.149859189987 seconds.
+Throughput: 0.0085680431084 Mbps
+Average Throughput: 0.00852792758041 Mbps
+Batch received in 0.149943828583 seconds.
+Throughput: 0.00856320671638 Mbps
+Average Throughput: 0.00852804999956 Mbps
+Batch received in 0.149955034256 seconds.
+Throughput: 0.00856256681458 Mbps
+Average Throughput: 0.00852816936815 Mbps
+Batch received in 0.149882793427 seconds.
+Throughput: 0.00856669381886 Mbps
+Average Throughput: 0.00852830207335 Mbps
+Batch received in 0.149944067001 seconds.
+Throughput: 0.00856319310045 Mbps
+Average Throughput: 0.0085284218987 Mbps
+Batch received in 0.149934053421 seconds.
+Throughput: 0.0085637650067 Mbps
+Average Throughput: 0.00852854285315 Mbps
+Batch received in 0.14995598793 seconds.
+Throughput: 0.00856251235927 Mbps
+Average Throughput: 0.00852865872712 Mbps
+Batch received in 0.149965047836 seconds.
+Throughput: 0.00856199506835 Mbps
+Average Throughput: 0.00852877206155 Mbps
+Batch received in 0.149887084961 seconds.
+Throughput: 0.00856644853914 Mbps
+Average Throughput: 0.00852889965112 Mbps
+Batch received in 0.149981021881 seconds.
+Throughput: 0.00856108315503 Mbps
+Average Throughput: 0.008529008339 Mbps
+Batch received in 0.149888038635 seconds.
+Throughput: 0.00856639403445 Mbps
+Average Throughput: 0.00852913409266 Mbps
+Batch received in 0.150574922562 seconds.
+Throughput: 0.00852731635624 Mbps
+Average Throughput: 0.00852912797104 Mbps
+Batch received in 0.149574995041 seconds.
+Throughput: 0.00858432253097 Mbps
+Average Throughput: 0.00852931200077 Mbps
+Batch received in 0.149667978287 seconds.
+Throughput: 0.00857898940507 Mbps
+Average Throughput: 0.00852947718705 Mbps
+Batch received in 0.149905920029 seconds.
+Throughput: 0.00856537219981 Mbps
+Average Throughput: 0.00852959633734 Mbps
+Batch received in 0.150002002716 seconds.
+Throughput: 0.0085598857132 Mbps
+Average Throughput: 0.0085296966116 Mbps
+Batch received in 0.149865865707 seconds.
+Throughput: 0.00856766144805 Mbps
+Average Throughput: 0.00852982176776 Mbps
+Batch received in 0.150279045105 seconds.
+Throughput: 0.00854410539475 Mbps
+Average Throughput: 0.0085298688299 Mbps
+Batch received in 0.149624109268 seconds.
+Throughput: 0.0085815047206 Mbps
+Average Throughput: 0.00853003766611 Mbps
+Batch received in 0.150032043457 seconds.
+Throughput: 0.00855817177727 Mbps
+Average Throughput: 0.00853012960685 Mbps
+Batch received in 0.14982008934 seconds.
+Throughput: 0.00857027923061 Mbps
+Average Throughput: 0.00853026020209 Mbps
+Batch received in 0.150227069855 seconds.
+Throughput: 0.00854706146663 Mbps
+Average Throughput: 0.00853031482211 Mbps
+Batch received in 0.149682044983 seconds.
+Throughput: 0.00857818317586 Mbps
+Average Throughput: 0.00853046937438 Mbps
+Batch received in 0.149937152863 seconds.
+Throughput: 0.00856358797994 Mbps
+Average Throughput: 0.00853057614116 Mbps
+Batch received in 0.149900913239 seconds.
+Throughput: 0.00856565828893 Mbps
+Average Throughput: 0.00853068884737 Mbps
+Batch received in 0.149976968765 seconds.
+Throughput: 0.00856131451763 Mbps
+Average Throughput: 0.00853078697105 Mbps
+Batch received in 0.149893045425 seconds.
+Throughput: 0.00856610789617 Mbps
+Average Throughput: 0.00853089971384 Mbps
+Batch received in 0.149939060211 seconds.
+Throughput: 0.00856347904403 Mbps
+Average Throughput: 0.00853100340642 Mbps
+Batch received in 0.150129079819 seconds.
+Throughput: 0.00855264017837 Mbps
+Average Throughput: 0.00853107213957 Mbps
+Batch received in 0.149600982666 seconds.
+Throughput: 0.00858283132315 Mbps
+Average Throughput: 0.00853123546666 Mbps
+Batch received in 0.149991035461 seconds.
+Throughput: 0.00856051160691 Mbps
+Average Throughput: 0.00853132779683 Mbps
+Batch received in 0.150012969971 seconds.
+Throughput: 0.008559259911 Mbps
+Average Throughput: 0.00853141562411 Mbps
+Batch received in 0.149564027786 seconds.
+Throughput: 0.00858495200353 Mbps
+Average Throughput: 0.00853158293092 Mbps
+Batch received in 0.150009870529 seconds.
+Throughput: 0.00855943675887 Mbps
+Average Throughput: 0.00853166996374 Mbps
+Batch received in 0.1498939991 seconds.
+Throughput: 0.00856605339581 Mbps
+Average Throughput: 0.00853177698202 Mbps
+Batch received in 0.150008916855 seconds.
+Throughput: 0.00855949117506 Mbps
+Average Throughput: 0.0085318630404 Mbps
+Batch received in 0.149819135666 seconds.
+Throughput: 0.00857033378475 Mbps
+Average Throughput: 0.00853198198012 Mbps
+Batch received in 0.150219202042 seconds.
+Throughput: 0.00854750912366 Mbps
+Average Throughput: 0.00853202996471 Mbps
+Batch received in 0.149674892426 seconds.
+Throughput: 0.00857859310398 Mbps
+Average Throughput: 0.00853217290045 Mbps
+Batch received in 0.150217056274 seconds.
+Throughput: 0.00854763122008 Mbps
+Average Throughput: 0.00853222037875 Mbps
+Batch received in 0.149628162384 seconds.
+Throughput: 0.00858127226547 Mbps
+Average Throughput: 0.0085323699872 Mbps
+Batch received in 0.14994597435 seconds.
+Throughput: 0.00856308417459 Mbps
+Average Throughput: 0.00853246357851 Mbps
+Batch received in 0.149940013885 seconds.
+Throughput: 0.00856342457711 Mbps
+Average Throughput: 0.00853255763155 Mbps
+Batch received in 0.15012216568 seconds.
+Throughput: 0.00855303408517 Mbps
+Average Throughput: 0.00853261972146 Mbps
+Batch received in 0.149786949158 seconds.
+Throughput: 0.00857217539459 Mbps
+Average Throughput: 0.0085327390357 Mbps
+Batch received in 0.150162935257 seconds.
+Throughput: 0.00855071191704 Mbps
+Average Throughput: 0.00853279322064 Mbps
+Batch received in 0.149640083313 seconds.
+Throughput: 0.00858058864692 Mbps
+Average Throughput: 0.00853293638328 Mbps
+Batch received in 0.150213956833 seconds.
+Throughput: 0.00854780758774 Mbps
+Average Throughput: 0.00853298096409 Mbps
+Batch received in 0.149677038193 seconds.
+Throughput: 0.00857847012143 Mbps
+Average Throughput: 0.00853311643912 Mbps
+Batch received in 0.14990901947 seconds.
+Throughput: 0.00856519510659 Mbps
+Average Throughput: 0.00853321183877 Mbps
+Batch received in 0.149971008301 seconds.
+Throughput: 0.00856165477947 Mbps
+Average Throughput: 0.00853329620999 Mbps
+Batch received in 0.149940013885 seconds.
+Throughput: 0.00856342457711 Mbps
+Average Throughput: 0.00853338529806 Mbps
+Batch received in 0.149971008301 seconds.
+Throughput: 0.00856165477947 Mbps
+Average Throughput: 0.00853346866023 Mbps
+Batch received in 0.149899959564 seconds.
+Throughput: 0.00856571278427 Mbps
+Average Throughput: 0.00853356341865 Mbps
+Batch received in 0.149931907654 seconds.
+Throughput: 0.00856388756798 Mbps
+Average Throughput: 0.00853365229244 Mbps
+Batch received in 0.150113105774 seconds.
+Throughput: 0.00855355029383 Mbps
+Average Throughput: 0.008533710509 Mbps
+Batch received in 0.149722099304 seconds.
+Throughput: 0.00857588830218 Mbps
+Average Throughput: 0.00853383323111 Mbps
+Batch received in 0.150623083115 seconds.
+Throughput: 0.00852458981352 Mbps
+Average Throughput: 0.00853380625323 Mbps
+Batch received in 0.149233102798 seconds.
+Throughput: 0.0086039891681 Mbps
+Average Throughput: 0.00853400861393 Mbps
+Batch received in 0.149996995926 seconds.
+Throughput: 0.00856017143593 Mbps
+Average Throughput: 0.0085340842171 Mbps
+Batch received in 0.149812936783 seconds.
+Throughput: 0.00857068840364 Mbps
+Average Throughput: 0.00853418955902 Mbps
+Batch received in 0.150228023529 seconds.
+Throughput: 0.00854700720836 Mbps
+Average Throughput: 0.00853422644225 Mbps
+Batch received in 0.149678945541 seconds.
+Throughput: 0.00857836080656 Mbps
+Average Throughput: 0.00853435261452 Mbps
+Batch received in 0.150423049927 seconds.
+Throughput: 0.00853592584797 Mbps
+Average Throughput: 0.00853435712152 Mbps
+Batch received in 0.149203062057 seconds.
+Throughput: 0.00860572150661 Mbps
+Average Throughput: 0.0085345593337 Mbps
+Batch received in 0.150497913361 seconds.
+Throughput: 0.00853167975109 Mbps
+Average Throughput: 0.008534551127 Mbps
+Batch received in 0.149281978607 seconds.
+Throughput: 0.00860117217081 Mbps
+Average Throughput: 0.0085347389295 Mbps
+Batch received in 0.1502161026 seconds.
+Throughput: 0.00854768548628 Mbps
+Average Throughput: 0.0085347755499 Mbps
+Batch received in 0.14954996109 seconds.
+Throughput: 0.00858575950566 Mbps
+Average Throughput: 0.00853491871954 Mbps
+Batch received in 0.149919986725 seconds.
+Throughput: 0.00856456852785 Mbps
+Average Throughput: 0.0085350019518 Mbps
+Batch received in 0.150230169296 seconds.
+Throughput: 0.00854688512976 Mbps
+Average Throughput: 0.00853503528523 Mbps
+Batch received in 0.149691820145 seconds.
+Throughput: 0.00857762300411 Mbps
+Average Throughput: 0.00853515398793 Mbps
+Batch received in 0.149891138077 seconds.
+Throughput: 0.00856621689898 Mbps
+Average Throughput: 0.00853524044207 Mbps
+Batch received in 0.149934053421 seconds.
+Throughput: 0.0085637650067 Mbps
+Average Throughput: 0.00853531963376 Mbps
+Batch received in 0.149954080582 seconds.
+Throughput: 0.00856262127059 Mbps
+Average Throughput: 0.00853539523051 Mbps
+Batch received in 0.149927139282 seconds.
+Throughput: 0.00856415993894 Mbps
+Average Throughput: 0.00853547464425 Mbps
+Batch received in 0.149974107742 seconds.
+Throughput: 0.00856147783994 Mbps
+Average Throughput: 0.00853554625872 Mbps
+Batch received in 0.149941921234 seconds.
+Throughput: 0.00856331564536 Mbps
+Average Throughput: 0.00853562251101 Mbps
+Batch received in 0.149868965149 seconds.
+Throughput: 0.00856748426016 Mbps
+Average Throughput: 0.00853570971865 Mbps
+Batch received in 0.149938106537 seconds.
+Throughput: 0.00856353351164 Mbps
+Average Throughput: 0.00853578570122 Mbps
+Batch received in 0.149950027466 seconds.
+Throughput: 0.00856285271633 Mbps
+Average Throughput: 0.00853585942169 Mbps
+Batch received in 0.149958848953 seconds.
+Throughput: 0.00856234899749 Mbps
+Average Throughput: 0.00853593137767 Mbps
+Batch received in 0.149966001511 seconds.
+Throughput: 0.00856194062032 Mbps
+Average Throughput: 0.00853600184084 Mbps
+Batch received in 0.149915933609 seconds.
+Throughput: 0.00856480007888 Mbps
+Average Throughput: 0.00853607962314 Mbps
+Batch received in 0.14997792244 seconds.
+Throughput: 0.00856126007824 Mbps
+Average Throughput: 0.0085361474788 Mbps
+Batch received in 0.149886131287 seconds.
+Throughput: 0.00856650304453 Mbps
+Average Throughput: 0.00853622901058 Mbps
+Batch received in 0.149936914444 seconds.
+Throughput: 0.00856360159712 Mbps
+Average Throughput: 0.00853630235823 Mbps
+Batch received in 0.149937152863 seconds.
+Throughput: 0.00856358797994 Mbps
+Average Throughput: 0.00853637527758 Mbps
+Batch received in 0.149942159653 seconds.
+Throughput: 0.00856330202909 Mbps
+Average Throughput: 0.00853644704845 Mbps
+Batch received in 0.149956941605 seconds.
+Throughput: 0.00856245790465 Mbps
+Average Throughput: 0.00853651620059 Mbps
+Batch received in 0.150028944016 seconds.
+Throughput: 0.00855834858017 Mbps
+Average Throughput: 0.0085365741177 Mbps
+Batch received in 0.191874027252 seconds.
+Throughput: 0.00669189060337 Mbps
+Average Throughput: 0.00853033680004 Mbps
+Batch received in 0.147902965546 seconds.
+Throughput: 0.00868136751189 Mbps
+Average Throughput: 0.00853072941921 Mbps
+Batch received in 0.149907112122 seconds.
+Throughput: 0.00856530408616 Mbps
+Average Throughput: 0.00853082027797 Mbps
+Batch received in 0.149969100952 seconds.
+Throughput: 0.00856176366897 Mbps
+Average Throughput: 0.00853090141442 Mbps
+Batch received in 0.150012016296 seconds.
+Throughput: 0.00855931432495 Mbps
+Average Throughput: 0.00853097574208 Mbps
+Batch received in 0.149878978729 seconds.
+Throughput: 0.00856691185706 Mbps
+Average Throughput: 0.00853106942209 Mbps
+Batch received in 0.149946928024 seconds.
+Throughput: 0.0085630297127 Mbps
+Average Throughput: 0.00853115255868 Mbps
+Batch received in 0.150118112564 seconds.
+Throughput: 0.00855326501292 Mbps
+Average Throughput: 0.00853120999471 Mbps
+Batch received in 0.149661064148 seconds.
+Throughput: 0.00857938574278 Mbps
+Average Throughput: 0.00853133442569 Mbps
+Batch received in 0.14996099472 seconds.
+Throughput: 0.00856222648025 Mbps
+Average Throughput: 0.00853141416892 Mbps
+Batch received in 0.149955034256 seconds.
+Throughput: 0.00856256681458 Mbps
+Average Throughput: 0.00853149437459 Mbps
+Batch received in 0.149996995926 seconds.
+Throughput: 0.00856017143593 Mbps
+Average Throughput: 0.00853156803758 Mbps
+Batch received in 0.149852991104 seconds.
+Throughput: 0.00856839753774 Mbps
+Average Throughput: 0.00853166230905 Mbps
+Batch received in 0.150149822235 seconds.
+Throughput: 0.00855145867565 Mbps
+Average Throughput: 0.00853171295175 Mbps
+Batch received in 0.149770021439 seconds.
+Throughput: 0.00857314426256 Mbps
+Average Throughput: 0.00853181840341 Mbps
+Batch received in 0.14999294281 seconds.
+Throughput: 0.00856040274925 Mbps
+Average Throughput: 0.00853189107979 Mbps
+Batch received in 0.150205850601 seconds.
+Throughput: 0.0085482688914 Mbps
+Average Throughput: 0.00853193267397 Mbps
+Batch received in 0.149562835693 seconds.
+Throughput: 0.00858502043003 Mbps
+Average Throughput: 0.00853206658336 Mbps
+Batch received in 0.14996099472 seconds.
+Throughput: 0.00856222648025 Mbps
+Average Throughput: 0.00853214266926 Mbps
+Batch received in 0.15021109581 seconds.
+Throughput: 0.00854797039511 Mbps
+Average Throughput: 0.00853218256444 Mbps
+Batch received in 0.149671077728 seconds.
+Throughput: 0.00857881174833 Mbps
+Average Throughput: 0.0085322993815 Mbps
+Batch received in 0.149874210358 seconds.
+Throughput: 0.00856718442043 Mbps
+Average Throughput: 0.00853238667633 Mbps
+Batch received in 0.149956941605 seconds.
+Throughput: 0.00856245790465 Mbps
+Average Throughput: 0.00853246177879 Mbps
+Batch received in 0.149935007095 seconds.
+Throughput: 0.00856371053615 Mbps
+Average Throughput: 0.00853253961633 Mbps
+Batch received in 0.149983882904 seconds.
+Throughput: 0.00856091984778 Mbps
+Average Throughput: 0.00853261015594 Mbps
+Batch received in 0.149936914444 seconds.
+Throughput: 0.00856360159712 Mbps
+Average Throughput: 0.00853268697077 Mbps
+Batch received in 0.150125026703 seconds.
+Throughput: 0.00855287108485 Mbps
+Average Throughput: 0.00853273693752 Mbps
+Batch received in 0.149760961533 seconds.
+Throughput: 0.0085736629016 Mbps
+Average Throughput: 0.00853283775704 Mbps
+Batch received in 0.150118112564 seconds.
+Throughput: 0.00855326501292 Mbps
+Average Throughput: 0.00853288807455 Mbps
+Batch received in 0.149826049805 seconds.
+Throughput: 0.00856993828292 Mbps
+Average Throughput: 0.00853297893766 Mbps
+Batch received in 0.149863958359 seconds.
+Throughput: 0.00856777049039 Mbps
+Average Throughput: 0.00853306407431 Mbps
+Batch received in 0.149958133698 seconds.
+Throughput: 0.00856238983735 Mbps
+Average Throughput: 0.00853313570561 Mbps
+Batch received in 0.149931907654 seconds.
+Throughput: 0.00856388756798 Mbps
+Average Throughput: 0.00853321062421 Mbps
+Batch received in 0.149958848953 seconds.
+Throughput: 0.00856234899749 Mbps
+Average Throughput: 0.00853328145214 Mbps
+Batch received in 0.14994096756 seconds.
+Throughput: 0.00856337011089 Mbps
+Average Throughput: 0.00853335440395 Mbps
+Batch received in 0.150008916855 seconds.
+Throughput: 0.00855949117506 Mbps
+Average Throughput: 0.00853341764947 Mbps
+Batch received in 0.149932861328 seconds.
+Throughput: 0.00856383309587 Mbps
+Average Throughput: 0.00853349103369 Mbps
+Batch received in 0.14998292923 seconds.
+Throughput: 0.00856097428283 Mbps
+Average Throughput: 0.00853355720575 Mbps
+Batch received in 0.149863958359 seconds.
+Throughput: 0.00856777049039 Mbps
+Average Throughput: 0.00853363931898 Mbps
+Batch received in 0.150015830994 seconds.
+Throughput: 0.0085590966733 Mbps
+Average Throughput: 0.00853370033297 Mbps
+Batch received in 0.149928092957 seconds.
+Throughput: 0.00856410546336 Mbps
+Average Throughput: 0.0085337729887 Mbps
+Batch received in 0.149908065796 seconds.
+Throughput: 0.00856524959603 Mbps
+Average Throughput: 0.00853384801552 Mbps
+Batch received in 0.149890899658 seconds.
+Throughput: 0.00856623052452 Mbps
+Average Throughput: 0.00853392500928 Mbps
+Batch received in 0.14994096756 seconds.
+Throughput: 0.00856337011089 Mbps
+Average Throughput: 0.00853399487617 Mbps
+Batch received in 0.14997792244 seconds.
+Throughput: 0.00856126007824 Mbps
+Average Throughput: 0.00853405943336 Mbps
+Batch received in 0.149949073792 seconds.
+Throughput: 0.00856290717597 Mbps
+Average Throughput: 0.00853412756318 Mbps
+Batch received in 0.149880886078 seconds.
+Throughput: 0.00856680283657 Mbps
+Average Throughput: 0.00853420451576 Mbps
+Batch received in 0.14995598793 seconds.
+Throughput: 0.00856251235927 Mbps
+Average Throughput: 0.00853427105933 Mbps
+Batch received in 0.149917125702 seconds.
+Throughput: 0.00856473197434 Mbps
+Average Throughput: 0.00853434247777 Mbps
+Batch received in 0.150046825409 seconds.
+Throughput: 0.00855732866391 Mbps
+Average Throughput: 0.00853439629135 Mbps
+Batch received in 0.149945020676 seconds.
+Throughput: 0.00856313863718 Mbps
+Average Throughput: 0.00853446337823 Mbps
+Batch received in 0.14981508255 seconds.
+Throughput: 0.00857056564763 Mbps
+Average Throughput: 0.00853454737483 Mbps
+Batch received in 0.150286912918 seconds.
+Throughput: 0.00854365809417 Mbps
+Average Throughput: 0.00853456858935 Mbps
+Batch received in 0.149574041367 seconds.
+Throughput: 0.00858437726405 Mbps
+Average Throughput: 0.00853468375293 Mbps
+Batch received in 0.149968862534 seconds.
+Throughput: 0.00856177728035 Mbps
+Average Throughput: 0.00853474641648 Mbps
+Batch received in 0.149923801422 seconds.
+Throughput: 0.00856435060891 Mbps
+Average Throughput: 0.00853481470837 Mbps
+Batch received in 0.149976015091 seconds.
+Throughput: 0.00856136895771 Mbps
+Average Throughput: 0.0085348758448 Mbps
+Batch received in 0.149892091751 seconds.
+Throughput: 0.00856616239723 Mbps
+Average Throughput: 0.00853494767095 Mbps
+Batch received in 0.150145053864 seconds.
+Throughput: 0.00855173025658 Mbps
+Average Throughput: 0.00853498617606 Mbps
+Batch received in 0.149859905243 seconds.
+Throughput: 0.00856800221459 Mbps
+Average Throughput: 0.00853506160979 Mbps
+Batch received in 0.149920940399 seconds.
+Throughput: 0.00856451404708 Mbps
+Average Throughput: 0.00853512877543 Mbps
+Batch received in 0.149854898453 seconds.
+Throughput: 0.00856828847944 Mbps
+Average Throughput: 0.00853520419019 Mbps
+Batch received in 0.149986028671 seconds.
+Throughput: 0.00856079737143 Mbps
+Average Throughput: 0.00853526231512 Mbps
+Batch received in 0.149884939194 seconds.
+Throughput: 0.00856657117724 Mbps
+Average Throughput: 0.00853533321215 Mbps
+Batch received in 0.150063037872 seconds.
+Throughput: 0.00855640414992 Mbps
+Average Throughput: 0.00853538087466 Mbps
+Batch received in 0.150112867355 seconds.
+Throughput: 0.00855356387911 Mbps
+Average Throughput: 0.00853542192542 Mbps
+Batch received in 0.149678945541 seconds.
+Throughput: 0.00857836080656 Mbps
+Average Throughput: 0.00853551836884 Mbps
+Batch received in 0.150017023087 seconds.
+Throughput: 0.00855902865943 Mbps
+Average Throughput: 0.00853557117482 Mbps
+Batch received in 0.150038957596 seconds.
+Throughput: 0.00855777739711 Mbps
+Average Throughput: 0.00853562094725 Mbps
+Batch received in 0.149651050568 seconds.
+Throughput: 0.00857995981405 Mbps
+Average Throughput: 0.00853571984915 Mbps
+Batch received in 0.149932861328 seconds.
+Throughput: 0.00856383309587 Mbps
+Average Throughput: 0.00853578253631 Mbps
+Batch received in 0.150008916855 seconds.
+Throughput: 0.00855949117506 Mbps
+Average Throughput: 0.00853583531112 Mbps
+Batch received in 0.149966001511 seconds.
+Throughput: 0.00856194062032 Mbps
+Average Throughput: 0.00853589327525 Mbps
+Batch received in 0.149852991104 seconds.
+Throughput: 0.00856839753774 Mbps
+Average Throughput: 0.00853596523354 Mbps
+Batch received in 0.149949073792 seconds.
+Throughput: 0.00856290717597 Mbps
+Average Throughput: 0.00853602478423 Mbps
+Batch received in 0.149944067001 seconds.
+Throughput: 0.00856319310045 Mbps
+Average Throughput: 0.00853608470084 Mbps
+Batch received in 0.149983882904 seconds.
+Throughput: 0.00856091984778 Mbps
+Average Throughput: 0.00853613936587 Mbps
+Batch received in 0.149924039841 seconds.
+Throughput: 0.00856433698935 Mbps
+Average Throughput: 0.00853620127113 Mbps
+Batch received in 0.149978160858 seconds.
+Throughput: 0.00856124646851 Mbps
+Average Throughput: 0.00853625615485 Mbps
+Batch received in 0.149830102921 seconds.
+Throughput: 0.00856970645399 Mbps
+Average Throughput: 0.00853632922506 Mbps
+Batch received in 0.149919033051 seconds.
+Throughput: 0.00856462300932 Mbps
+Average Throughput: 0.00853639093298 Mbps
+Batch received in 0.14999294281 seconds.
+Throughput: 0.00856040274925 Mbps
+Average Throughput: 0.00853644321378 Mbps
+Batch received in 0.149924993515 seconds.
+Throughput: 0.00856428251152 Mbps
+Average Throughput: 0.00853650366912 Mbps
+Batch received in 0.150206804276 seconds.
+Throughput: 0.00854821461779 Mbps
+Average Throughput: 0.0085365290929 Mbps
+Batch received in 0.149812936783 seconds.
+Throughput: 0.00857068840364 Mbps
+Average Throughput: 0.0085366028965 Mbps
+Batch received in 0.149785041809 seconds.
+Throughput: 0.00857228455186 Mbps
+Average Throughput: 0.00853667980874 Mbps
+Batch received in 0.149936914444 seconds.
+Throughput: 0.00856360159712 Mbps
+Average Throughput: 0.00853673777274 Mbps
+Batch received in 0.150098085403 seconds.
+Throughput: 0.00855440625074 Mbps
+Average Throughput: 0.00853677577288 Mbps
+Batch received in 0.149760961533 seconds.
+Throughput: 0.0085736629016 Mbps
+Average Throughput: 0.00853685475948 Mbps
+Batch received in 0.149860858917 seconds.
+Throughput: 0.00856794769012 Mbps
+Average Throughput: 0.00853692124088 Mbps
+Batch received in 0.149956941605 seconds.
+Throughput: 0.00856245790465 Mbps
+Average Throughput: 0.00853697576051 Mbps
+Batch received in 0.149920940399 seconds.
+Throughput: 0.00856451404708 Mbps
+Average Throughput: 0.0085370344142 Mbps
+Batch received in 0.150020122528 seconds.
+Throughput: 0.00855885182843 Mbps
+Average Throughput: 0.00853708081488 Mbps
+Batch received in 0.149860143661 seconds.
+Throughput: 0.00856798858341 Mbps
+Average Throughput: 0.00853714633937 Mbps
+Batch received in 0.149932146072 seconds.
+Throughput: 0.00856387394989 Mbps
+Average Throughput: 0.00853720290916 Mbps
+Batch received in 0.149971008301 seconds.
+Throughput: 0.00856165477947 Mbps
+Average Throughput: 0.00853725456633 Mbps
+Batch received in 0.149976968765 seconds.
+Throughput: 0.00856131451763 Mbps
+Average Throughput: 0.00853730529038 Mbps
+Batch received in 0.149878025055 seconds.
+Throughput: 0.00856696636835 Mbps
+Average Throughput: 0.0085373676503 Mbps
+Batch received in 0.150006055832 seconds.
+Throughput: 0.00855965442781 Mbps
+Average Throughput: 0.00853741444792 Mbps
+Batch received in 0.149901151657 seconds.
+Throughput: 0.00856564466521 Mbps
+Average Throughput: 0.00853747356005 Mbps
+Batch received in 0.149978876114 seconds.
+Throughput: 0.00856120563955 Mbps
+Average Throughput: 0.00853752317521 Mbps
+Batch received in 0.149911880493 seconds.
+Throughput: 0.00856503164243 Mbps
+Average Throughput: 0.00853758053986 Mbps
+Batch received in 0.149917840958 seconds.
+Throughput: 0.00856469111213 Mbps
+Average Throughput: 0.00853763695935 Mbps
+Batch received in 0.149920940399 seconds.
+Throughput: 0.00856451404708 Mbps
+Average Throughput: 0.00853769277792 Mbps
+Batch received in 0.149968147278 seconds.
+Throughput: 0.00856181811476 Mbps
+Average Throughput: 0.00853774279351 Mbps
+Batch received in 0.149861097336 seconds.
+Throughput: 0.00856793405912 Mbps
+Average Throughput: 0.00853780521073 Mbps
+Batch received in 0.150080919266 seconds.
+Throughput: 0.00855538469701 Mbps
+Average Throughput: 0.00853784153255 Mbps
+Batch received in 0.149900913239 seconds.
+Throughput: 0.00856565828893 Mbps
+Average Throughput: 0.00853789881893 Mbps
+Batch received in 0.150050163269 seconds.
+Throughput: 0.00855713830646 Mbps
+Average Throughput: 0.00853793839897 Mbps
+Batch received in 0.149811983109 seconds.
+Throughput: 0.008570742963 Mbps
+Average Throughput: 0.00853800564025 Mbps
+Batch received in 0.150007963181 seconds.
+Throughput: 0.00855954559195 Mbps
+Average Throughput: 0.00853804975905 Mbps
+Batch received in 0.149954080582 seconds.
+Throughput: 0.00856262127059 Mbps
+Average Throughput: 0.00853809996632 Mbps
+Batch received in 0.149953126907 seconds.
+Throughput: 0.00856267572728 Mbps
+Average Throughput: 0.00853815007955 Mbps
+Batch received in 0.14982509613 seconds.
+Throughput: 0.00856999283273 Mbps
+Average Throughput: 0.00853821482379 Mbps
+Batch received in 0.150109052658 seconds.
+Throughput: 0.00855378124945 Mbps
+Average Throughput: 0.00853824646973 Mbps
+Batch received in 0.149797916412 seconds.
+Throughput: 0.0085715477942 Mbps
+Average Throughput: 0.00853831389291 Mbps
+Batch received in 0.150042057037 seconds.
+Throughput: 0.00855760061781 Mbps
+Average Throughput: 0.00853835292607 Mbps
+Batch received in 0.149840831757 seconds.
+Throughput: 0.00856909284971 Mbps
+Average Throughput: 0.00853841492986 Mbps
+Batch received in 0.149921894073 seconds.
+Throughput: 0.008564459567 Mbps
+Average Throughput: 0.0085384673856 Mbps
+Batch received in 0.149929046631 seconds.
+Throughput: 0.00856405098847 Mbps
+Average Throughput: 0.00853851881167 Mbps
+Batch received in 0.149966001511 seconds.
+Throughput: 0.00856194062032 Mbps
+Average Throughput: 0.00853856580939 Mbps
+Batch received in 0.14990401268 seconds.
+Throughput: 0.00856548118389 Mbps
+Average Throughput: 0.00853861968683 Mbps
+Batch received in 0.14994597435 seconds.
+Throughput: 0.00856308417459 Mbps
+Average Throughput: 0.00853866857407 Mbps
+Batch received in 0.149981975555 seconds.
+Throughput: 0.00856102871858 Mbps
+Average Throughput: 0.00853871317779 Mbps
+Batch received in 0.149961233139 seconds.
+Throughput: 0.00856221286744 Mbps
+Average Throughput: 0.00853875995488 Mbps
+Batch received in 0.149947881699 seconds.
+Throughput: 0.0085629752515 Mbps
+Average Throughput: 0.00853880805638 Mbps
+Batch received in 0.149896144867 seconds.
+Throughput: 0.00856593077253 Mbps
+Average Throughput: 0.00853886180789 Mbps
+Batch received in 0.14990901947 seconds.
+Throughput: 0.00856519510659 Mbps
+Average Throughput: 0.00853891389618 Mbps
+Batch received in 0.149979114532 seconds.
+Throughput: 0.00856119202999 Mbps
+Average Throughput: 0.00853895789672 Mbps
+Batch received in 0.150183916092 seconds.
+Throughput: 0.00854951737451 Mbps
+Average Throughput: 0.00853897873953 Mbps
+Batch received in 0.149646997452 seconds.
+Throughput: 0.00858019219807 Mbps
+Average Throughput: 0.00853905963872 Mbps
+Batch received in 0.149937868118 seconds.
+Throughput: 0.00856354712865 Mbps
+Average Throughput: 0.00853910770487 Mbps
+Batch received in 0.149965047836 seconds.
+Throughput: 0.00856199506835 Mbps
+Average Throughput: 0.00853915255026 Mbps
+Batch received in 0.149912834167 seconds.
+Throughput: 0.00856497715576 Mbps
+Average Throughput: 0.00853920303436 Mbps
+Batch received in 0.149941921234 seconds.
+Throughput: 0.00856331564536 Mbps
+Average Throughput: 0.00853925008886 Mbps
+Batch received in 0.149942874908 seconds.
+Throughput: 0.00856326118053 Mbps
+Average Throughput: 0.00853929685428 Mbps
+Batch received in 0.149993181229 seconds.
+Throughput: 0.00856038914224 Mbps
+Average Throughput: 0.00853933786874 Mbps
+Batch received in 0.149856805801 seconds.
+Throughput: 0.00856817942391 Mbps
+Average Throughput: 0.0085393937922 Mbps
+Batch received in 0.149964094162 seconds.
+Throughput: 0.00856204951709 Mbps
+Average Throughput: 0.00853943766772 Mbps
+Batch received in 0.149966001511 seconds.
+Throughput: 0.00856194062032 Mbps
+Average Throughput: 0.0085394811637 Mbps
+Batch received in 0.149974107742 seconds.
+Throughput: 0.00856147783994 Mbps
+Average Throughput: 0.00853952360136 Mbps
+Batch received in 0.149887084961 seconds.
+Throughput: 0.00856644853914 Mbps
+Average Throughput: 0.00853957541694 Mbps
+Batch received in 0.149927139282 seconds.
+Throughput: 0.00856415993894 Mbps
+Average Throughput: 0.00853962265025 Mbps
+Batch received in 0.149927854538 seconds.
+Throughput: 0.00856411908219 Mbps
+Average Throughput: 0.00853966962428 Mbps
+Batch received in 0.149958133698 seconds.
+Throughput: 0.00856238983735 Mbps
+Average Throughput: 0.00853971311764 Mbps
+Batch received in 0.149919033051 seconds.
+Throughput: 0.00856462300932 Mbps
+Average Throughput: 0.00853976069921 Mbps
+Batch received in 0.149930953979 seconds.
+Throughput: 0.00856394204079 Mbps
+Average Throughput: 0.00853980680474 Mbps
+Batch received in 0.15042591095 seconds.
+Throughput: 0.00853576349908 Mbps
+Average Throughput: 0.00853979908486 Mbps
+Batch received in 0.149348020554 seconds.
+Throughput: 0.00859736871798 Mbps
+Average Throughput: 0.00853990800842 Mbps
+Batch received in 0.150243997574 seconds.
+Throughput: 0.00854609848469 Mbps
+Average Throughput: 0.00853991976887 Mbps
+Batch received in 0.149646043777 seconds.
+Throughput: 0.00858024687849 Mbps
+Average Throughput: 0.00853999593193 Mbps
+Batch received in 0.149927854538 seconds.
+Throughput: 0.00856411908219 Mbps
+Average Throughput: 0.00854004149126 Mbps
+Batch received in 0.149964094162 seconds.
+Throughput: 0.00856204951709 Mbps
+Average Throughput: 0.0085400829876 Mbps
+Batch received in 0.149914979935 seconds.
+Throughput: 0.0085648545633 Mbps
+Average Throughput: 0.0085401295915 Mbps
+Batch received in 0.150290966034 seconds.
+Throughput: 0.00854342768487 Mbps
+Average Throughput: 0.0085401358002 Mbps
+Batch received in 0.149569034576 seconds.
+Throughput: 0.00858466462417 Mbps
+Average Throughput: 0.00854021906766 Mbps
+Batch received in 0.149967908859 seconds.
+Throughput: 0.00856183172631 Mbps
+Average Throughput: 0.00854025951457 Mbps
+Batch received in 0.280774116516 seconds.
+Throughput: 0.00457307110759 Mbps
+Average Throughput: 0.0085264079216 Mbps
+Batch received in 0.149040937424 seconds.
+Throughput: 0.00861508268933 Mbps
+Average Throughput: 0.00852657196596 Mbps
+Batch received in 0.149961948395 seconds.
+Throughput: 0.00856217202927 Mbps
+Average Throughput: 0.00852663810834 Mbps
+Batch received in 0.149939060211 seconds.
+Throughput: 0.00856347904403 Mbps
+Average Throughput: 0.00852670641884 Mbps
+Batch received in 0.149956941605 seconds.
+Throughput: 0.00856245790465 Mbps
+Average Throughput: 0.00852677259446 Mbps
+Batch received in 0.149893045425 seconds.
+Throughput: 0.00856610789617 Mbps
+Average Throughput: 0.00852684523826 Mbps
+Batch received in 0.150037050247 seconds.
+Throughput: 0.00855788618801 Mbps
+Average Throughput: 0.00852690251339 Mbps
+Batch received in 0.150403022766 seconds.
+Throughput: 0.00853706246314 Mbps
+Average Throughput: 0.00852692127102 Mbps
+Batch received in 0.149363994598 seconds.
+Throughput: 0.0085964492544 Mbps
+Average Throughput: 0.0085270485158 Mbps
+Batch received in 0.149914979935 seconds.
+Throughput: 0.0085648545633 Mbps
+Average Throughput: 0.00852711783344 Mbps
+Batch received in 0.149960041046 seconds.
+Throughput: 0.00856228093192 Mbps
+Average Throughput: 0.00852718220652 Mbps
+Batch received in 0.150100946426 seconds.
+Throughput: 0.00855424319812 Mbps
+Average Throughput: 0.00852723170292 Mbps
+Batch received in 0.149765014648 seconds.
+Throughput: 0.00857343087112 Mbps
+Average Throughput: 0.00852731586166 Mbps
+Batch received in 0.1500248909 seconds.
+Throughput: 0.00855857979499 Mbps
+Average Throughput: 0.00852737280853 Mbps
+Batch received in 0.149879932404 seconds.
+Throughput: 0.00856685734647 Mbps
+Average Throughput: 0.00852744452912 Mbps
+Batch received in 0.150104999542 seconds.
+Throughput: 0.00855401221755 Mbps
+Average Throughput: 0.00852749277197 Mbps
+Batch received in 0.149669885635 seconds.
+Throughput: 0.00857888007697 Mbps
+Average Throughput: 0.00852758564479 Mbps
+Batch received in 0.149886846542 seconds.
+Throughput: 0.00856646216543 Mbps
+Average Throughput: 0.00852765588147 Mbps
+Batch received in 0.149842023849 seconds.
+Throughput: 0.00856902467688 Mbps
+Average Throughput: 0.00852773046378 Mbps
+Batch received in 0.150031089783 seconds.
+Throughput: 0.00855822617738 Mbps
+Average Throughput: 0.00852778541359 Mbps
+Batch received in 0.149938106537 seconds.
+Throughput: 0.00856353351164 Mbps
+Average Throughput: 0.00852784967196 Mbps
+Batch received in 0.149871110916 seconds.
+Throughput: 0.00856736159591 Mbps
+Average Throughput: 0.00852792053687 Mbps
+Batch received in 0.149955034256 seconds.
+Throughput: 0.00856256681458 Mbps
+Average Throughput: 0.00852798259864 Mbps
+Batch received in 0.149898052216 seconds.
+Throughput: 0.00856582177701 Mbps
+Average Throughput: 0.00852805023297 Mbps
+Batch received in 0.149873018265 seconds.
+Throughput: 0.00856725256398 Mbps
+Average Throughput: 0.00852812016714 Mbps
+Batch received in 0.149954080582 seconds.
+Throughput: 0.00856262127059 Mbps
+Average Throughput: 0.00852818163823 Mbps
+Batch received in 0.149981021881 seconds.
+Throughput: 0.00856108315503 Mbps
+Average Throughput: 0.00852824016554 Mbps
+Batch received in 0.149884939194 seconds.
+Throughput: 0.00856657117724 Mbps
+Average Throughput: 0.00852830818659 Mbps
+Batch received in 0.14995598793 seconds.
+Throughput: 0.00856251235927 Mbps
+Average Throughput: 0.00852836880541 Mbps
+Batch received in 0.149947166443 seconds.
+Throughput: 0.00856301609733 Mbps
+Average Throughput: 0.00852843009733 Mbps
+Batch received in 0.149930953979 seconds.
+Throughput: 0.00856394204079 Mbps
+Average Throughput: 0.00852849280114 Mbps
+Batch received in 0.150305986404 seconds.
+Throughput: 0.00854257392347 Mbps
+Average Throughput: 0.00852851768247 Mbps
+Batch received in 0.149557828903 seconds.
+Throughput: 0.00858530783321 Mbps
+Average Throughput: 0.00852861735589 Mbps
+Batch received in 0.149961948395 seconds.
+Throughput: 0.00856217202927 Mbps
+Average Throughput: 0.0085286763037 Mbps
+Batch received in 0.149979829788 seconds.
+Throughput: 0.00856115120155 Mbps
+Average Throughput: 0.00852873326131 Mbps
+Batch received in 0.149891853333 seconds.
+Throughput: 0.0085661760226 Mbps
+Average Throughput: 0.00852879877869 Mbps
+Batch received in 0.149960041046 seconds.
+Throughput: 0.00856228093192 Mbps
+Average Throughput: 0.00852885729001 Mbps
+Batch received in 0.149919986725 seconds.
+Throughput: 0.00856456852785 Mbps
+Average Throughput: 0.00852891957126 Mbps
+Batch received in 0.150168180466 seconds.
+Throughput: 0.00855041325012 Mbps
+Average Throughput: 0.00852895705333 Mbps
+Batch received in 0.149656772614 seconds.
+Throughput: 0.00857963176391 Mbps
+Average Throughput: 0.00852904496943 Mbps
+Batch received in 0.150104045868 seconds.
+Throughput: 0.0085540665648 Mbps
+Average Throughput: 0.00852908843377 Mbps
+Batch received in 0.149794101715 seconds.
+Throughput: 0.00857176607956 Mbps
+Average Throughput: 0.00852916228686 Mbps
+Batch received in 0.149953126907 seconds.
+Throughput: 0.00856267572728 Mbps
+Average Throughput: 0.00852922024259 Mbps
+Batch received in 0.150059938431 seconds.
+Throughput: 0.00855658087979 Mbps
+Average Throughput: 0.00852926751 Mbps
+Batch received in 0.149753093719 seconds.
+Throughput: 0.00857411334957 Mbps
+Average Throughput: 0.00852934469284 Mbps
+Batch received in 0.149930953979 seconds.
+Throughput: 0.00856394204079 Mbps
+Average Throughput: 0.00852940420549 Mbps
+Batch received in 0.149969100952 seconds.
+Throughput: 0.00856176366897 Mbps
+Average Throughput: 0.00852945978716 Mbps
+Batch received in 0.149899959564 seconds.
+Throughput: 0.00856571278427 Mbps
+Average Throughput: 0.00852952192111 Mbps
+Batch received in 0.149961948395 seconds.
+Throughput: 0.00856217202927 Mbps
+Average Throughput: 0.00852957780739 Mbps
+Batch received in 0.150097846985 seconds.
+Throughput: 0.00855441983874 Mbps
+Average Throughput: 0.00852962029455 Mbps
+Batch received in 0.149751901627 seconds.
+Throughput: 0.00857418160339 Mbps
+Average Throughput: 0.00852969620227 Mbps
+Batch received in 0.151129007339 seconds.
+Throughput: 0.00849605262817 Mbps
+Average Throughput: 0.00852963846455 Mbps
+Batch received in 0.148794174194 seconds.
+Throughput: 0.00862937011447 Mbps
+Average Throughput: 0.00852980669146 Mbps
+Batch received in 0.150648117065 seconds.
+Throughput: 0.00852317323981 Mbps
+Average Throughput: 0.00852979538208 Mbps
+Batch received in 0.149194955826 seconds.
+Throughput: 0.00860618908255 Mbps
+Average Throughput: 0.00852992415203 Mbps
+Batch received in 0.150134086609 seconds.
+Throughput: 0.00855235495817 Mbps
+Average Throughput: 0.00852996213518 Mbps
+Batch received in 0.149683952332 seconds.
+Throughput: 0.00857807386831 Mbps
+Average Throughput: 0.0085300432239 Mbps
+Batch received in 0.149932146072 seconds.
+Throughput: 0.00856387394989 Mbps
+Average Throughput: 0.00853010024133 Mbps
+Batch received in 0.149960041046 seconds.
+Throughput: 0.00856228093192 Mbps
+Average Throughput: 0.00853015439665 Mbps
+Batch received in 0.149880886078 seconds.
+Throughput: 0.00856680283657 Mbps
+Average Throughput: 0.00853021593446 Mbps
+Batch received in 0.149942159653 seconds.
+Throughput: 0.00856330202909 Mbps
+Average Throughput: 0.00853027142011 Mbps
+Batch received in 0.149924993515 seconds.
+Throughput: 0.00856428251152 Mbps
+Average Throughput: 0.00853032835498 Mbps
+Batch received in 0.149975061417 seconds.
+Throughput: 0.00856142339847 Mbps
+Average Throughput: 0.0085303803387 Mbps
+Batch received in 0.149907112122 seconds.
+Throughput: 0.00856530408616 Mbps
+Average Throughput: 0.00853043859931 Mbps
+Batch received in 0.150054931641 seconds.
+Throughput: 0.00855686638194 Mbps
+Average Throughput: 0.00853048265667 Mbps
+Batch received in 0.149817943573 seconds.
+Throughput: 0.00857040197841 Mbps
+Average Throughput: 0.00853054899005 Mbps
+Batch received in 0.150134086609 seconds.
+Throughput: 0.00855235495817 Mbps
+Average Throughput: 0.00853058524082 Mbps
+Batch received in 0.149735927582 seconds.
+Throughput: 0.00857509630946 Mbps
+Average Throughput: 0.0085306589187 Mbps
+Batch received in 0.149922132492 seconds.
+Throughput: 0.00856444594708 Mbps
+Average Throughput: 0.00853071482228 Mbps
+Batch received in 0.14993596077 seconds.
+Throughput: 0.00856365606629 Mbps
+Average Throughput: 0.00853076924142 Mbps
+Batch received in 0.15007019043 seconds.
+Throughput: 0.0085559963396 Mbps
+Average Throughput: 0.00853081088519 Mbps
+Batch received in 0.149779081345 seconds.
+Throughput: 0.00857262568627 Mbps
+Average Throughput: 0.008530879664 Mbps
+Batch received in 0.150156974792 seconds.
+Throughput: 0.00855105133661 Mbps
+Average Throughput: 0.00853091287219 Mbps
+Batch received in 0.14978313446 seconds.
+Throughput: 0.00857239371192 Mbps
+Average Throughput: 0.00853098087952 Mbps
+Batch received in 0.150218009949 seconds.
+Throughput: 0.00854757695458 Mbps
+Average Throughput: 0.00853100812278 Mbps
+Batch received in 0.149621963501 seconds.
+Throughput: 0.00858162779017 Mbps
+Average Throughput: 0.00853109075262 Mbps
+Batch received in 0.150240898132 seconds.
+Throughput: 0.0085462747891 Mbps
+Average Throughput: 0.00853111560033 Mbps
+Batch received in 0.149915933609 seconds.
+Throughput: 0.00856480007888 Mbps
+Average Throughput: 0.00853117051394 Mbps
+Batch received in 0.149919033051 seconds.
+Throughput: 0.00856462300932 Mbps
+Average Throughput: 0.00853122496173 Mbps
+Batch received in 0.14964389801 seconds.
+Throughput: 0.00858036991199 Mbps
+Average Throughput: 0.00853130467449 Mbps
+Batch received in 0.150115966797 seconds.
+Throughput: 0.00855338727384 Mbps
+Average Throughput: 0.00853134054694 Mbps
+Batch received in 0.149723052979 seconds.
+Throughput: 0.00857583367729 Mbps
+Average Throughput: 0.00853141251875 Mbps
+Batch received in 0.150031805038 seconds.
+Throughput: 0.00855818537723 Mbps
+Average Throughput: 0.00853145584544 Mbps
+Batch received in 0.149816989899 seconds.
+Throughput: 0.00857045653412 Mbps
+Average Throughput: 0.00853151876845 Mbps
+Batch received in 0.149968862534 seconds.
+Throughput: 0.00856177728035 Mbps
+Average Throughput: 0.00853156755768 Mbps
+Batch received in 0.149911165237 seconds.
+Throughput: 0.00856507250788 Mbps
+Average Throughput: 0.00853162147383 Mbps
+Batch received in 0.150269031525 seconds.
+Throughput: 0.00854467475415 Mbps
+Average Throughput: 0.0085316424954 Mbps
+Batch received in 0.149551153183 seconds.
+Throughput: 0.00858569106738 Mbps
+Average Throughput: 0.00853172898311 Mbps
+Batch received in 0.149951934814 seconds.
+Throughput: 0.00856274379913 Mbps
+Average Throughput: 0.00853177866584 Mbps
+Batch received in 0.149924993515 seconds.
+Throughput: 0.00856428251152 Mbps
+Average Throughput: 0.00853183064125 Mbps
+Batch received in 0.149981021881 seconds.
+Throughput: 0.00856108315503 Mbps
+Average Throughput: 0.00853187736036 Mbps
+Batch received in 0.149935007095 seconds.
+Throughput: 0.00856371053615 Mbps
+Average Throughput: 0.00853192810441 Mbps
+Batch received in 0.149950027466 seconds.
+Throughput: 0.00856285271633 Mbps
+Average Throughput: 0.00853197732662 Mbps
+Batch received in 0.149901151657 seconds.
+Throughput: 0.00856564466521 Mbps
+Average Throughput: 0.00853203081182 Mbps
+Batch received in 0.149981021881 seconds.
+Throughput: 0.00856108315503 Mbps
+Average Throughput: 0.00853207691677 Mbps
+Batch received in 0.149871110916 seconds.
+Throughput: 0.00856736159591 Mbps
+Average Throughput: 0.00853213278258 Mbps
+Batch received in 0.14998793602 seconds.
+Throughput: 0.00856068850651 Mbps
+Average Throughput: 0.00853217795817 Mbps
+Batch received in 0.150063037872 seconds.
+Throughput: 0.00855640414992 Mbps
+Average Throughput: 0.00853221624296 Mbps
+Batch received in 0.149823904037 seconds.
+Throughput: 0.00857006102096 Mbps
+Average Throughput: 0.00853227585993 Mbps
+Batch received in 0.150065898895 seconds.
+Throughput: 0.00855624102113 Mbps
+Average Throughput: 0.00853231361371 Mbps
+Batch received in 0.149791002274 seconds.
+Throughput: 0.00857194344461 Mbps
+Average Throughput: 0.0085323758328 Mbps
+Batch received in 0.149972915649 seconds.
+Throughput: 0.00856154589274 Mbps
+Average Throughput: 0.00853242161363 Mbps
+Batch received in 0.149931907654 seconds.
+Throughput: 0.00856388756798 Mbps
+Average Throughput: 0.0085324709069 Mbps
+Batch received in 0.149891853333 seconds.
+Throughput: 0.0085661760226 Mbps
+Average Throughput: 0.00853252361131 Mbps
+Batch received in 0.14997792244 seconds.
+Throughput: 0.00856126007824 Mbps
+Average Throughput: 0.00853256850184 Mbps
+Batch received in 0.149914979935 seconds.
+Throughput: 0.0085648545633 Mbps
+Average Throughput: 0.00853261883759 Mbps
+Batch received in 0.149962186813 seconds.
+Throughput: 0.00856215841663 Mbps
+Average Throughput: 0.0085326648342 Mbps
+Batch received in 0.150249004364 seconds.
+Throughput: 0.00854581370063 Mbps
+Average Throughput: 0.00853268531574 Mbps
+Batch received in 0.149597883224 seconds.
+Throughput: 0.00858300914641 Mbps
+Average Throughput: 0.00853276324289 Mbps
+Batch received in 0.149956226349 seconds.
+Throughput: 0.00856249874555 Mbps
+Average Throughput: 0.00853280932749 Mbps
+Batch received in 0.149923801422 seconds.
+Throughput: 0.00856435060891 Mbps
+Average Throughput: 0.00853285812453 Mbps
+Batch received in 0.150115013123 seconds.
+Throughput: 0.00855344161314 Mbps
+Average Throughput: 0.00853288996024 Mbps
+Batch received in 0.149771213531 seconds.
+Throughput: 0.00857307602525 Mbps
+Average Throughput: 0.00853295187663 Mbps
+Batch received in 0.149874925613 seconds.
+Throughput: 0.00856714353482 Mbps
+Average Throughput: 0.0085330045125 Mbps
+Batch received in 0.150006055832 seconds.
+Throughput: 0.00855965442781 Mbps
+Average Throughput: 0.00853304551106 Mbps
+Batch received in 0.14989900589 seconds.
+Throughput: 0.00856576728029 Mbps
+Average Throughput: 0.00853309573751 Mbps
+Batch received in 0.149968862534 seconds.
+Throughput: 0.00856177728035 Mbps
+Average Throughput: 0.00853313971537 Mbps
+Batch received in 0.149971008301 seconds.
+Throughput: 0.00856165477947 Mbps
+Average Throughput: 0.00853318337165 Mbps
+Batch received in 0.149908065796 seconds.
+Throughput: 0.00856524959603 Mbps
+Average Throughput: 0.00853323236913 Mbps
+Batch received in 0.149906873703 seconds.
+Throughput: 0.00856531770881 Mbps
+Average Throughput: 0.00853328132064 Mbps
+Batch received in 0.149925947189 seconds.
+Throughput: 0.00856422803438 Mbps
+Average Throughput: 0.00853332846904 Mbps
+Batch received in 0.149957895279 seconds.
+Throughput: 0.00856240345073 Mbps
+Average Throughput: 0.00853337270783 Mbps
+Batch received in 0.150007963181 seconds.
+Throughput: 0.00855954559195 Mbps
+Average Throughput: 0.0085334124837 Mbps
+Batch received in 0.150016069412 seconds.
+Throughput: 0.00855908307044 Mbps
+Average Throughput: 0.00853345143913 Mbps
+Batch received in 0.149737119675 seconds.
+Throughput: 0.00857502804107 Mbps
+Average Throughput: 0.00853351431955 Mbps
+Batch received in 0.149934053421 seconds.
+Throughput: 0.0085637650067 Mbps
+Average Throughput: 0.00853356006157 Mbps
+Batch received in 0.149971008301 seconds.
+Throughput: 0.00856165477947 Mbps
+Average Throughput: 0.00853360248985 Mbps
+Batch received in 0.149905204773 seconds.
+Throughput: 0.00856541306851 Mbps
+Average Throughput: 0.00853365043632 Mbps
+Batch receivedException in thread Thread-1:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/threading.py", line 810, in __bootstrap_inner
+    self.run()
+  File "/usr/lib/python2.7/threading.py", line 763, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "tests/scripts/server.py", line 25, in server_thread
+    total_size = batch_size = marshal.loads(data) + 4
+EOFError: EOF read where object expected
+
+Killing:8840
+All jobs done!

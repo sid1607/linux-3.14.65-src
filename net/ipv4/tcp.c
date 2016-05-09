@@ -652,7 +652,7 @@ static void tcp_push(struct sock *sk, int flags, int mss_now,
 		if (is_blocked) {
 			if (cl_ctr > 0 && cl_ctr < 10) {
 				cl_ctr++;
-				printk("tcp_push(%d): socket blocked\n", sk->sk_id);
+				// printk("tcp_push(%d): socket blocked\n", sk->sk_id);
 				// printk("tcp_push: flags(0x%x), mss_now(%d), nonagle(%d), size_goal(%d)\n", flags, mss_now, nonagle, size_goal);
 			}
 			return;

@@ -3185,7 +3185,7 @@ void cl_timer_callback( unsigned long data ) {
 		// no need to do anything
 	} else {
 		// somebody else won, go back
-		 printk("cl_timer_callback: CAS returned\n");
+		printk("cl_timer_callback: CAS returned\n");
 		return;
 	}
 
@@ -3193,11 +3193,11 @@ void cl_timer_callback( unsigned long data ) {
 	if (data == 0){
 		// natural callback
 		sock_list.callback_count++;
-		printk("clcallback: (%ld)\n", sock_list.callback_count);
+		printk("power:clcallback: (%ld)\n", sock_list.callback_count);
 	} else {
 		// syscall callback
 		sock_list.nic_callback_count++;
-		printk("niccallback: (%ld)\n", sock_list.nic_callback_count);
+		printk("power:niccallback: (%ld)\n", sock_list.nic_callback_count);
 	}
 	// 1) Lock list
 	spin_lock(&sock_list.cl_list_lock);
@@ -3327,7 +3327,7 @@ void cl_list_delete( struct sock *sk ) {
 void cl_timer_callback_send( struct sock *sk ) {
 	int mss = 21888, needs_retransmit, ack_count, i;
 
-	printk( "cl_timer_callback(%d): callback for sock(%u)\n", sk->sk_id, sk );
+	// printk( "cl_timer_callback(%d): callback for sock(%u)\n", sk->sk_id, sk );
 
 	// unblock socket
 	atomic_set(&sk->sk_cl_block_flag, 0);
@@ -3383,7 +3383,7 @@ int cl_timer_start( struct sock *sk  ) {
 	// block socket
 	atomic_set(&sk->sk_cl_block_flag, 1);
 
-	printk( "timer_start(%d): Starting timer to fire in %dms (%ld), cl_block flag val (%d)\n", sk->sk_id, sk->sk_delay_ms,
+	//	printk( "timer_start(%d): Starting timer to fire in %dms (%ld), cl_block flag val (%d)\n", sk->sk_id, sk->sk_delay_ms,
 			jiffies, atomic_read(&sk->sk_cl_block_flag) );
 	// TODO: make this to set value
 	ret = mod_timer( &sk->sk_cl_timer, jiffies + msecs_to_jiffies(sk->sk_delay_ms) );
@@ -3401,7 +3401,7 @@ void cl_cleanup_timer( struct sock *sk ) {
 		printk("cl_cleanup_timer(%d): The timer is still in use...\n", sk->sk_id);
 	}
 
-	printk("cl_cleanup_timer(%d): timer deleting\n", sk->sk_id);
+	// printk("cl_cleanup_timer(%d): timer deleting\n", sk->sk_id);
 	// TODO: add function to delete this sk from the list
 	cl_list_delete(sk);
 
