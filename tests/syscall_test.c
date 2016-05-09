@@ -10,7 +10,7 @@ int main() {
 	while(1) {
 		nanosleep(&req, rem);
 		syscall(316);
-		printf("Pushed packets\n");
+		// printf("Pushed packets\n");
 	}
 
 	return 0;
