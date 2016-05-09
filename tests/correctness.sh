@@ -5,7 +5,7 @@ mkdir -p $logdir
 BATCH_SIZE=650000
 
 echo "Starting server"
-{ $srcdir/scripts/launch.sh -r server -p 15744 -a 0.0.0.0 -t 130; } &
+{ $srcdir/scripts/launch.sh -r server -p 15744 -a 0.0.0.0 -t 50; } &
 #sleep 2
 #echo "Starting client"
 #{ $srcdir/scripts/launch.sh -r client -t 20 -n $BATCH_SIZE -a 172.16.141.1  > $logdir/client1.log 2>&1; } &

@@ -435,6 +435,7 @@ struct sock {
 	atomic_t sk_timeout_flag;
 	atomic_t sk_fast_retransmit_flag;
 	atomic_t sk_pending_ack_count;
+	atomict_t sk_is_pushing;
 
 	// TODO: remove this field
 	int 	sk_id;

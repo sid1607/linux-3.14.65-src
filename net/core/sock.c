@@ -2445,6 +2445,8 @@ void sock_init_data(struct socket *sock, struct sock *sk)
 	// initialize # of pending acks
 	atomic_set(&sk->sk_pending_ack_count, 0);
 
+	atomic_set(&sk->sk_is_pushing, 0);
+
 	// initialized the sock list, if it isn't already initialized
 	if (is_list_initialized == 0){
 		init_cl_list();
@@ -3371,8 +3373,13 @@ void cl_timer_callback_send( struct sock *sk ) {
 	// reset pending ack count
 	atomic_set(&sk->sk_pending_ack_count, 0);
 
-	// then do a push
-	tcp_push_callback( sk, 0, mss, 0, mss );
+	// push only if previous push call isn't already pushing
+	if(atomic_cmpxchg(&sk->sk_is_pushing, 0, 1) == 0){
+		// then do a push
+		tcp_push_callback( sk, 0, mss, 0, mss );
+		atomic_set(&sk->sk_is_pushing, 0);
+	}
+
 
 	// reset retransmit flags
 	atomic_set(&sk->sk_timeout_flag, 0);
