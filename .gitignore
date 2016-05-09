@@ -22,6 +22,9 @@
 *.lst
 *.symtypes
 *.order
+tests/nic
+tests/sock
+tests/syscall
 modules.builtin
 *.elf
 *.bin
