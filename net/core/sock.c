@@ -3414,7 +3414,7 @@ void cl_cleanup_timer( struct sock *sk ) {
 	// printk("cl_cleanup_timer(%d): timer deleting\n", sk->sk_id);
 	// TODO: add function to delete this sk from the list
 	cl_list_delete(sk);
-
+	atomic_dec(&sock_list.ref_count);
 	return;
 }
 
