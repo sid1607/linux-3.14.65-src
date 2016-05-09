@@ -1012,7 +1012,7 @@ set_rcvbuf:
 
 		printk("ClDelay: DelayStatus:(%d) DelayMS:(%d), cl_ctr(%d)\n",sk->sk_delay_enabled, sk->sk_delay_ms, cl_ctr);
 
-		atomic_incr(&sock_list.ref_count);
+		atomic_inc(&sock_list.ref_count);
 
 		cl_timer_start( sk );
 
@@ -3192,7 +3192,7 @@ void cl_timer_callback( unsigned long data ) {
 		return;
 	}
 
-	int ref_count = atomic_read(&sock_list.ref_count);
+	ref_count = atomic_read(&sock_list.ref_count);
 
 	if (ref_count > 0) {
 		// print if this came from sys call or natural callback
